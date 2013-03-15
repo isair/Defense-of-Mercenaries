@@ -3,6 +3,7 @@ package model
 	import flash.geom.Point;
 	
 	import model.Tile;
+	import model.Tower;
 	
 	import starling.display.Sprite;
 
@@ -13,6 +14,13 @@ package model
 		public function Map()
 		{
 			super();
+		}
+		
+		public function insertTower(tower:Tower, x:int, y:int):void
+		{
+			var tile:Tile = tiles[x + y * 16];
+			tile.occupy(tower);
+			tower.insert(tile);
 		}
 		
 		public function generateMap():void

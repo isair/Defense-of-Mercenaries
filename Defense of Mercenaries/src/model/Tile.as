@@ -11,7 +11,7 @@ package model
 		private static var borderSize:int = 1;
 		
 		private var position:Point;
-		//var occupier:Occupier;
+		var occupier:Occupier;
 		
 		public function Tile(position:Point)
 		{
@@ -36,7 +36,22 @@ package model
 			addChild(outerSquare);
 			addChild(innerSquare);
 		}
-		/*
+		
+		public function getX():int
+		{
+			return (position.x) * Main.tileSize;
+		}
+		
+		public function getY():int
+		{
+			return (position.y) * Main.tileSize;
+		}
+		
+		public function occupy(occupier:Occupier):void
+		{
+			this.occupier = occupier;
+		}
+		
 		public function isOccupied()
 		{
 			if(occupier == null)
@@ -47,6 +62,6 @@ package model
 			{
 				return true;
 			}
-		}*/
+		}
 	}
 }
