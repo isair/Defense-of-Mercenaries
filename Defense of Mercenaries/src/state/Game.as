@@ -22,7 +22,7 @@ package state
 		private function onAdd(event:Event):void
 		{
 			var map:Map = new Map();
-			var type:TowerType = new TowerType("Basic Tower", 10, 5, 10, 10, 1, 10, new Quad(tileSize, tileSize, 0x0000FF, true));
+			var type:TowerType = new TowerType("Basic Tower", 10, 5, 10, 10, 1, 10, new Quad(Settings.tileSize, Settings.tileSize, 0x0000FF, true));
 			var tower:Tower = new Tower(type);
 			map.insertTower(tower, 3, 3);
 			
