@@ -1,9 +1,10 @@
 package model
 {
-	
+	import starling.display.Quad;
 	import starling.display.Sprite;
+	import starling.events.Event;
 	
-	public class Tower implements Occupier extends Sprite
+	public class Tower extends Sprite implements Occupier
 	{
 		private var level:int;
 		private var type:TowerType;
@@ -27,7 +28,7 @@ package model
 		
 		public function init(e:Event):void
 		{
-			private var shape:Quad = type.getShape();	
+			var shape:Quad = type.getShape();
 			
 			addChild(shape);
 		}
