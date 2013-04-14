@@ -9,6 +9,7 @@ package state
 	
 	import starling.display.Sprite;
 	import starling.events.Event;
+	import starling.display.Quad;
 	
 	public class Game extends Sprite
 	{
