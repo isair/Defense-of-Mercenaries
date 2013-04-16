@@ -1,14 +1,15 @@
 package
 {
+	import flash.display.DisplayObjectContainer;
 	import flash.display.Sprite;
+	
+	import model.GameObject;
 	
 	import starling.core.Starling;
 	import starling.display.DisplayObjectContainer;
 	import starling.events.Event;
 	
 	import state.Game;
-	
-	import model.GameObject;
 	
 	[SWF(frameRate="60", width="640", height="960", backgroundColor="0x333333")]
 	public class Main extends Sprite
@@ -31,7 +32,7 @@ package
 			this.addEventListener(Event.ENTER_FRAME, enterFrame);
 		}
 		
-		private function enterFrame(e:Event)
+		private function enterFrame(e:Event):void
 		{
 			nextFrameDate = new Date();
 			deltaTime = (nextFrameDate.time - prevFrameDate.time) / 1000;
@@ -41,16 +42,22 @@ package
 			prevFrameDate = nextFrameDate;
 		}
 		
-		private function recurseGameObjectUpdate(container:DisplayObjectContainer)
+		private function recurseGameObjectUpdate(container:Object):void
 		{
-			for (var i = 0; i < container.numChildren; i++)
+			if ( ! container is flash.display.DisplayObjectContainer && 
+				 ! container is starling.display.DisplayObjectContainer)
+				return;
+			
+			for (var i:int = 0; i < container.numChildren; i++)
 			{
-				var child = container.getChildAt(i);
+				var child:Object = container.getChildAt(i);
 				
 				if (child is GameObject)
 					child.update(deltaTime);
 				
-				if (child is DisplayObjectContainer && child.numChildren > 0)
+				if ((child is flash.display.DisplayObjectContainer ||
+					 child is starling.display.DisplayObjectContainer) &&
+					 child.numChildren > 0)
 					recurseGameObjectUpdate(child);
 			}
 		}
