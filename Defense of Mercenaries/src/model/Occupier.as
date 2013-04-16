@@ -1,8 +1,30 @@
 package model
-{
-	public interface Occupier
+{	
+	import starling.display.Sprite;
+	import starling.events.Event;
+	import starling.display.Quad;
+
+
+	public class Occupier extends Sprite
 	{		
-		function getPosition():Tile;
-		function insert(position:Tile):void;
+		private var position:Tile;
+		
+		public function getPosition():Tile
+		{
+			return this.position;
+		}
+		
+		public function insert(position:Tile):void
+		{
+			this.position = position;
+			
+			x = position.getX();
+			y = position.getY();
+			
+			addEventListener(Event.ADDED_TO_STAGE, init);
+		}
+		
+		public function init(e:Event):void{
+		}
 	}
 }

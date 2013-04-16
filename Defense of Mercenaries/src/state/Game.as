@@ -24,6 +24,8 @@ package state
 		private function onAdd(event:Event):void
 		{
 			var map:Map = new Map();
+			map.generateMap();
+
 			var type:TowerType = new TowerType("Basic Tower", 10, 5, 10, 10, 1, 10, new Quad(Settings.tileSize, Settings.tileSize, 0x0000FF, true));
 			var base:Base = new Base();
 			var tower:Tower = new Tower(type);
@@ -31,7 +33,6 @@ package state
 			map.insertOccupier(tower, 3, 3);
 			
 			addChild(map);
-			map.generateMap();
 		}
 	}
 }
