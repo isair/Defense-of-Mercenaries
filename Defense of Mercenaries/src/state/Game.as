@@ -12,16 +12,14 @@ package state
 	import starling.events.Event;
 	import starling.display.Quad;
 	
-	public class Game extends Sprite
+	public class Game extends GameState
 	{
 		public function Game()
 		{
 			super();
-			
-			this.addEventListener(Event.ADDED_TO_STAGE, onAdd);
 		}
 		
-		private function onAdd(event:Event):void
+		public override function onAdd(e:Event):void
 		{
 			var map:Map = new Map();
 			map.generateMap();
