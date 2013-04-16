@@ -5,15 +5,19 @@ package model
   public class Gate extends Sprite implements GameObject
   {
     private var spawnQueue:Array = null;
+	private var spawnTimePassed:Number = 0;
 
     public function Gate()
     {
       super();
     }
 	
-	public override function update(dt:Number)
+	public override function update(deltaTime:Number):void
 	{
-		// TODO: Spawning.
+		spawnTimePassed += deltaTime;
+		
+		if (spawnTimePassed > 500)
+			trace("Spawned.");
 	}
   }
 }
