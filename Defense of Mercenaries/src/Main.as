@@ -35,7 +35,7 @@ package
 		private function enterFrame(e:Event):void
 		{
 			nextFrameDate = new Date();
-			deltaTime = (nextFrameDate.time - prevFrameDate.time) / 1000;
+			deltaTime = (nextFrameDate.time - prevFrameDate.time);
 			
 			recurseGameObjectUpdate(stage);
 			
