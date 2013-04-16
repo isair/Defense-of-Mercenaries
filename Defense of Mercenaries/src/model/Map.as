@@ -21,7 +21,7 @@ package model
 			var tile:Tile = tiles[x + y * 16];
 			tile.occupy(occupier);
 			occupier.insert(tile);
-			stage.addChild(occupier);
+			addChild(occupier);
 		}
 		
 		public function generateMap():void
@@ -33,7 +33,7 @@ package model
 				for (var j:int = 0; j < 16; j++)
 				{
 					tiles[i + j * 16] = new Tile(new Point(i, j));
-					stage.addChild(tiles[i + j * 16]);
+					addChild(tiles[i + j * 16]);
 				}
 			}
 		}
