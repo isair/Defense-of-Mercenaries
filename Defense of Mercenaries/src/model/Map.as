@@ -16,6 +16,13 @@ package model
 			super();
 		}
 		
+		public function insertGate(gate:Gate, x:int, y:int):void
+		{
+			var tile:Tile = tiles[x + y * 16];
+			gate.insert(tile);
+			addChild(gate);
+		}
+		
 		public function insertOccupier(occupier:Occupier, x:int, y:int):void
 		{
 			var tile:Tile = tiles[x + y * 16];
