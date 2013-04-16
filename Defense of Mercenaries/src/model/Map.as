@@ -21,6 +21,7 @@ package model
 			var tile:Tile = tiles[x + y * 16];
 			tile.occupy(occupier);
 			occupier.insert(tile);
+			stage.addChild(occupier);
 		}
 		
 		public function generateMap():void

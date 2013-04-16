@@ -4,7 +4,7 @@ package model
 	import starling.display.Sprite;
 	import starling.events.Event;
 	
-	public class Tower extends Sprite implements Occupier
+	public class Tower extends Occupier
 	{
 		private var level:int;
 		private var type:TowerType;
@@ -17,28 +17,12 @@ package model
 			this.level = 1;
 			this.type = type;			
 		}
-		
-		public function insert(position:Tile):void
-		{
-			this.position = position;
-			
-			x = position.getX();
-			y = position.getY();
-			
-			addEventListener(Event.ADDED_TO_STAGE, init);
-		}
-		
-		public function init(e:Event):void
+				
+		public override function init(e:Event):void
 		{
 			var shape:Quad = type.getShape();
 			
 			addChild(shape);
-		}
-
-		
-		public function getPosition():Tile
-		{
-			return this.position;
 		}
 		
 		public function getType():TowerType
