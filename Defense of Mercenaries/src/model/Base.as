@@ -4,18 +4,13 @@ package model
 	import starling.display.Sprite;
 	import starling.events.Event;
 	
-	public class Tower extends Sprite implements Occupier
+	public class Base extends Sprite implements Occupier
 	{
-		private var level:int;
-		private var type:TowerType;
 		private var position:Tile;
-		
-		public function Tower(type:TowerType)
+				
+		public function Base()
 		{
 			super();
-			
-			this.level = 1;
-			this.type = type;			
 		}
 		
 		public function insert(position:Tile):void
@@ -30,26 +25,14 @@ package model
 		
 		public function init(e:Event):void
 		{
-			var shape:Quad = type.getShape();
+			var shape:Quad = new Quad(Settings.tileSize, Settings.tileSize, 0xFF55AA, true);
 			
 			addChild(shape);
 		}
-
 		
 		public function getPosition():Tile
 		{
 			return this.position;
-		}
-		
-		public function getType():TowerType
-		{
-			return this.type;
-		}
-		
-		// Placeholder upgrade cost calculation
-		public function getUpgradeCost(level:int):int
-		{
-			return (type.getUpgradeModifier() * level);
 		}
 	}
 }

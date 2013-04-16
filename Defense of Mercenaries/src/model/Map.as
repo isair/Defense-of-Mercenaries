@@ -16,11 +16,11 @@ package model
 			super();
 		}
 		
-		public function insertTower(tower:Tower, x:int, y:int):void
+		public function insertOccupier(occupier:Occupier, x:int, y:int):void
 		{
 			var tile:Tile = tiles[x + y * 16];
-			tile.occupy(tower);
-			tower.insert(tile);
+			tile.occupy(occupier);
+			occupier.insert(tile);
 		}
 		
 		public function generateMap():void
