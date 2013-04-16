@@ -10,5 +10,10 @@ package model
     {
       super();
     }
+	
+	public override function update(dt:Number)
+	{
+		// TODO: Spawning.
+	}
   }
 }
