@@ -28,7 +28,7 @@ package model
 		public function init(e:Event):void
 		{
 			var outerSquare:Quad = new Quad(Main.tileSize, Main.tileSize, 0x000000, true);
-			var innerSquare:Quad = new Quad(Main.tileSize - borderSize * 2, Main.tileSize - borderSize * 2, 0xcc0000, true);
+			var innerSquare:Quad = new Quad(Main.tileSize - borderSize * 2, Main.tileSize - borderSize * 2, 0xe8d176, true);
 			
 			innerSquare.x = borderSize;
 			innerSquare.y = borderSize;

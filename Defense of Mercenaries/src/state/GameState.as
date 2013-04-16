@@ -24,7 +24,7 @@ package state
 		
 		public  function onAdd(e:Event):void {}
 		
-		private function onFrameEnter(e:Event)
+		private function onFrameEnter(e:Event):void
 		{
 			nextFrameDate = new Date();
 			deltaTime = nextFrameDate.time - prevFrameDate.time;
