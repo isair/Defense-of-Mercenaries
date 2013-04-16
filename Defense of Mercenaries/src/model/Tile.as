@@ -11,7 +11,7 @@ package model
 		private static var borderSize:int = 1;
 		
 		private var position:Point;
-		var occupier:Occupier;
+		private var occupier:Occupier;
 		
 		public function Tile(position:Point)
 		{
@@ -52,7 +52,7 @@ package model
 			this.occupier = occupier;
 		}
 		
-		public function isOccupied()
+		public function isOccupied():Boolean
 		{
 			if(occupier == null)
 			{

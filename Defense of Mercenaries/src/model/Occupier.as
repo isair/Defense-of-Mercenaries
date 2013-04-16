@@ -9,6 +9,11 @@ package model
 	{		
 		private var position:Tile;
 		
+		public function Occupier()
+		{
+			super();
+		}
+		
 		public function getPosition():Tile
 		{
 			return this.position;
@@ -24,7 +29,8 @@ package model
 			addEventListener(Event.ADDED_TO_STAGE, init);
 		}
 		
-		public function init(e:Event):void{
+		public function init(e:Event):void
+		{
 		}
 	}
 }
