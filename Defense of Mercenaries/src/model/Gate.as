@@ -17,7 +17,10 @@ package model
 		spawnTimePassed += deltaTime;
 		
 		if (spawnTimePassed > 500)
+		{
 			trace("Spawned.");
+			spawnTimePassed -= 500;
+		}
 	}
   }
 }
