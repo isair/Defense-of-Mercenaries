@@ -96,7 +96,7 @@ package model
 		{
 			spawnTimePassed += deltaTime;
 			
-			if (spawnTimePassed > 1000)
+			if (spawnTimePassed > 1500)
 			{	
 				if(storedEnemies > 0)
 				{
