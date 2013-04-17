@@ -104,7 +104,7 @@ package model
 					spawnEnemy();
 				}
 				
-				spawnTimePassed -= 1000;
+				spawnTimePassed -= 1500;
 			}
 		}
 		
