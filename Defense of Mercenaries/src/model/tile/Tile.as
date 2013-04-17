@@ -1,10 +1,11 @@
-package model
+package model.tile
 {
 	import flash.geom.Point;
 	
 	import starling.display.Quad;
 	import starling.display.Sprite;
 	import starling.events.Event;
+	import model.Occupier;
 
 	public class Tile extends Sprite
 	{

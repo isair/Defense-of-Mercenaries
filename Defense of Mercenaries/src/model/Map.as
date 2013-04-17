@@ -2,10 +2,11 @@ package model
 {
 	import flash.geom.Point;
 	
-	import model.Tile;
-	import model.Tower;
+	import model.tile.Tile;
+	import model.tower.Tower;
 	
 	import starling.display.Sprite;
+	import model.tile.Tile;
 
 	public class Map extends Sprite
 	{

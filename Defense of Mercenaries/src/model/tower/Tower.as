@@ -1,8 +1,10 @@
-package model
+package model.tower
 {
 	import starling.display.Quad;
 	import starling.display.Sprite;
 	import starling.events.Event;
+	import model.Occupier;
+	import model.tile.Tile;
 	
 	public class Tower extends Occupier
 	{

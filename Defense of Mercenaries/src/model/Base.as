@@ -3,6 +3,7 @@ package model
 	import starling.display.Quad;
 	import starling.display.Sprite;
 	import starling.events.Event;
+	import model.tile.Tile;
 	
 	public class Base extends Occupier
 	{

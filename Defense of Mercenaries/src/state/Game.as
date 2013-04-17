@@ -3,9 +3,9 @@ package state
 	import flash.geom.Point;
 	
 	import model.Map;
-	import model.Tile;
-	import model.Tower;
-	import model.TowerType;
+	import model.tile.Tile;
+	import model.tower.Tower;
+	import model.tower.TowerType;
 	import model.Base;
 	import model.Gate;
 	
@@ -25,13 +25,18 @@ package state
 			var map:Map = new Map();
 			map.generateMap();
 
+			// TODO: Remove TowerType class. Instead use different classes that extend the Tower class.
 			var type:TowerType = new TowerType("Basic Tower", 10, 5, 10, 10, 1, 10, new Quad(Settings.tileSize, Settings.tileSize, 0x0000FF, true));
-			var base:Base = new Base();
+			
 			var tower:Tower = new Tower(type);
-			var gate:Gate = new Gate();
-			map.insertGate(gate, 1, 1);
-			map.insertOccupier(base, 8, 10);
 			map.insertOccupier(tower, 3, 3);
+			
+			var base:Base = new Base();
+			map.insertOccupier(base, 8, 10);
+			
+			var gate:Gate = new Gate();
+			gate.calculatePath(base);
+			map.insertGate(gate, 0, 0);
 			
 			addChild(map);
 		}
