@@ -21,7 +21,7 @@ package state
 
 			// TODO: Remove TowerType class. Instead use different classes that extend the Tower class.
 			
-			var tower:Tower = new Tower(10, 5, 10, 10, 1, 10);
+			var tower:Tower = new Tower(10, 5, 10, 10, 60, 10);
 			map.insertOccupier(tower, 3, 3);
 			
 			var base:Base = new Base();
