@@ -64,12 +64,12 @@ package model.tower
 					break;
 				}
 			}
-
 		}
 		
 		private function shoot(enemy:Enemy):void
 		{
 			var bullet:Projectile = new Projectile(enemy, position.getCenterX(), position.getCenterY(), 5);
+			stage.addChild(bullet);
 		}
 		
 		// Placeholder upgrade cost calculation

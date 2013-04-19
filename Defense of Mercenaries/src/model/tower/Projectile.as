@@ -5,6 +5,7 @@ package model.tower
 	
 	import starling.display.Sprite;
 	import starling.display.Quad;
+	import starling.events.Event;
 	
 	public class Projectile extends Sprite implements GameObject
 	{
@@ -22,6 +23,8 @@ package model.tower
 				this.x = x;
 				this.y = y;
 				this.velocity = velocity;
+				
+				addEventListener(Event.ADDED_TO_STAGE, init);
 			}
 			
 			private function init():void
