@@ -1,5 +1,7 @@
 package state
 {
+	
+	// useless comment by cgulduren
 	import flash.geom.Point;
 	
 	import model.Map;
