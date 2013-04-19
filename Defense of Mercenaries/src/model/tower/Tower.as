@@ -67,7 +67,7 @@ package model.tower
 
 		}
 		
-		private function shoot(enemy:Enemy)
+		private function shoot(enemy:Enemy):void
 		{
 			var bullet:Projectile = new Projectile(enemy, position.getCenterX(), position.getCenterY(), 5);
 		}
