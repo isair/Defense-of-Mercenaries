@@ -64,5 +64,15 @@ package model.tile
 				return true;
 			}
 		}
+		
+		public function getCenterX():int
+		{
+			return (this.x + (Settings.tileSize / 2));
+		}
+		
+		public function getCenterY():int
+		{
+			return (this.y + (Settings.tileSize / 2));
+		}
 	}
 }

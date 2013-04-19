@@ -1,11 +1,12 @@
 package model.tower
 {
+	import model.GameObject;
 	import model.Occupier;
+	import model.enemy.Enemy;
 	import model.tile.Tile;
 	
 	import starling.display.Quad;
 	import starling.events.Event;
-	import model.GameObject;
 	
 	public class Tower extends Occupier implements GameObject
 	{
@@ -46,19 +47,33 @@ package model.tower
 			
 			if (currentInterval > attackInterval)
 			{	
-				shootFirstEnemy();
+				findFirstEnemy();
 				
 				currentInterval -= attackInterval;
 			}
 		}
 		
-		private function shootFirstEnemy():void
+		private function findFirstEnemy():void
 		{
-			// TODO Auto Generated method stub
+			for (var i:int = 0; i < stage.numChildren; i++)
+			{
+				var child:Object = stage.getChildAt(i);
+				
+				if (child is Enemy){
+					shoot(child as Enemy);
+					break;
+				}
+			}
+
+		}
+		
+		private function shoot(enemy:Enemy)
+		{
+			var bullet:Projectile = new Projectile(enemy, position.getCenterX(), position.getCenterY(), 5);
 		}
 		
 		// Placeholder upgrade cost calculation
-		public function getUpgradeCost(level:int):int
+		private function getUpgradeCost(level:int):int
 		{
 			return (upgradeModifier * level);
 		}
