@@ -16,6 +16,7 @@ package model
 		
 		private var position:Tile = null;
 		
+		private var hasPath:Boolean = false;
 		private var path:Path = null;
 
     	public function Gate()
@@ -59,7 +60,7 @@ package model
 			
 			while (nextDirection != Path.NONE)
 			{
-				var roadTile:Quad = new Quad(Main.tileSize, Main.tileSize, 0x61380b, true);
+				var roadTile:Quad = new Quad(Settings.tileSize, Settings.tileSize, 0x61380b, true);
 				
 				roadTile.x = roadX;
 				roadTile.y = roadY;
@@ -69,19 +70,19 @@ package model
 				switch (nextDirection)
 				{
 					case Path.UP:
-						roadY -= Main.tileSize;
+						roadY -= Settings.tileSize;
 						break;
 					
 					case Path.RIGHT:
-						roadX += Main.tileSize;
+						roadX += Settings.tileSize;
 						break;
 					
 					case Path.DOWN:
-						roadY += Main.tileSize;
+						roadY += Settings.tileSize;
 						break;
 					
 					case Path.LEFT:
-						roadX -= Main.tileSize;
+						roadX -= Settings.tileSize;
 						break;
 					
 					default:
@@ -90,10 +91,14 @@ package model
 				
 				nextDirection = roadPath.popNextDirection();
 			}
+			
+			hasPath = true;
 		}
 		
 		public function update(deltaTime:Number):void
 		{
+			if ( ! hasPath) return;
+			
 			spawnTimePassed += deltaTime;
 			
 			if (spawnTimePassed > 1500)

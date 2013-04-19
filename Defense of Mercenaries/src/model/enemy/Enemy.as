@@ -35,7 +35,7 @@ package model.enemy
 	
 	public function init(e:Event):void
 	{
-		addChild(new Quad(Main.tileSize, Main.tileSize, 0xcc0000, true));
+		addChild(new Quad(Settings.tileSize, Settings.tileSize, 0xcc0000, true));
 	}
 	
 	public function update(deltaTime:Number):void
@@ -51,11 +51,11 @@ package model.enemy
 		}
 		else // Move in given direction for a single tile length.
 		{
-			var deltaPos:Number = (((Main.tileSize as Number) * deltaTime) / (speed * 1000));
+			var deltaPos:Number = (((Settings.tileSize as Number) * deltaTime) / (speed * 1000));
 			distanceMoved += deltaPos;
 			
-			if (distanceMoved >= Main.tileSize)
-				deltaPos -= (distanceMoved - Main.tileSize);
+			if (distanceMoved >= Settings.tileSize)
+				deltaPos -= (distanceMoved - Settings.tileSize);
 			
 			switch (moveDirection)
 			{
@@ -79,7 +79,7 @@ package model.enemy
 					break;
 			}
 			
-			if (distanceMoved >= Main.tileSize)
+			if (distanceMoved >= Settings.tileSize)
 				moveDirection = Path.NONE;
 		}
 	}

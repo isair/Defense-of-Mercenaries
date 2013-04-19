@@ -20,16 +20,16 @@ package model.tile
 			
 			this.position = position;
 			
-			x = (position.x) * Main.tileSize;
-			y = (position.y) * Main.tileSize;
+			x = (position.x) * Settings.tileSize;
+			y = (position.y) * Settings.tileSize;
 			
 			addEventListener(Event.ADDED_TO_STAGE, init);
 		}
 		
 		public function init(e:Event):void
 		{
-			var outerSquare:Quad = new Quad(Main.tileSize, Main.tileSize, 0x000000, true);
-			var innerSquare:Quad = new Quad(Main.tileSize - borderSize * 2, Main.tileSize - borderSize * 2, 0xB3956D, true);
+			var outerSquare:Quad = new Quad(Settings.tileSize, Settings.tileSize, 0x000000, true);
+			var innerSquare:Quad = new Quad(Settings.tileSize - borderSize * 2, Settings.tileSize - borderSize * 2, 0xB3956D, true);
 			
 			innerSquare.x = borderSize;
 			innerSquare.y = borderSize;
@@ -40,12 +40,12 @@ package model.tile
 		
 		public function getX():int
 		{
-			return (position.x) * Main.tileSize;
+			return (position.x) * Settings.tileSize;
 		}
 		
 		public function getY():int
 		{
-			return (position.y) * Main.tileSize;
+			return (position.y) * Settings.tileSize;
 		}
 		
 		public function occupy(occupier:Occupier):void

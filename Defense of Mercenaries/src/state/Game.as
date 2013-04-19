@@ -28,8 +28,8 @@ package state
 			map.insertOccupier(base, 8, 10);
 			
 			var gate:Gate = new Gate();
-			gate.calculatePath(base);
 			map.insertGate(gate, 0, 0);
+			gate.calculatePath(base);
 			
 			addChild(map);
 		}
