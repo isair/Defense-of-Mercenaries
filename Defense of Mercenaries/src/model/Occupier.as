@@ -26,8 +26,6 @@ package model
 			
 			x = position.getX();
 			y = position.getY();
-			
-			addEventListener(Event.ADDED_TO_STAGE, init);
 		}
 		
 		public function init(e:Event):void

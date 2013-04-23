@@ -1,5 +1,8 @@
 package model.tower
 {
+	import flash.geom.Point;
+	
+	import model.Path;
 	import model.GameObject;
 	import model.Occupier;
 	import model.enemy.Enemy;
@@ -34,6 +37,8 @@ package model.tower
 			this.attackInterval = attackInterval;
 			this.influenceRange = influenceRange;
 			this.shape = new Quad(Settings.tileSize, Settings.tileSize, 0x0000FF, true);
+						
+			addEventListener(Event.ADDED_TO_STAGE, init);
 		}
 				
 		public override function init(e:Event):void
@@ -68,8 +73,7 @@ package model.tower
 		
 		private function shoot(enemy:Enemy):void
 		{
-			var bullet:Projectile = new Projectile(enemy, position.getCenterX(), position.getCenterY(), 5);
-			stage.addChild(bullet);
+			stage.addChild(new Projectile(enemy, 2));
 		}
 		
 		// Placeholder upgrade cost calculation

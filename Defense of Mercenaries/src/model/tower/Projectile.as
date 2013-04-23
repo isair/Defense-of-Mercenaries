@@ -3,6 +3,8 @@ package model.tower
 	import model.GameObject;
 	import model.enemy.Enemy;
 	
+	import flash.geom.Point;
+	
 	import starling.display.Sprite;
 	import starling.display.Quad;
 	import starling.events.Event;
@@ -15,29 +17,28 @@ package model.tower
 			private var velocityY:Number;
 			private var deltaX:Number;
 			private var deltaY:Number;
+			private var shape:Quad;
 			
-			public function Projectile(target:Enemy, x:Number, y:Number, velocity:Number)
+			public function Projectile(target:Enemy, velocity:Number)
 			{
 				super();
 				
-				this.x = x;
-				this.y = y;
+				this.target = target;
 				this.velocity = velocity;
+				shape = new Quad(5, 5, 0x000000, true);
 				
 				addEventListener(Event.ADDED_TO_STAGE, init);
 			}
 			
 			private function init():void
 			{
-				var shape:Quad = new Quad(2, 2, 0x000000, true);
-				
 				addChild(shape);
 			}
 			
 			public function update(deltaTime:Number):void
 			{				
-				deltaX = this.x - target.x;
-				deltaY = this.y - target.y;
+				deltaX = x - target.x;
+				deltaY = y - target.y;
 				
 				if( (deltaX < (Settings.tileSize / 4)) && (deltaY < (Settings.tileSize / 4)))
 				{
@@ -49,8 +50,8 @@ package model.tower
 					velocityX = (deltaX / deltaY) * velocity;
 					velocityY = (deltaY / deltaX) * velocity;
 				
-					this.x += velocityX;
-					this.y += velocityY;
+					x += velocityX;
+					y += velocityY;
 				}
 			}
 		}

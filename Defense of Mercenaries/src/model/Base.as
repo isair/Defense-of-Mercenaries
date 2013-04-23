@@ -12,6 +12,8 @@ package model
 		public function Base()
 		{
 			super();
+			
+			addEventListener(Event.ADDED_TO_STAGE, init);
 		}
 				
 		public override function init(e:Event):void
