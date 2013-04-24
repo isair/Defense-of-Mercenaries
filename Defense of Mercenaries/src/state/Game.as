@@ -1,11 +1,13 @@
 package state
 {			
-	import model.Map;
-	import model.tower.Tower;
 	import model.Base;
 	import model.Gate;
+	import model.Map;
+	import model.tower.Tower;
 	
 	import starling.events.Event;
+	
+	import view.Interface;
 	
 	public class Game extends GameState
 	{
@@ -18,6 +20,8 @@ package state
 		{
 			var map:Map = new Map();
 			map.generateMap();
+			
+			var ui:Interface = new Interface();
 
 			// TODO: Remove TowerType class. Instead use different classes that extend the Tower class.
 			
@@ -32,6 +36,7 @@ package state
 			gate.calculatePath(base);
 			
 			addChild(map);
+			addChild(ui);
 		}
 	}
 }
