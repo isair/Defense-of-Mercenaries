@@ -7,7 +7,7 @@ package model
 	
 	import starling.display.Sprite;
 	import model.tile.Tile;
-
+	
 	public class Map extends Sprite
 	{
 		private var tiles:Array = null;

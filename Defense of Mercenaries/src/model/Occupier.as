@@ -4,8 +4,8 @@ package model
 	import starling.events.Event;
 	import starling.display.Quad;
 	import model.tile.Tile;
-
-
+	
+	
 	public class Occupier extends Sprite
 	{		
 		private var position:Tile;
