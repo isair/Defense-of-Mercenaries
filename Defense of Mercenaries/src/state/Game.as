@@ -24,7 +24,7 @@ package state
 			
 			var ui:Interface = new Interface();
 			
-			var tower:Tower = new Tower(10, 5, 10, 10, 60, 10);
+			var tower:Tower = new Tower();
 			map.insertOccupier(tower, 3, 3);
 			
 			var base:Base = new Base();

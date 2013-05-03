@@ -52,7 +52,6 @@ package model
 		
 		public override function init(e:Event):void
 		{
-			
 			addChild(shape);
 		}
 	}

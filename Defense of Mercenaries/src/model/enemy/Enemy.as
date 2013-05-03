@@ -20,12 +20,11 @@ package model.enemy
 	private var moveDirection:int = Path.NONE;
 	private var distanceMoved:Number = 0;
 
-    public function Enemy(health:Number, armor:Number, speed:int, position:Point, path:Path)
+    public function Enemy(health:Number, speed:int, position:Point, path:Path)
     {
       super();
 	  
 	  this.health = health;
-	  this.armor = armor;
 	  this.speed = speed;
 	  this.position = position;
 	  this.path = path;
@@ -36,6 +35,16 @@ package model.enemy
 	public function init(e:Event):void
 	{
 		addChild(new Quad(Settings.tileSize, Settings.tileSize, 0xcc0000, true));
+	}
+	
+	public function damage(value:int):void
+	{
+		health = health - value;
+		
+		if(health <= 0)
+		{
+			this.removeFromParent(true);
+		}
 	}
 	
 	public function update(deltaTime:Number):void
