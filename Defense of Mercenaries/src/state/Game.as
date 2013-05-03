@@ -35,16 +35,17 @@ package state
 			gate.calculatePath(base);
 			
 			var obstacle1:Obstacle = new Obstacle();
-			var obstacle2:Obstacle = new Obstacle();
+			var obstacle2:Obstacle = new Obstacle();			
+			var obstacle3:Obstacle = new Obstacle();
+			var obstacle4:Obstacle = new Obstacle();
 			
 			map.insertOccupier(obstacle1, 10, 10);
 			map.insertOccupier(obstacle2, 10, 7);
+			map.insertOccupier(obstacle3, 3, 7);
+			map.insertOccupier(obstacle4, 6, 2);
 			
 			addChild(map);
 			addChild(ui);
-			
-			
-
 		}
 	}
 }
