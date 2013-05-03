@@ -5,6 +5,7 @@ package state
 	import model.Map;
 	import model.Obstacle;
 	import model.tower.Tower;
+	import model.tower.SlowTower;
 	
 	import starling.events.Event;
 	
@@ -26,8 +27,11 @@ package state
 			
 			var ui:Interface = new Interface();
 			
+			var slowTower:SlowTower = new SlowTower();
 			var tower:Tower = new Tower();
-			map.insertOccupier(tower, 3, 3);
+
+			map.insertOccupier(tower, 8, 3);
+			map.insertOccupier(slowTower, 3, 3);
 			
 			var base:Base = new Base();
 			map.insertOccupier(base, 8, 10);

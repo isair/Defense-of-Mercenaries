@@ -1,4 +1,4 @@
-package model.tower
+package model.projectile
 {
 	import flash.geom.Point;
 	
@@ -8,6 +8,7 @@ package model.tower
 	import starling.display.Quad;
 	import starling.display.Sprite;
 	import starling.events.Event;
+	import model.tower.Tower;
 	
 	public class Projectile extends Sprite implements GameObject
 	{
@@ -25,20 +26,20 @@ package model.tower
 			this.velocity = velocity;
 			this.strength = strength;
 			this.owner = owner;
-			this.shape = new Quad(5, 5, 0x000000, true);
 			
 			addEventListener(Event.ADDED_TO_STAGE, init);
 		}
 		
 		private function init():void
 		{
+			this.shape = new Quad(5, 5, 0x000000, true);
 			addChild(shape);
 		}
 		
 		public function update(deltaTime:Number):void
 		{						
-			var deltaX = (target.x + Settings.tileSize / 2) - (x + owner.x);
-			var deltaY = (target.y + Settings.tileSize / 2) - (y + owner.y);
+			var deltaX = (target.x + Settings.tileSize / 2) - (x);
+			var deltaY = (target.y + Settings.tileSize / 2) - (y);
 			
 			var hyp = Math.sqrt( deltaX * deltaX + deltaY * deltaY );
 			
@@ -47,7 +48,7 @@ package model.tower
 						
 			if( (absX < (Settings.tileSize / 4)) && (absY < (Settings.tileSize / 4)))
 			{
-				target.damage(strength);
+				hit();
 				
 				this.removeFromParent(true);
 			}
@@ -59,6 +60,11 @@ package model.tower
 				x += (((Settings.tileSize as Number) * deltaTime * velocityX) / 1000);
 				y += (((Settings.tileSize as Number) * deltaTime * velocityY) / 1000);
 			}
+		}
+		
+		public function hit():void
+		{
+			target.damage(strength);
 		}
 	}
 }

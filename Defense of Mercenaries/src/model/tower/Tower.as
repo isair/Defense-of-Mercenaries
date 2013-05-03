@@ -10,6 +10,7 @@ package model.tower
 	
 	import starling.display.Quad;
 	import starling.events.Event;
+	import model.projectile.Projectile;
 	
 	public class Tower extends Occupier implements GameObject
 	{
@@ -29,14 +30,13 @@ package model.tower
 			super();
 			
 			this.level = 1;
-			
-			this.shape = new Quad(Settings.tileSize, Settings.tileSize, 0x0000FF, true);
-						
+									
 			addEventListener(Event.ADDED_TO_STAGE, init);
 		}
 				
 		public override function init(e:Event):void
 		{			
+			this.shape = new Quad(Settings.tileSize, Settings.tileSize, 0x7A4F2C, true);
 			addChild(shape);
 		}
 
@@ -53,9 +53,9 @@ package model.tower
 		
 		private function findFirstEnemy():void
 		{
-			for (var i:int = 0; i < stage.numChildren; i++)
+			for (var i:int = 0; i < Settings.currentMap.numChildren; i++)
 			{
-				var child:Object = stage.getChildAt(i);
+				var child:Object = Settings.currentMap.getChildAt(i);
 				
 				if (child is Enemy){
 					shoot(child as Enemy);
@@ -64,12 +64,12 @@ package model.tower
 			}
 		}
 		
-		private function shoot(enemy:Enemy):void
+		public function shoot(enemy:Enemy):void
 		{
-			var bullet:Projectile = new Projectile(enemy, 5, damage, this);
-			bullet.x = Settings.tileSize / 2;
-			bullet.y = Settings.tileSize / 2;
-			addChild(bullet);
+			var bullet:Projectile = new Projectile(enemy, 10, damage, this);
+			bullet.x = x + Settings.tileSize / 2;
+			bullet.y = y + Settings.tileSize / 2;
+			Settings.currentMap.addChild(bullet);
 		}
 		
 		// Placeholder upgrade cost calculation
