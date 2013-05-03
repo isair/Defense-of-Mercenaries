@@ -17,7 +17,7 @@ package model.tower
 		private var position:Tile;
 		private var purchaseCost:int;
 		private var upgradeModifier:int;
-		private var damage:int = 10;
+		private var damage:int = 20;
 		private var range:int;
 		private var influenceRange:int;
 		private var shape:Quad; //Placeholder graphics variable
@@ -66,7 +66,10 @@ package model.tower
 		
 		private function shoot(enemy:Enemy):void
 		{
-			stage.addChild(new Projectile(enemy, 2, damage));
+			var bullet:Projectile = new Projectile(enemy, 5, damage, this);
+			bullet.x = Settings.tileSize / 2;
+			bullet.y = Settings.tileSize / 2;
+			addChild(bullet);
 		}
 		
 		// Placeholder upgrade cost calculation
