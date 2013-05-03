@@ -35,10 +35,11 @@ package model
 		
 		public function calculatePath(base:Base):void
 		{
+			var openSet:OrderedTileList;
+			
 			// TODO:Pathfinding algorithm.
 			path = new Path();
 			
-			/* TEMPORARY FIX, REMOVE AFTER PROJECT REPORT */
 			for (var i:int = 0; i < 5; i++)
 				path.pushDirection(Path.RIGHT);
 			
@@ -115,7 +116,7 @@ package model
 		
 		public function spawnEnemy():void
 		{
-			stage.addChild(new Enemy(100, 0, 1, new Point(position.getX(), position.getY()), (new Path()).copyPath(path)));
+			stage.addChild(new Enemy(100, 1, new Point(position.getX(), position.getY()), (new Path()).copyPath(path)));
 		}
   }
 }
