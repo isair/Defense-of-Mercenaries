@@ -1,12 +1,12 @@
 package model.tower
 {
+	import flash.geom.Point;
+	
 	import model.GameObject;
 	import model.enemy.Enemy;
 	
-	import flash.geom.Point;
-	
-	import starling.display.Sprite;
 	import starling.display.Quad;
+	import starling.display.Sprite;
 	import starling.events.Event;
 	
 	public class Projectile extends Sprite implements GameObject
@@ -18,13 +18,16 @@ package model.tower
 			private var deltaX:Number;
 			private var deltaY:Number;
 			private var shape:Quad;
+			private var strength:int;
+			private var hit:Boolean = false;
 			
-			public function Projectile(target:Enemy, velocity:Number)
+			public function Projectile(target:Enemy, velocity:Number, strength:int)
 			{
 				super();
 				
 				this.target = target;
 				this.velocity = velocity;
+				this.strength = strength;
 				shape = new Quad(5, 5, 0x000000, true);
 				
 				addEventListener(Event.ADDED_TO_STAGE, init);
@@ -42,7 +45,12 @@ package model.tower
 				
 				if( (deltaX < (Settings.tileSize / 4)) && (deltaY < (Settings.tileSize / 4)))
 				{
-					// deal damage to enemy
+					if(!hit)
+					{
+						target.damage(strength);
+						hit = true;
+					}
+					
 					this.removeFromParent(true);
 				}
 				else

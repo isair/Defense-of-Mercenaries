@@ -17,25 +17,19 @@ package model.tower
 		private var position:Tile;
 		private var purchaseCost:int;
 		private var upgradeModifier:int;
-		private var damage:int;
+		private var damage:int = 10;
 		private var range:int;
 		private var influenceRange:int;
 		private var shape:Quad; //Placeholder graphics variable
-		private var attackInterval:int;
+		private var attackInterval:int = 1000;
 		private var currentInterval:int = 0;
 		
-		public function Tower(purchaseCost:int, upgradeModifier:int, damage:int, range:int, attackInterval:int, influenceRange:int)
+		public function Tower()
 		{
 			super();
 			
 			this.level = 1;
 			
-			this.purchaseCost = purchaseCost;
-			this.upgradeModifier = upgradeModifier;
-			this.damage = damage;
-			this.range = range;
-			this.attackInterval = attackInterval;
-			this.influenceRange = influenceRange;
 			this.shape = new Quad(Settings.tileSize, Settings.tileSize, 0x0000FF, true);
 						
 			addEventListener(Event.ADDED_TO_STAGE, init);
@@ -53,7 +47,6 @@ package model.tower
 			if (currentInterval > attackInterval)
 			{	
 				findFirstEnemy();
-				
 				currentInterval -= attackInterval;
 			}
 		}
@@ -73,7 +66,7 @@ package model.tower
 		
 		private function shoot(enemy:Enemy):void
 		{
-			stage.addChild(new Projectile(enemy, 2));
+			stage.addChild(new Projectile(enemy, 2, damage));
 		}
 		
 		// Placeholder upgrade cost calculation
