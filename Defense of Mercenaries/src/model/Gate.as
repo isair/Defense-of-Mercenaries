@@ -1,16 +1,16 @@
 package model
 {
-  	import flash.geom.Point;
-  	
-  	import model.enemy.Enemy;
-  	import model.tile.RoadTile;
-  	import model.tile.Tile;
-  	
-  	import starling.display.Quad;
-  	import starling.display.Sprite;
-
-  	public class Gate extends Sprite implements GameObject
-  	{
+	import flash.geom.Point;
+	
+	import model.enemy.Enemy;
+	import model.tile.RoadTile;
+	import model.tile.Tile;
+	
+	import starling.display.Quad;
+	import starling.display.Sprite;
+	
+	public class Gate extends Sprite implements GameObject
+	{
 		private var storedEnemies:int = 0;
 		private var spawnTimePassed:Number = 0;
 		
@@ -18,11 +18,11 @@ package model
 		
 		private var hasPath:Boolean = false;
 		private var path:Path = null;
-
-    	public function Gate()
-    	{
+		
+		public function Gate()
+		{
 			super();
-    	}
+		}
 		
 		public function insert(position:Tile):void
 		{
@@ -116,7 +116,7 @@ package model
 		
 		public function spawnEnemy():void
 		{
-			stage.addChild(new Enemy(100, 1, new Point(position.getX(), position.getY()), (new Path()).copyPath(path)));
+			Settings.currentMap.addChild(new Enemy(100, 1, new Point(position.getX(), position.getY()), (new Path()).copyPath(path)));
 		}
-  }
+	}
 }
