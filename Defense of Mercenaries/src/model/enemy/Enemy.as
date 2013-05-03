@@ -47,6 +47,7 @@ package model.enemy
 			
 			if(health <= 0)
 			{
+				Settings.currentGold += 10;
 				this.removeFromParent(true);
 			}
 		}
