@@ -2,7 +2,9 @@ package view
 {
 	import model.Card;
 	
+	import starling.display.Quad;
 	import starling.display.Sprite;
+	import starling.text.TextField;
 	import starling.events.Event;
 	
 	public class Hand extends Sprite
@@ -13,8 +15,9 @@ package view
 		{
 			super();
 			
-			y = 650;
-			generateHand();
+			generateCards();
+			generateGoldCounter();
+			generateButton();
 			
 			addEventListener(Event.ADDED_TO_STAGE, init);
 		}
@@ -23,13 +26,13 @@ package view
 		{
 			for(var i:int=0; i<cards.length; i++)
 			{
-				cards[i].x = 90 * i;
+				cards[i].x = Settings.tileSize * 2.25 * i;
 				
 				addChild(cards[i]);
 			}
 		}
 		
-		public function generateHand():void
+		public function generateCards():void
 		{
 			cards = new Array(6);
 			
@@ -48,6 +51,27 @@ package view
 			cards[3] = card4;
 			cards[4] = card5;
 			cards[5] = card6;
+		}
+		
+		public function generateGoldCounter():void
+		{
+			var goldCounter:Quad = new Quad(Settings.tileSize * 2.5, Settings.tileSize, 0xE0E01B, true);
+			goldCounter.x = 540;
+			
+			var gold:TextField = new TextField(Settings.tileSize * 2.5, Settings.tileSize, "GOLD", "Arial", 30, 0x000000);
+			gold.x = 540;
+			
+			addChild(goldCounter);
+			addChild(gold);
+		}
+		
+		public function generateButton():void
+		{
+			var button:Quad = new Quad(Settings.tileSize * 2.5, Settings.tileSize * 1.75, 0xF01620, true);
+			button.x = 540;
+			button.y = Settings.tileSize * 1.25;
+			
+			addChild(button);
 		}
 	}
 }

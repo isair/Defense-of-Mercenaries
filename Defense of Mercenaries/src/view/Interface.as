@@ -1,6 +1,7 @@
 package view
 {
 	import starling.display.Sprite;
+	import starling.display.Quad;
 
 	public class Interface extends Sprite
 	{
@@ -11,6 +12,7 @@ package view
 			super();
 			
 			hand = new Hand();
+			hand.y = 650;
 			addChild(hand);
 		}
 	}
