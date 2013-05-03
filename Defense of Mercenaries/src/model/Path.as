@@ -30,6 +30,11 @@ package model
 			directions.push(direction);
 		}
 		
+		public function pop():int
+		{
+			return directions.pop();
+		}
+		
 		public function popNextDirection():int
 		{
 			if (directions.length != 0)

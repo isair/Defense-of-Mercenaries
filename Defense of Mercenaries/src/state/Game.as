@@ -22,6 +22,8 @@ package state
 			var map:Map = new Map();
 			map.generateMap();
 			
+			Settings.currentMap = map;
+			
 			var ui:Interface = new Interface();
 			
 			var tower:Tower = new Tower();

@@ -6,7 +6,6 @@ package model
 	import model.tower.Tower;
 	
 	import starling.display.Sprite;
-	import model.tile.Tile;
 	
 	public class Map extends Sprite
 	{
@@ -44,6 +43,11 @@ package model
 					addChild(tiles[i + j * 16]);
 				}
 			}
+		}
+		
+		public function getTile(column:int, row:int):Tile
+		{
+			return tiles[column + row * Settings.mapSize];
 		}
 	}
 }
