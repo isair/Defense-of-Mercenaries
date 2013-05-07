@@ -46,9 +46,9 @@ package view
 			var card1:Card = new Card(1);
 			var card2:Card = new Card(2);
 			var card3:Card = new Card(3);
-			var card4:Card = new Card(4);
-			var card5:Card = new Card(5);
-			var card6:Card = new Card(6);
+			var card4:Card = new Card(1);
+			var card5:Card = new Card(1);
+			var card6:Card = new Card(1);
 			
 			cards[0] = card1;
 			cards[1] = card2;
