@@ -9,23 +9,23 @@ package model
 	
 	public class Map extends Sprite
 	{
-		private var tiles:Array = null;
+		private var tiles:Vector.<Vector.<Tile>>;
 		
 		public function Map()
 		{
 			super();
 		}
 		
-		public function insertGate(gate:Gate, x:int, y:int):void
+		public function insertGate(gate:Gate, column:int, row:int):void
 		{
-			var tile:Tile = tiles[x + y * 16];
+			var tile:Tile = tiles[column][row];
 			gate.insert(tile);
 			addChild(gate);
 		}
 		
-		public function insertOccupier(occupier:Occupier, x:int, y:int):void
+		public function insertOccupier(occupier:Occupier, column:int, row:int):void
 		{
-			var tile:Tile = tiles[x + y * 16];
+			var tile:Tile = tiles[column][row];
 			tile.occupy(occupier);
 			occupier.insert(tile);
 			addChild(occupier);
@@ -33,21 +33,28 @@ package model
 		
 		public function generateMap():void
 		{
-			tiles = new Array(16 * 16);
+			tiles = new Vector.<Vector.<Tile>>();
 			
-			for (var i:int = 0; i < 16; i++)
+			for (var column:uint = 0; column < Settings.mapSize; column++)
 			{
-				for (var j:int = 0; j < 16; j++)
+				tiles[column] = new Vector.<Tile>();
+				
+				for (var row:uint = 0; row < Settings.mapSize; row++)
 				{
-					tiles[i + j * 16] = new Tile(new Point(i, j));
-					addChild(tiles[i + j * 16]);
+					tiles[column][row] = new Tile(new Point(column, row));
+					addChild(tiles[column][row]);
 				}
 			}
 		}
 		
+		public function getTiles():Vector.<Vector.<Tile>>
+		{
+			return tiles;
+		}
+		
 		public function getTile(column:int, row:int):Tile
 		{
-			return tiles[column + row * Settings.mapSize];
+			return tiles[column][row];
 		}
 	}
 }

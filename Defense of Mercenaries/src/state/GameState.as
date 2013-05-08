@@ -4,19 +4,14 @@ package state
 	
 	import starling.display.DisplayObjectContainer;
 	import starling.display.Sprite;
+	import starling.events.EnterFrameEvent;
 	import starling.events.Event;
 
 	public class GameState extends Sprite
-	{
-		private var deltaTime:Number = 0;
-		private var prevFrameDate:Date = null;
-		private var nextFrameDate:Date = null;
-		
+	{	
 		public function GameState()
 		{
 			super();
-			
-			prevFrameDate = new Date();
 			
 			this.addEventListener(Event.ADDED_TO_STAGE, onAdd);
 			this.addEventListener(Event.ENTER_FRAME, onFrameEnter);
@@ -24,17 +19,12 @@ package state
 		
 		public  function onAdd(e:Event):void {}
 		
-		private function onFrameEnter(e:Event):void
+		private function onFrameEnter(e:EnterFrameEvent):void
 		{
-			nextFrameDate = new Date();
-			deltaTime = nextFrameDate.time - prevFrameDate.time;
-			
-			recurseGameObjectUpdate(stage);
-			
-			prevFrameDate = nextFrameDate;
+			recurseGameObjectUpdate(stage, e.passedTime * 1000);
 		}
 		
-		private function recurseGameObjectUpdate(container:DisplayObjectContainer):void
+		private function recurseGameObjectUpdate(container:DisplayObjectContainer, deltaTime:Number):void
 		{
 			for (var i:int = 0; i < container.numChildren; i++)
 			{
@@ -44,7 +34,7 @@ package state
 					child.update(deltaTime);
 				
 				if (child is starling.display.DisplayObjectContainer && child.numChildren > 0)
-					recurseGameObjectUpdate(child as DisplayObjectContainer);
+					recurseGameObjectUpdate(child as DisplayObjectContainer, deltaTime);
 			}
 		}
 	}

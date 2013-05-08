@@ -30,6 +30,11 @@ package model
 			directions.push(direction);
 		}
 		
+		public function reverse():void
+		{
+			directions = directions.reverse();
+		}
+		
 		public function pop():int
 		{
 			return directions.pop();

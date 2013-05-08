@@ -36,10 +36,6 @@ package state
 			var base:Base = new Base();
 			map.insertOccupier(base, 8, 10);
 			
-			var gate:Gate = new Gate();
-			map.insertGate(gate, 0, 0);
-			gate.calculatePath(base);
-			
 			var obstacle1:Obstacle = new Obstacle();
 			var obstacle2:Obstacle = new Obstacle();			
 			var obstacle3:Obstacle = new Obstacle();
@@ -49,6 +45,10 @@ package state
 			map.insertOccupier(obstacle2, 10, 7);
 			map.insertOccupier(obstacle3, 3, 7);
 			map.insertOccupier(obstacle4, 6, 2);
+			
+			var gate:Gate = new Gate();
+			map.insertGate(gate, 0, 0);
+			gate.calculatePath(base);
 			
 			addChild(map);
 			addChild(ui);
