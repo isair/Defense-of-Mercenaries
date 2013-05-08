@@ -10,13 +10,15 @@ package model
 	
 	import state.Game;
 	
-	public class Card extends Sprite
+	public class Card extends Sprite implements GameObject
 	{
 		
 		private var type:int; // 1 refers to regular Tower, 2 refers to slowTower, 3 refers to area-of-effect Tower
-		private var cost:int; // purchase cost for tower
-		private var price:TextField;
-		private var shape:Quad ;
+		public var cost:int; // purchase cost for tower
+		public var price:TextField = new TextField(Settings.tileSize * 2, 20, "price: ", "Arial", 12, 0x000000);
+		private var shape:Quad;
+		private var recentlyClicked:Boolean = false;
+		private var timePassed:Number = 0;
 		
 		public function Card(type:int)
 		{
@@ -50,31 +52,77 @@ package model
 			}
 			
 			// Placeholder price tag
-			price = new TextField(Settings.tileSize * 2, 20, "price: " + cost, "Arial", 12, 0x000000);
+			price.text = "price: " + cost;
 			price.y = Settings.tileSize * 3 - 20;
 			
 			addChild(shape);
 			addChild(price);
 		}
 		
+		public function priceDefault():void
+		{
+			price.text = "price: " + cost;
+		}
+		
 		public function cardTouched(ev:TouchEvent):void
 		{
-			var touch:Touch = ev.getTouch(this, TouchPhase.ENDED);
+			var touch:Touch = ev.getTouch(this);
 			
-			if (touch) {
-				if (Settings.currentGold < cost) {
-					price.text = "more gold";
+			if( touch.phase != TouchPhase.HOVER )
+			{
+				if( Settings.currentGold >= cost )
+				{
+					// send the touch to interface to handle
+					Settings.ui.handleTouch(this, touch);			
 				}
-				else {
-					price.text = "PURCHASED" ; 
-					Settings.currentGold = Settings.currentGold - cost;
+					
+				else
+				{
+					// block touch handling if not enough $$$
+					price.text = "$$$";
+					addResetCounter();
 				}
 			}
+		}
+		
+		public function addResetCounter():void
+		{
+			recentlyClicked = true;
+			timePassed = 0;
+		}
+		
+		public function isTouched(touch:Touch):Boolean
+		{
+			var globalX:Number = this.x;
+			var globalY:Number = this.y + 650;
+			
+			if((touch.globalX > globalX) && (touch.globalX < globalX + Settings.tileSize * 2) &&
+				(touch.globalY > globalY) && (touch.globalY < globalY + Settings.tileSize * 3))
+			{
+				return true;
+			}
+			else
+				return false;
 		}
 		
 		public function getType():int
 		{
 			return this.type;
+		}
+		
+		public function update(deltaTime:Number):void
+		{		
+			if(recentlyClicked)
+			{
+				timePassed += deltaTime;	
+				
+				if(timePassed > 500)
+				{
+					timePassed = 0;
+					recentlyClicked = false;
+					priceDefault();
+				}
+			}
 		}
 	}
 }

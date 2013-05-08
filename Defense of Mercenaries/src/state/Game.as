@@ -26,6 +26,7 @@ package state
 			Settings.currentMap = map;
 			
 			var ui:Interface = new Interface();
+			Settings.ui = ui;
 			
 			var slowTower:SlowTower = new SlowTower();
 			var tower:Tower = new Tower();

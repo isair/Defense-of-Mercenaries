@@ -2,6 +2,7 @@ package view
 {	
 	import model.Card;
 	import model.GameObject;
+	
 	import starling.display.Button;
 	import starling.display.Quad;
 	import starling.display.Sprite;
@@ -25,6 +26,8 @@ package view
 			generateCards();
 			generateGoldCounter();
 			generateButton();
+			
+			Settings.currentGold = 50;
 			
 			addEventListener(Event.ADDED_TO_STAGE, init);
 		}
@@ -56,6 +59,11 @@ package view
 			cards[3] = card4;
 			cards[4] = card5;
 			cards[5] = card6;
+		}
+		
+		public function getCards():Array
+		{
+			return cards;
 		}
 		
 		public function generateGoldCounter():void

@@ -4,11 +4,11 @@ package model.projectile
 	
 	import model.GameObject;
 	import model.enemy.Enemy;
+	import model.tower.Tower;
 	
 	import starling.display.Quad;
 	import starling.display.Sprite;
 	import starling.events.Event;
-	import model.tower.Tower;
 	
 	public class Projectile extends Sprite implements GameObject
 	{
@@ -38,10 +38,10 @@ package model.projectile
 		
 		public function update(deltaTime:Number):void
 		{						
-			var deltaX = (target.x + Settings.tileSize / 2) - (x);
-			var deltaY = (target.y + Settings.tileSize / 2) - (y);
+			var deltaX:Number = (target.x + Settings.tileSize / 2) - (x);
+			var deltaY:Number = (target.y + Settings.tileSize / 2) - (y);
 			
-			var hyp = Math.sqrt( deltaX * deltaX + deltaY * deltaY );
+			var hyp:Number = Math.sqrt( deltaX * deltaX + deltaY * deltaY );
 			
 			var absX:Number = Math.abs(deltaX);
 			var absY:Number = Math.abs(deltaY);
@@ -54,8 +54,8 @@ package model.projectile
 			}
 			else
 			{
-				var velocityX = (deltaX / hyp) * velocity;
-				var velocityY = (deltaY / hyp) * velocity;
+				var velocityX:Number = (deltaX / hyp) * velocity;
+				var velocityY:Number = (deltaY / hyp) * velocity;
 				
 				x += (((Settings.tileSize as Number) * deltaTime * velocityX) / 1000);
 				y += (((Settings.tileSize as Number) * deltaTime * velocityY) / 1000);
