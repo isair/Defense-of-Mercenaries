@@ -43,7 +43,7 @@ package model.astar
 				var currentNode:AStarNode = openHeap.pop();
 				
 				// Check if goal is reached.
-				if (startNode.position.x == endNode.position.x && startNode.position.y == endNode.position.y)
+				if (currentNode.position.x == endNode.position.x && currentNode.position.y == endNode.position.y)
 				{
 					var node:AStarNode = currentNode;
 					var path:Vector.<AStarNode> = new Vector.<AStarNode>();
@@ -65,7 +65,7 @@ package model.astar
 				var neighbors:Vector.<AStarNode> = getNeighbors(currentNode);
 				
 				// Iterate through neighbours.
-				for (var i:int = 0; i < neighbors.length; i++)
+				for (i = 0; i < neighbors.length; i++)
 				{
 					var neighbor:AStarNode = neighbors[i];
 					

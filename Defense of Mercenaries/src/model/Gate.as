@@ -37,7 +37,7 @@ package model
 		}
 		
 		// Calculate an optimal path from gate to base using A* algorithm.
-		public function calculatePath(base:Base):void
+		public function calculatePath(base:Base):Boolean
 		{
 			var tiles:Vector.<Vector.<Tile>> = Settings.currentMap.getTiles();
 			var nodes:Vector.<Vector.<AStarNode>> = new Vector.<Vector.<AStarNode>>();
@@ -56,8 +56,10 @@ package model
 					var tile:Tile = tiles[column][row];
 					
 					node.next = previousNode;
-					node.isWall = tile.isOccupied();
+					node.isWall = tile.isOccupied() && ! (tile.getOccupier() is Base);
 					node.position = new Point(column, row);
+					
+					nodes[column][row] = node;
 					
 					// Set startNode and endNode.
 					if (tile.x == position.x && tile.y == position.y)
@@ -74,48 +76,34 @@ package model
 			
 			// Find path nodes.
 			var pathNodes:Vector.<AStarNode> = pathFinder.findPath(startNode, endNode);
+			
+			// Return false if unable to find a path.
+			if (pathNodes.length == 0)
+				return false;
 				
 			// Create path out of path nodes.
-			var nextNode:AStarNode = pathNodes.pop();
-			var currentNode:AStarNode = null;
+			var currentNode:AStarNode = startNode;
+			var nextNode:AStarNode;
 			
 			path = new Path();
 			
 			for (var i:int = 0; i < pathNodes.length; i++)
 			{
-				currentNode = pathNodes.pop();
+				nextNode = pathNodes[i];
 				
-				if (nextNode.position.x > currentNode.position.x)
+				if (nextNode.position.x > currentNode.position.x && nextNode.position.y == currentNode.position.y)
 					path.pushDirection(Path.RIGHT);
-				else if (nextNode.position.x < currentNode.position.x)
+				else if (nextNode.position.x < currentNode.position.x && nextNode.position.y == currentNode.position.y)
 					path.pushDirection(Path.LEFT);
-				else if (nextNode.position.y > currentNode.position.y)
+				else if (nextNode.position.y > currentNode.position.y && nextNode.position.x == currentNode.position.x)
 					path.pushDirection(Path.DOWN);
-				else
+				else if (nextNode.position.y < currentNode.position.y && nextNode.position.x == currentNode.position.x)
 					path.pushDirection(Path.UP);
 				
-				nextNode = currentNode;
+				currentNode = nextNode;
 			}
 			
-			path.reverse();
-			
-			// Temporary fix.
-			path = new Path();
-			
-			for (var i:int = 0; i < 5; i++)
-				path.pushDirection(Path.RIGHT);
-			
-			for (var i:int = 0; i < 7; i++)
-				path.pushDirection(Path.DOWN);
-			
-			path.pushDirection(Path.RIGHT);
-			path.pushDirection(Path.RIGHT);
-			path.pushDirection(Path.DOWN);
-			path.pushDirection(Path.RIGHT);
-			path.pushDirection(Path.DOWN);
-			path.pushDirection(Path.DOWN);
-			
-			// Pave the path with road tiles.
+			// Pave the path with road tiles. TODO: Better paving.
 			var roadPath:Path = new Path().copyPath(path);
 			var nextDirection:int = roadPath.popNextDirection();
 			var roadX:int = 0;
@@ -156,6 +144,7 @@ package model
 			}
 			
 			hasPath = true;
+			return true;
 		}
 		
 		public function update(deltaTime:Number):void

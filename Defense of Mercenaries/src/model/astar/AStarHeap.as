@@ -101,13 +101,12 @@ package model.astar
 			{
 				var child2N:Number = (n + 1) << 1;
 				var child1N:Number = child2N - 1;
-				var child1Score:Number = scoreFunction(content[child1N]);
 				var swap:* = null;
 				
-				if (child1N < length && child1Score < score)
+				if (child1N < length && scoreFunction(content[child1N]) < score)
 					swap = child1N;
 				
-				if (child2N < length && scoreFunction(content[child2N]) < (swap == null ? score : child1Score))
+				if (child2N < length && scoreFunction(content[child2N]) < (swap == null ? score : scoreFunction(content[child1N])))
 					swap = child2N;
 				
 				if (swap != null)

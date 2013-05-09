@@ -2,10 +2,11 @@ package model.tile
 {
 	import flash.geom.Point;
 	
+	import model.Occupier;
+	
 	import starling.display.Quad;
 	import starling.display.Sprite;
 	import starling.events.Event;
-	import model.Occupier;
 
 	public class Tile extends Sprite
 	{
@@ -63,6 +64,11 @@ package model.tile
 			{
 				return true;
 			}
+		}
+		
+		public function getOccupier():Occupier
+		{
+			return occupier;
 		}
 		
 		public function getCenterX():int
