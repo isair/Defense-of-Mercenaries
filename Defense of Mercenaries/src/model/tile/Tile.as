@@ -14,6 +14,7 @@ package model.tile
 		
 		private var position:Point;
 		private var occupier:Occupier;
+		private var isRoad:Boolean;
 		
 		public function Tile(position:Point)
 		{
@@ -28,6 +29,15 @@ package model.tile
 		}
 		
 		public function init(e:Event):void
+		{
+			if (isRoad)
+				addChild(new Quad(Settings.tileSize, Settings.tileSize, 0x61380b, true));
+			else
+				draw();
+		}
+		
+		// Override this method for different tiles.
+		public function draw():void
 		{
 			var outerSquare:Quad = new Quad(Settings.tileSize, Settings.tileSize, 0x000000, true);
 			var innerSquare:Quad = new Quad(Settings.tileSize - borderSize * 2, Settings.tileSize - borderSize * 2, 0xB3956D, true);
@@ -79,6 +89,17 @@ package model.tile
 		public function getCenterY():int
 		{
 			return (this.y + (Settings.tileSize / 2));
+		}
+		
+		public function setIsRoad(isRoad:Boolean):void
+		{
+			if (this.isRoad != isRoad)
+			{
+				removeChildren();
+				init(null);
+			}
+			
+			this.isRoad = isRoad;
 		}
 	}
 }

@@ -6,7 +6,6 @@ package model
   	import model.astar.AStarHeap;
   	import model.astar.AStarNode;
   	import model.enemy.Enemy;
-  	import model.tile.RoadTile;
   	import model.tile.Tile;
   	
   	import starling.display.Quad;
@@ -103,7 +102,17 @@ package model
 				currentNode = nextNode;
 			}
 			
-			// Pave the path with road tiles. TODO: Better paving.
+			// Reset road tiles.
+			for (column = 0; column < tiles.length; column++)
+				for (row = 0; row < tiles[column].length; row++)
+					tiles[column][row].setIsRoad(false);
+			
+			// Set tiles on path as road tiles.
+			tiles[startNode.position.x][startNode.position.y].setIsRoad(true);
+			for (i = 0; i < pathNodes.length; i++)
+				tiles[pathNodes[i].position.x][pathNodes[i].position.y].setIsRoad(true);
+			
+			/*
 			var roadPath:Path = new Path().copyPath(path);
 			var nextDirection:int = roadPath.popNextDirection();
 			var roadX:int = 0;
@@ -142,6 +151,7 @@ package model
 				
 				nextDirection = roadPath.popNextDirection();
 			}
+			*/
 			
 			hasPath = true;
 			return true;
