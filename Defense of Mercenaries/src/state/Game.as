@@ -18,7 +18,7 @@ package state
 			super();
 		}
 		
-		public override function onAdd(e:Event):void
+		public override function init(e:Event):void
 		{
 			var map:Map = new Map();
 			map.generateMap();

@@ -13,11 +13,11 @@ package state
 		{
 			super();
 			
-			this.addEventListener(Event.ADDED_TO_STAGE, onAdd);
+			this.addEventListener(Event.ADDED_TO_STAGE, init);
 			this.addEventListener(Event.ENTER_FRAME, onFrameEnter);
 		}
 		
-		public  function onAdd(e:Event):void {}
+		public  function init(e:Event):void {}
 		
 		private function onFrameEnter(e:EnterFrameEvent):void
 		{
