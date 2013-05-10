@@ -29,7 +29,7 @@ package view
 			generateGoldCounter();
 			generateButton();
 			
-			Settings.currentGold = 50;
+			Settings.currentGold = 30;
 			
 			addEventListener(Event.ADDED_TO_STAGE, init);
 		}
@@ -122,10 +122,10 @@ package view
 			timePassed += deltaTime;
 			goldText.text = Settings.currentGold+"";
 			
-			if (timePassed > 1000)
+			if (timePassed > 3000)
 			{
 				Settings.currentGold += 1;
-				timePassed -= 1000;
+				timePassed -= 3000;
 			}
 		}
 	}

@@ -63,6 +63,8 @@ package view
 			else if (bonusCard.type == 6) {
 				freezeEnemies();
 			}
+			
+			Settings.currentGold -= bonusCard.cost;
 		}
 		
 		public function freezeEnemies():void

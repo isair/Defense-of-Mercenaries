@@ -26,7 +26,7 @@ package model
 			super();
 			
 			waveNumber = 1;
-			waveInterval = 30000; // Waiting duration between waves.
+			waveInterval = 15000; // Waiting duration between waves.
 			
 			storedEnemies = 2 * Math.pow(waveNumber, 2) + waveNumber - 1;
 			
@@ -153,7 +153,7 @@ package model
 				spawnTimePassed = 0;
 				waitTime = waveInterval;
 				waveNumber++;
-				storedEnemies = 2 * Math.pow(waveNumber, 2) + waveNumber - 1;
+				storedEnemies = 2 + waveNumber * (4/3);
 			}
 		}
 		

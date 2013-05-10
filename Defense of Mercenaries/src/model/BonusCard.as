@@ -29,12 +29,12 @@ package model
 			{
 				case 5: 
 					shape = new Quad(Settings.tileSize * 2, Settings.tileSize * 3, 0xE0D91B, true);
-					cost = 20;
+					cost = 100;
 					break;
 				
 				case 6: 
 					shape = new Quad(Settings.tileSize * 2, Settings.tileSize * 3, 0xE0811B, true);
-					cost = 10;
+					cost = 100;
 					break;
 			}
 			

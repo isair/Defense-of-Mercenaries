@@ -11,9 +11,8 @@ package model.enemy
 	
 	public class Enemy extends Sprite implements GameObject
 	{
-		private var health:Number = 0;
-		private var armor:Number = 0;
-		private var speed:Number = 0;
+		private var health:Number = 100;
+		private var speed:Number = 1;
 		private var position:Point = null;
 		private var dead:Boolean = false;
 		
@@ -50,7 +49,7 @@ package model.enemy
 			if(health <= 0 && !this.dead)
 			{
 				this.dead = true;
-				Settings.currentGold += 10;
+				Settings.currentGold += 5;
 				this.removeFromParent(true);
 			}
 		}
