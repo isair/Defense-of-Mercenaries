@@ -23,6 +23,7 @@ package view
 		{
 			super();
 			
+			generateBackground();
 			generateCards();
 			generateGoldCounter();
 			generateButton();
@@ -37,6 +38,7 @@ package view
 			for(var i:int=0; i<cards.length; i++)
 			{
 				cards[i].x = Settings.tileSize * 2.25 * i;
+				cards[i].y = Settings.tileSize / 4;
 				
 				addChild(cards[i]);
 			}
@@ -69,11 +71,13 @@ package view
 		public function generateGoldCounter():void
 		{
 			var goldCounter:Quad = new Quad(Settings.tileSize * 2.5, Settings.tileSize, 0xE0E01B, true);
-			goldCounter.x = 540;
+			goldCounter.x = Settings.tileSize * 13.5;
+			goldCounter.y = Settings.tileSize / 4;
 			
 			goldText = new TextField(Settings.tileSize * 2.5, Settings.tileSize, Settings.currentGold+"", "Arial", 30, 0x000000);
-			goldText.x = 540;
-			
+			goldText.x = Settings.tileSize * 13.5;
+			goldText.y = Settings.tileSize / 4;
+
 			addChild(goldCounter);
 			addChild(goldText);
 		}
@@ -82,12 +86,12 @@ package view
 		{
 			
 			var button:Quad = new Quad(Settings.tileSize * 2.5, Settings.tileSize * 1.75, 0xF01620, true);
-			button.x = 540;
-			button.y = Settings.tileSize * 1.25;
+			button.x = Settings.tileSize * 13.5;
+			button.y = Settings.tileSize * 1.50;
 			
-			buttonText = new TextField(Settings.tileSize * 2, Settings.tileSize * 1.25, "END TURN", "Arial", 15, 0x000000);
-			buttonText.x = 550;
-			buttonText.y = Settings.tileSize * 1.4;
+			buttonText = new TextField(Settings.tileSize * 2, Settings.tileSize * 1.25, "END TURN", "Arial", Settings.tileSize * 15 / 40, 0x000000);
+			buttonText.x = Settings.tileSize * 13.5;
+			buttonText.y = Settings.tileSize * 1.65;
 			
 			addChild(button);
 			addChild(buttonText);
@@ -96,6 +100,12 @@ package view
 			buttonText.touchable = false;
 			
 			button.addEventListener(TouchEvent.TOUCH, buttonTouched) ;		
+		}
+		
+		public function generateBackground():void
+		{
+			var background:Quad = new Quad(Settings.tileSize * 16, Settings.tileSize * 3.5, 0x111111, true);
+			addChild(background);
 		}
 		
 		public function buttonTouched(ev:TouchEvent):void

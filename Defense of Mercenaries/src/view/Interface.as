@@ -23,7 +23,7 @@ package view
 			super();
 			
 			hand = new Hand();
-			hand.y = 650;
+			hand.y = Settings.tileSize * 16;
 			addChild(hand);
 		}
 		
@@ -112,9 +112,9 @@ package view
 				if(q != null)
 				{
 					if(q is Shape)
-						addChild(q as Shape);
+						Settings.currentMap.addChild(q as Shape);
 					if(q is Quad)
-						addChild(q as Quad);
+						Settings.currentMap.addChild(q as Quad);
 				}
 			}
 		}
@@ -126,9 +126,9 @@ package view
 				if(q != null)
 				{
 					if(q is Shape)
-						removeChild(q as Shape);
+						Settings.currentMap.removeChild(q as Shape);
 					if(q is Quad)
-						removeChild(q as Quad);
+						Settings.currentMap.removeChild(q as Quad);
 				}
 			}
 		}
