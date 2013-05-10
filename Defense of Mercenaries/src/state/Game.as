@@ -28,15 +28,12 @@ package state
 		public override function init(e:Event):void
 		{
 			assetManager = new AssetManager();
-			assetManager.verbose = true;
 			
 			// Enqueue game assets.
 			assetManager.enqueue(EmbeddedGameAssets);
 			
 			assetManager.loadQueue(function(ratio:Number):void
 			{
-				trace("Loading assets, progress:", ratio);
-				
 				if (ratio == 1.0)
 					startGame();
 			});
@@ -73,7 +70,7 @@ package state
 			addChild(ui);
 			
 			// Start the background music.
-			var bgm:SoundChannel = assetManager.playSound("bgm");
+			var bgm:SoundChannel = assetManager.playSound("bgm", 0, int.MAX_VALUE);
 		}
 	}
 }

@@ -8,7 +8,7 @@ package state
 	import starling.events.Event;
 
 	public class GameState extends Sprite
-	{	
+	{
 		public function GameState()
 		{
 			super();
