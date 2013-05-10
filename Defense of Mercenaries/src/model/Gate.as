@@ -13,8 +13,8 @@ package model
 
   	public class Gate extends Sprite implements GameObject
   	{
-		private var storedEnemies:int = 0;
-		private var spawnTimePassed:Number = 0;
+		private var waveNumber:int, waveInterval:int, storedEnemies:int;
+		private var spawnTimePassed:Number, waitTime:Number;
 		
 		private var position:Tile = null;
 		
@@ -24,12 +24,19 @@ package model
 		public function Gate()
 		{
 			super();
+			
+			waveNumber = 1;
+			waveInterval = 30000; // Waiting duration between waves.
+			
+			storedEnemies = 2 * Math.pow(waveNumber, 2) + waveNumber - 1;
+			
+			spawnTimePassed = 0;
+			waitTime = 0;
 		}
 		
 		public function insert(position:Tile):void
 		{
 			this.position = position;
-			this.storedEnemies = 3;
 			
 			x = position.getX();
 			y = position.getY();
@@ -121,23 +128,39 @@ package model
 		{
 			if ( ! hasPath) return;
 			
-			spawnTimePassed += deltaTime;
+			if (waitTime > 0)
+			{
+				waitTime -= deltaTime;
+				
+				if (waitTime > 0) return;
+				deltaTime = 0 - waitTime;
+			}
 			
-			if (spawnTimePassed > 1500)
-			{	
-				if(storedEnemies > 0)
+			if (storedEnemies > 0)
+			{
+				spawnTimePassed += deltaTime;
+				trace("spawnTimePassed:" + spawnTimePassed);
+				
+				if(spawnTimePassed >= 1500)
 				{
 					storedEnemies--;
 					spawnEnemy();
+					spawnTimePassed -= 1500;
 				}
-				
-				spawnTimePassed -= 1500;
+			}
+			else
+			{
+				spawnTimePassed = 0;
+				waitTime = waveInterval;
+				waveNumber++;
+				storedEnemies = 2 * Math.pow(waveNumber, 2) + waveNumber - 1;
 			}
 		}
 		
 		public function spawnEnemy():void
 		{
-			Settings.currentMap.addChild(new Enemy(100, 1, new Point(position.getX(), position.getY()), (new Path()).copyPath(path)));
+			trace("added enemy");
+			Settings.currentMap.addChild(new Enemy(100, 1, new Point(x, y), (new Path()).copyPath(path)));
 		}
 	}
 }
