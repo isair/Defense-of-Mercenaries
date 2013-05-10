@@ -2,6 +2,7 @@ package view
 {	
 	import model.Card;
 	import model.GameObject;
+	import model.BonusCard;
 	
 	import starling.display.Button;
 	import starling.display.Quad;
@@ -51,9 +52,9 @@ package view
 			var card1:Card = new Card(1);
 			var card2:Card = new Card(2);
 			var card3:Card = new Card(3);
-			var card4:Card = new Card(1);
-			var card5:Card = new Card(1);
-			var card6:Card = new Card(1);
+			var card4:Card = new Card(4);
+			var card5:BonusCard = new BonusCard(5);
+			var card6:BonusCard = new BonusCard(6);
 			
 			cards[0] = card1;
 			cards[1] = card2;

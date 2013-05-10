@@ -13,12 +13,13 @@ package model
 	public class Card extends Sprite implements GameObject
 	{
 		
-		public var type:int; // 1 refers to regular Tower, 2 refers to slowTower, 3 refers to area-of-effect Tower
-		public var cost:int; // purchase cost for tower
+		public var type:int;
+		public var cost:int;
 		public var price:TextField = new TextField(Settings.tileSize * 2, 20, "price: ", "Arial", 12, 0x000000);
 		private var shape:Quad;
 		private var recentlyClicked:Boolean = false;
 		private var timePassed:Number = 0;
+		private var disabled:Boolean = false;
 		
 		public function Card(type:int)
 		{
@@ -42,11 +43,16 @@ package model
 				
 				case 2:
 					shape = new Quad(Settings.tileSize * 2, Settings.tileSize * 3, 0x25E01B, true);
+					cost = 30;
+					break;
+	
+				case 3:
+					shape = new Quad(Settings.tileSize * 2, Settings.tileSize * 3, 0x2FB54A, true);
 					cost = 50;
 					break;
 				
-				case 3:
-					shape = new Quad(Settings.tileSize * 2, Settings.tileSize * 3, 0xEDF5F5, true);
+				case 4:
+					shape = new Quad(Settings.tileSize * 2, Settings.tileSize * 3, 0x1C9133, true);
 					cost = 100;
 					break;
 			}
@@ -59,36 +65,14 @@ package model
 			addChild(price);
 		}
 		
-		public function priceDefault():void
-		{
-			price.text = "price: " + cost;
-		}
-		
 		public function cardTouched(ev:TouchEvent):void
 		{
 			var touch:Touch = ev.getTouch(this);
 			
-			if( touch.phase != TouchPhase.HOVER )
+			if ( (touch != null) && (touch.phase != TouchPhase.HOVER) )
 			{
-				if( Settings.currentGold >= cost )
-				{
-					// send the touch to interface to handle
-					Settings.ui.handleTouch(this, touch);			
-				}
-					
-				else
-				{
-					// block touch handling if not enough $$$
-					price.text = "$$$";
-					addResetCounter();
-				}
+				Settings.ui.handleTouch(this, touch);			
 			}
-		}
-		
-		public function addResetCounter():void
-		{
-			recentlyClicked = true;
-			timePassed = 0;
 		}
 		
 		public function isTouched(touch:Touch):Boolean
@@ -112,17 +96,34 @@ package model
 		
 		public function update(deltaTime:Number):void
 		{		
-			if(recentlyClicked)
+			if(!disabled)
 			{
-				timePassed += deltaTime;	
-				
-				if(timePassed > 500)
+				if(Settings.currentGold < this.cost)
 				{
-					timePassed = 0;
-					recentlyClicked = false;
-					priceDefault();
+					disable();
 				}
 			}
+			else
+			{
+				if(Settings.currentGold >= this.cost)
+				{
+					enable();
+				}
+			}
+		}
+		
+		public function enable():void
+		{
+			this.touchable = true;
+			this.shape.alpha = 1;
+			this.disabled = false;
+		}
+		
+		public function disable():void
+		{
+			this.touchable = false;
+			this.shape.alpha = 0.4;
+			this.disabled = true;
 		}
 	}
 }

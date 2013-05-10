@@ -10,8 +10,8 @@ package model.tower
 	import model.tile.Tile;
 	
 	import starling.display.Quad;
-	import starling.events.Event;
 	import starling.display.Shape;
+	import starling.events.Event;
 	
 	public class Tower extends Occupier implements GameObject
 	{
@@ -23,20 +23,22 @@ package model.tower
 		private var shape:Quad;
 		private var attackInterval:int = 1000;
 		private var currentInterval:int = attackInterval - 1;
+		private var previousInterval:Number = 0;
+		private var boosted:Boolean = false;
 		
 		public function Tower()
 		{
 			super();
-									
+			
 			addEventListener(Event.ADDED_TO_STAGE, init);
 		}
-				
+		
 		public override function init(e:Event):void
 		{			
 			this.shape = new Quad(Settings.tileSize, Settings.tileSize, 0x7A4F2C, true);
 			addChild(shape);
 		}
-
+		
 		public function update(deltaTime:Number):void
 		{
 			currentInterval += deltaTime;
@@ -92,7 +94,7 @@ package model.tower
 		public static function getGhost():Array
 		{
 			var ghostArray:Array = new Array(2);
-						
+			
 			var shape:Shape = new Shape();
 			shape.graphics.beginFill(0xFF0000, 0.3);
 			shape.graphics.lineStyle(1, 0xFF0000, 0.7);
@@ -105,6 +107,22 @@ package model.tower
 			ghostArray[1] = ghost;
 			
 			return ghostArray;
+		}
+		
+		public function boostAttackSpeed():void
+		{
+			this.previousInterval = this.attackInterval;
+			this.attackInterval = this.attackInterval / 2 ;
+			this.boosted = true; 
+		}
+		
+		public function revertAttackSpeed():void
+		{
+			if ( boosted )
+			{
+				this.attackInterval = this.previousInterval;
+				this.boosted = false;
+			}
 		}
 	}
 }

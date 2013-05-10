@@ -1,9 +1,14 @@
 package view
 {
 	import model.Card;
+	import model.BonusCard;
 	import model.tile.Tile;
 	import model.tower.SlowTower;
 	import model.tower.Tower;
+	
+	import model.GameObject;
+	
+	import model.enemy.Enemy;
 	
 	import starling.display.Quad;
 	import starling.display.Sprite;
@@ -13,7 +18,7 @@ package view
 	import starling.events.TouchPhase;
 	import starling.display.Shape;
 	
-	public class Interface extends Sprite
+	public class Interface extends Sprite implements GameObject
 	{
 		private var hand:Hand;
 		private var ghostArray:Array = new Array(2);
@@ -48,6 +53,78 @@ package view
 			}
 			
 			//When construction completes -- deduct gold
+		}
+		
+		public function handleBonusTouch(bonusCard:BonusCard, touch:Touch):void 
+		{
+			if (bonusCard.type == 5) {
+				boostTowers();
+			}
+			else if (bonusCard.type == 6) {
+				freezeEnemies();
+			}
+		}
+		
+		public function freezeEnemies():void
+		{
+			for (var i:int = 0; i < Settings.currentMap.numChildren; i++)
+			{
+				var child:Object = Settings.currentMap.getChildAt(i);
+				
+				if (child is Enemy)
+				{
+					(child as Enemy).freeze();
+				}
+			}
+			
+			Settings.freezeTimer = 2000;
+			Settings.freezeActive = true;
+		}
+		
+		public function unfreezeEnemies():void
+		{
+			for (var i:int = 0; i < Settings.currentMap.numChildren; i++)
+			{
+				var child:Object = Settings.currentMap.getChildAt(i);
+				
+				if (child is Enemy)
+				{
+					(child as Enemy).unfreeze();
+				}
+			}
+			
+			Settings.freezeActive = false;
+		}
+		
+		public function boostTowers():void
+		{
+			for (var i:int = 0; i < Settings.currentMap.numChildren; i++)
+			{
+				var child:Object = Settings.currentMap.getChildAt(i);
+				
+				if (child is Tower)
+				{
+					(child as Tower).boostAttackSpeed();
+				}
+			}
+			
+			Settings.boostTimer = 3000;
+			Settings.boostActive = true;
+		}
+		
+		public function revertBoost():void
+		{
+			for (var i:int = 0; i < Settings.currentMap.numChildren; i++)
+			{
+				var child:Object = Settings.currentMap.getChildAt(i);
+				
+				if (child is Tower)
+				{
+					(child as Tower).revertAttackSpeed();
+				}
+			}
+			
+			Settings.boostActive = false;
 		}
 		
 		public function constructTower(touch:Touch, card:Card):void
@@ -150,6 +227,29 @@ package view
 						(q as Quad).x = snapCoords[0];
 						(q as Quad).y = snapCoords[1];
 					}
+				}
+			}
+		}
+		
+		public function update(deltaTime:Number):void
+		{
+			if ( Settings.boostActive )
+			{
+				Settings.boostTimer -= deltaTime;
+				
+				if ( Settings.boostTimer <= 0 )
+				{
+					revertBoost();
+				}
+			}
+			
+			if ( Settings.freezeActive )
+			{
+				Settings.freezeTimer -= deltaTime;
+				
+				if ( Settings.freezeTimer <= 0 )
+				{
+					unfreezeEnemies();
 				}
 			}
 		}

@@ -15,8 +15,10 @@ package model.enemy
 		private var armor:Number = 0;
 		private var speed:Number = 0;
 		private var position:Point = null;
+		private var dead:Boolean = false;
 		
 		private var slowed:Boolean = false;
+		private var frozen:Boolean = false;
 		private var slowAmount:Number = 0;
 		private var slowDuration:Number = 0;
 		
@@ -45,8 +47,9 @@ package model.enemy
 		{
 			health = health - value;
 			
-			if(health <= 0)
+			if(health <= 0 && !this.dead)
 			{
+				this.dead = true;
 				Settings.currentGold += 10;
 				this.removeFromParent(true);
 			}
@@ -64,61 +67,74 @@ package model.enemy
 			}
 		}
 		
+		public function freeze():void
+		{
+			this.frozen = true;
+		}
+		
+		public function unfreeze():void
+		{
+			this.frozen = false;
+		}
+		
 		public function update(deltaTime:Number):void
 		{
-			if (this.slowed)
+			if (!frozen)
 			{
-				this.slowDuration -= deltaTime;
-				
-				if (this.slowDuration <= 0)
+				if (this.slowed)
 				{
-					this.slowed = false;
-					this.slowAmount = 0;
-					this.speed = 1;
-				}
-			}
-			
-			if (moveDirection == Path.NONE) // If not moving, check path for directions.
-			{
-				moveDirection = path.popNextDirection();
-				distanceMoved = 0;
-				
-				// TODO: Reduce base health at the end of the path.
-				if (moveDirection == Path.NONE)
-					this.removeFromParent(true);
-			}
-			else // Move in given direction for a single tile length.
-			{
-				var deltaPos:Number = (((Settings.tileSize as Number) * deltaTime * speed) / (1000));
-				distanceMoved += deltaPos;
-				
-				if (distanceMoved >= Settings.tileSize)
-					deltaPos -= (distanceMoved - Settings.tileSize);
-				
-				switch (moveDirection)
-				{
-					case Path.UP:
-						y -= deltaPos;
-						break;
+					this.slowDuration -= deltaTime;
 					
-					case Path.RIGHT:
-						x += deltaPos;
-						break;
-					
-					case Path.DOWN:
-						y += deltaPos;
-						break;
-					
-					case Path.LEFT:
-						x -= deltaPos;
-						break;
-					
-					default:
-						break;
+					if (this.slowDuration <= 0)
+					{
+						this.slowed = false;
+						this.slowAmount = 0;
+						this.speed = 1;
+					}
 				}
 				
-				if (distanceMoved >= Settings.tileSize)
-					moveDirection = Path.NONE;
+				if (moveDirection == Path.NONE) // If not moving, check path for directions.
+				{
+					moveDirection = path.popNextDirection();
+					distanceMoved = 0;
+					
+					// TODO: Reduce base health at the end of the path.
+					if (moveDirection == Path.NONE)
+						this.removeFromParent(true);
+				}
+				else // Move in given direction for a single tile length.
+				{
+					var deltaPos:Number = (((Settings.tileSize as Number) * deltaTime * speed) / (1000));
+					distanceMoved += deltaPos;
+					
+					if (distanceMoved >= Settings.tileSize)
+						deltaPos -= (distanceMoved - Settings.tileSize);
+					
+					switch (moveDirection)
+					{
+						case Path.UP:
+							y -= deltaPos;
+							break;
+						
+						case Path.RIGHT:
+							x += deltaPos;
+							break;
+						
+						case Path.DOWN:
+							y += deltaPos;
+							break;
+						
+						case Path.LEFT:
+							x -= deltaPos;
+							break;
+						
+						default:
+							break;
+					}
+					
+					if (distanceMoved >= Settings.tileSize)
+						moveDirection = Path.NONE;
+				}
 			}
 		}
 	}
