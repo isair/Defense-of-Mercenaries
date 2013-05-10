@@ -2,15 +2,15 @@ package model.tower
 {
 	import flash.geom.Point;
 	
-	import model.Path;
 	import model.GameObject;
 	import model.Occupier;
+	import model.Path;
 	import model.enemy.Enemy;
+	import model.projectile.Projectile;
 	import model.tile.Tile;
 	
 	import starling.display.Quad;
 	import starling.events.Event;
-	import model.projectile.Projectile;
 	
 	public class Tower extends Occupier implements GameObject
 	{
@@ -21,7 +21,8 @@ package model.tower
 		private var damage:int = 20;
 		private var range:int;
 		private var influenceRange:int;
-		private var shape:Quad; //Placeholder graphics variable
+		private static var towerShape:Quad = new Quad(Settings.tileSize, Settings.tileSize, 0x7A4F2C, true);
+		private var shape:Quad;
 		private var attackInterval:int = 1000;
 		private var currentInterval:int = 0;
 		
@@ -76,6 +77,13 @@ package model.tower
 		private function getUpgradeCost(level:int):int
 		{
 			return (upgradeModifier * level);
+		}
+		
+		public static function getGhost():Quad
+		{
+ 			var ghost:Quad = towerShape;
+			ghost.alpha = 0.3;
+			return ghost;
 		}
 	}
 }

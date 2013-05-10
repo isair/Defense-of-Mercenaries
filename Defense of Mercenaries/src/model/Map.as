@@ -22,14 +22,17 @@ package model
 			gate.insert(tile);
 			addChild(gate);
 		}
-				
-		public function insertOccupier(occupier:Occupier, column:int = null, row:int = null, tile:Tile = null):void
+		
+		public function insertOccupierToTile(occupier:Occupier, tile:Tile):void
 		{
-			if( tile == null )
-			{
-				tile:Tile = tiles[column][row];
-			}
-			
+			tile.occupy(occupier);
+			occupier.insert(tile);
+			addChild(occupier);
+		}
+				
+		public function insertOccupier(occupier:Occupier, column:int, row:int):void
+		{
+			var tile:Tile = tiles[column][row];
 			tile.occupy(occupier);
 			occupier.insert(tile);
 			addChild(occupier);
@@ -58,10 +61,23 @@ package model
 		
 		public function getTileFromCoordinates(x:Number, y:Number):Tile
 		{
-			var tileX:int = (Settings.tileSize * 16) / x;
-			var tileY:int = (Settings.tileSize * 16) / y;
+			var tileX:int = x / Settings.tileSize;
+			var tileY:int = y / Settings.tileSize;
 			
 			return getTile(tileX, tileY);
+		}
+		
+		public function getSnapCoordinates(x:Number, y:Number):Array
+		{
+			var snapCoordinates:Array = new Array(2);
+			
+			var tileX:int = x / Settings.tileSize;
+			var tileY:int = y / Settings.tileSize;
+
+			snapCoordinates[0] = tileX * Settings.tileSize;
+			snapCoordinates[1] = tileY * Settings.tileSize;
+			
+			return snapCoordinates;
 		}
 		
 		public function getTile(column:int, row:int):Tile

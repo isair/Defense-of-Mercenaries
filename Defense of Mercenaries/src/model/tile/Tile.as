@@ -76,6 +76,11 @@ package model.tile
 			}
 		}
 		
+		public function hasRoad():Boolean
+		{
+			return isRoad;
+		}
+		
 		public function getOccupier():Occupier
 		{
 			return occupier;

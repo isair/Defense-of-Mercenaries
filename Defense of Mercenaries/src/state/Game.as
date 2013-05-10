@@ -28,12 +28,6 @@ package state
 			var ui:Interface = new Interface();
 			Settings.ui = ui;
 			
-			var slowTower:SlowTower = new SlowTower();
-			var tower:Tower = new Tower();
-
-			map.insertOccupier(tower, 8, 3);
-			map.insertOccupier(slowTower, 3, 3);
-			
 			var base:Base = new Base();
 			map.insertOccupier(base, 8, 10);
 			

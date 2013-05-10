@@ -9,6 +9,7 @@ package model.tower
 	
 	public class SlowTower extends Tower
 	{
+		private static var towerShape:Quad = new Quad(Settings.tileSize, Settings.tileSize, 0x3787B0, true);
 		private var shape:Quad;
 		private var damage:int = 15;
 		private var attackInterval:int = 1500;
@@ -22,7 +23,7 @@ package model.tower
 		
 		public override function init(e:Event):void
 		{
-			shape = new Quad(Settings.tileSize, Settings.tileSize, 0x3787B0, true);
+			this.shape = new Quad(Settings.tileSize, Settings.tileSize, 0x3787B0, true);
 			addChild(shape);
 		}
 		
@@ -33,6 +34,13 @@ package model.tower
 			bullet.x = x + Settings.tileSize / 2;
 			bullet.y = y + Settings.tileSize / 2;
 			Settings.currentMap.addChild(bullet);
+		}
+		
+		public static function getGhost():Quad
+		{
+			var ghost:Quad = towerShape;
+			ghost.alpha = 0.3;
+			return ghost;
 		}
 	}
 }
