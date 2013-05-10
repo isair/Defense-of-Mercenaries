@@ -13,7 +13,7 @@ package model
 	public class Card extends Sprite implements GameObject
 	{
 		
-		private var type:int; // 1 refers to regular Tower, 2 refers to slowTower, 3 refers to area-of-effect Tower
+		public var type:int; // 1 refers to regular Tower, 2 refers to slowTower, 3 refers to area-of-effect Tower
 		public var cost:int; // purchase cost for tower
 		public var price:TextField = new TextField(Settings.tileSize * 2, 20, "price: ", "Arial", 12, 0x000000);
 		private var shape:Quad;

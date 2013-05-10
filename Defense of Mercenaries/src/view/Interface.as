@@ -2,6 +2,7 @@ package view
 {
 	import model.Card;
 	import model.tile.Tile;
+	import model.tower.Tower;
 	
 	import starling.display.Quad;
 	import starling.display.Sprite;
@@ -39,12 +40,34 @@ package view
 				case TouchPhase.ENDED:
 					
 					// released
+					
+					constructTower(touch, card);
 					card.addResetCounter();
 					
 					break;
 			}
 
 			//When construction completes -- deduct gold
+		}
+		
+		public function constructTower(touch:Touch, card:Card):void
+		{
+			var currentTile:Tile = Settings.currentMap.getTileFromCoordinates(touch.globalX, touch.globalY);
+			
+			if(!currentTile.isOccupied())
+			{
+				switch(card.type)
+				{
+					case 1:
+						var tower:Tower = new Tower();
+						Settings.currentMap.insertOccupier(tower, currentTile);
+						break;
+					case 2:
+						break;
+					case 3:
+						break;
+				}
+			}
 		}
 	}
 }

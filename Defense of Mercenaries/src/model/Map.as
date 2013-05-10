@@ -22,10 +22,14 @@ package model
 			gate.insert(tile);
 			addChild(gate);
 		}
-		
-		public function insertOccupier(occupier:Occupier, column:int, row:int):void
+				
+		public function insertOccupier(occupier:Occupier, column:int = null, row:int = null, tile:Tile = null):void
 		{
-			var tile:Tile = tiles[column][row];
+			if( tile == null )
+			{
+				tile:Tile = tiles[column][row];
+			}
+			
 			tile.occupy(occupier);
 			occupier.insert(tile);
 			addChild(occupier);
@@ -50,6 +54,14 @@ package model
 		public function getTiles():Vector.<Vector.<Tile>>
 		{
 			return tiles;
+		}
+		
+		public function getTileFromCoordinates(x:Number, y:Number):Tile
+		{
+			var tileX:int = (Settings.tileSize * 16) / x;
+			var tileY:int = (Settings.tileSize * 16) / y;
+			
+			return getTile(tileX, tileY);
 		}
 		
 		public function getTile(column:int, row:int):Tile
