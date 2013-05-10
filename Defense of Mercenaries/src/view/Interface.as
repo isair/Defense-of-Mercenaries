@@ -11,11 +11,12 @@ package view
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
+	import starling.display.Shape;
 	
 	public class Interface extends Sprite
 	{
 		private var hand:Hand;
-		private var ghost:Quad = null;
+		private var ghostArray:Array = new Array(2);
 		
 		public function Interface()
 		{
@@ -40,15 +41,12 @@ package view
 				case TouchPhase.ENDED:
 					
 					// released
-					
-					if(ghost != null)
-						removeChild(ghost);
-					
+					removeGhost();
 					constructTower(touch, card);
 					
 					break;
 			}
-
+			
 			//When construction completes -- deduct gold
 		}
 		
@@ -78,29 +76,82 @@ package view
 		
 		public function drawGhost(touch:Touch, card:Card):void
 		{
-			if( ghost != null)
-				removeChild(ghost);
+			removeGhost();
 			
 			var snapCoordinates:Array = Settings.currentMap.getSnapCoordinates(touch.globalX, touch.globalY);
-
-			switch(card.type)
+			var currentTile:Tile = Settings.currentMap.getTileFromCoordinates(touch.globalX, touch.globalY);
+			
+			if( snapCoordinates[1] <= (15 * Settings.tileSize))
 			{
-				case 1:
-					ghost = Tower.getGhost();
-					ghost.x = snapCoordinates[0];
-					ghost.y = snapCoordinates[1];
-					addChild(ghost);
-					break;
-				case 2:
-					ghost = SlowTower.getGhost();
-					ghost.x = snapCoordinates[0];
-					ghost.y = snapCoordinates[1];
-					addChild(ghost);
-					break;
-				case 3:
-					break;
+				if(! (currentTile.isOccupied() || currentTile.hasRoad()))
+				{
+					
+					switch(card.type)
+					{
+						case 1:
+							ghostArray = Tower.getGhost();
+							addSnapCoords(snapCoordinates);
+							addGhost();
+							break;
+						case 2:
+							ghostArray = SlowTower.getGhost();
+							addSnapCoords(snapCoordinates);
+							addGhost();
+							break;
+						case 3:
+							break;
+					}
+				}
 			}
-
+		}
+		
+		public function addGhost():void
+		{
+			for each(var q:Object in ghostArray)
+			{
+				if(q != null)
+				{
+					if(q is Shape)
+						addChild(q as Shape);
+					if(q is Quad)
+						addChild(q as Quad);
+				}
+			}
+		}
+		
+		public function removeGhost():void
+		{
+			for each(var q:Object in ghostArray)
+			{
+				if(q != null)
+				{
+					if(q is Shape)
+						removeChild(q as Shape);
+					if(q is Quad)
+						removeChild(q as Quad);
+				}
+			}
+		}
+		
+		public function addSnapCoords(snapCoords:Array):void
+		{
+			for each(var q:Object in ghostArray)
+			{
+				if( q!= null)
+				{
+					if(q is Shape)
+					{
+						(q as Shape).x = snapCoords[0];
+						(q as Shape).y = snapCoords[1];
+					}
+					
+					if(q is Quad)
+					{
+						(q as Quad).x = snapCoords[0];
+						(q as Quad).y = snapCoords[1];
+					}
+				}
+			}
 		}
 	}
 }

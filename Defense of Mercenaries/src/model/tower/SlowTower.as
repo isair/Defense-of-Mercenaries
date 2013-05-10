@@ -6,6 +6,7 @@ package model.tower
 	
 	import starling.display.Quad;
 	import starling.events.Event;
+	import starling.display.Shape;
 	
 	public class SlowTower extends Tower
 	{
@@ -13,6 +14,7 @@ package model.tower
 		private var shape:Quad;
 		private var damage:int = 15;
 		private var attackInterval:int = 1500;
+		private var currentInterval:int = attackInterval - 1;
 		private var slowAmount:Number = 30;
 		private var slowDuration:Number = 500;
 
@@ -27,7 +29,6 @@ package model.tower
 			addChild(shape);
 		}
 		
-		// TO-DO: Rotational slow mechanism
 		public override function shoot(enemy:Enemy):void
 		{			
 			var bullet:SlowProjectile = new SlowProjectile(enemy, 10, damage, this, slowAmount, slowDuration);
@@ -36,11 +37,22 @@ package model.tower
 			Settings.currentMap.addChild(bullet);
 		}
 		
-		public static function getGhost():Quad
+		public static function getGhost():Array
 		{
+			var ghostArray:Array = new Array(2);
+			
+			var shape:Shape = new Shape();
+			shape.graphics.beginFill(0xFF0000, 0.3);
+			shape.graphics.lineStyle(1, 0xFF0000, 0.7);
+			shape.graphics.drawCircle(Settings.tileSize / 2, Settings.tileSize / 2, Settings.tileSize * 5);
+			shape.graphics.endFill();
+			ghostArray[0] = shape;
+
 			var ghost:Quad = towerShape;
 			ghost.alpha = 0.3;
-			return ghost;
+			ghostArray[1] = ghost;
+			
+			return ghostArray;
 		}
 	}
 }

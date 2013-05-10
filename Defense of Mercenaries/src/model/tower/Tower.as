@@ -11,26 +11,22 @@ package model.tower
 	
 	import starling.display.Quad;
 	import starling.events.Event;
+	import starling.display.Shape;
 	
 	public class Tower extends Occupier implements GameObject
 	{
-		private var level:int;
 		private var position:Tile;
-		private var purchaseCost:int;
-		private var upgradeModifier:int;
 		private var damage:int = 20;
-		private var range:int;
+		private var range:int = Settings.tileSize * 5;
 		private var influenceRange:int;
 		private static var towerShape:Quad = new Quad(Settings.tileSize, Settings.tileSize, 0x7A4F2C, true);
 		private var shape:Quad;
 		private var attackInterval:int = 1000;
-		private var currentInterval:int = 0;
+		private var currentInterval:int = attackInterval - 1;
 		
 		public function Tower()
 		{
 			super();
-			
-			this.level = 1;
 									
 			addEventListener(Event.ADDED_TO_STAGE, init);
 		}
@@ -47,22 +43,42 @@ package model.tower
 			
 			if (currentInterval > attackInterval)
 			{	
-				findFirstEnemy();
-				currentInterval -= attackInterval;
+				if (findFirstEnemy())
+					currentInterval -= attackInterval;
+				else
+					currentInterval = attackInterval - 1;
 			}
 		}
 		
-		private function findFirstEnemy():void
+		private function findFirstEnemy():Boolean
 		{
 			for (var i:int = 0; i < Settings.currentMap.numChildren; i++)
 			{
 				var child:Object = Settings.currentMap.getChildAt(i);
 				
 				if (child is Enemy){
-					shoot(child as Enemy);
-					break;
+					if (inRange(child as Enemy))
+					{
+						shoot(child as Enemy);
+						return true;
+					}
 				}
 			}
+			
+			return false;
+		}
+		
+		public function inRange(enemy:Enemy):Boolean
+		{
+			var deltaX:Number = Math.abs(this.x - enemy.x);
+			var deltaY:Number = Math.abs(this.y - enemy.y);
+			
+			var hyp:Number = Math.sqrt( deltaX * deltaX + deltaY * deltaY );
+			
+			if( hyp < range )
+				return true;
+			else
+				return false;
 		}
 		
 		public function shoot(enemy:Enemy):void
@@ -73,17 +89,22 @@ package model.tower
 			Settings.currentMap.addChild(bullet);
 		}
 		
-		// Placeholder upgrade cost calculation
-		private function getUpgradeCost(level:int):int
+		public static function getGhost():Array
 		{
-			return (upgradeModifier * level);
-		}
-		
-		public static function getGhost():Quad
-		{
- 			var ghost:Quad = towerShape;
+			var ghostArray:Array = new Array(2);
+						
+			var shape:Shape = new Shape();
+			shape.graphics.beginFill(0xFF0000, 0.3);
+			shape.graphics.lineStyle(1, 0xFF0000, 0.7);
+			shape.graphics.drawCircle(Settings.tileSize / 2, Settings.tileSize / 2, Settings.tileSize * 5);
+			shape.graphics.endFill();
+			ghostArray[0] = shape;
+			
+			var ghost:Quad = towerShape;
 			ghost.alpha = 0.3;
-			return ghost;
+			ghostArray[1] = ghost;
+			
+			return ghostArray;
 		}
 	}
 }
