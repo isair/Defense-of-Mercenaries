@@ -8,6 +8,7 @@ package
 	{
 		public static const tileSize:int = 40, mapSize:int = 16;
 		public static var currentMap:Map = null;
+		public static var roundBreak:Boolean = false;
 		public static var currentGold:int = 30;
 		public static var boostActive:Boolean = false;
 		public static var boostTimer:Number = 0;

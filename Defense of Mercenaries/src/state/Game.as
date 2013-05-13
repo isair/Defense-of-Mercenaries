@@ -72,14 +72,14 @@ package state
 			// Start the background music.
 			var bgm:SoundChannel = assetManager.playSound("bgm", 0, int.MAX_VALUE);
 			
-			// Start the first round with 5 waves.
-			gate.start(5, onRoundEnd);
+			// Start the first round with 5 waves and with power multiplier as 1.
+			gate.start(5, 1, onRoundEnd);
+			Settings.roundBreak = false;
 		}
 		
 		private function onRoundEnd():void
 		{
-			// TODO: The state between rounds.
-			trace("Round ended.");
+			Settings.roundBreak = true;
 		}
 	}
 }

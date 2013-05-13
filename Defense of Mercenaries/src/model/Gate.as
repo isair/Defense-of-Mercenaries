@@ -22,6 +22,7 @@ package model
 		private var path:Path = null;
 		
 		private var storedEnemies:int = 0;
+		private var powerMultiplier:Number = 0;
 		private var spawnTimePassed:Number = 0;
 		
 		private var currentWave:int = 0;
@@ -131,13 +132,15 @@ package model
 			return true;
 		}
 		
-		public function start(waveCount:int, callback:Function):void
+		public function start(waveCount:int, powerMultiplier:Number, callback:Function):void
 		{
 			hasPath = calculatePath();
 			
 			if ( ! hasPath) return;
 			
 			this.waveCount = waveCount;
+			this.powerMultiplier = powerMultiplier;
+			
 			currentWave = 0;
 			storedEnemies = 2;
 			working = true;
@@ -195,7 +198,7 @@ package model
 		
 		public function spawnEnemy():void
 		{
-			Settings.currentMap.addChild(new Enemy(100, 1, new Point(x, y), (new Path()).copyPath(path)));
+			Settings.currentMap.addChild(new Enemy(100 * powerMultiplier, 1 * powerMultiplier, new Point(x, y), (new Path()).copyPath(path)));
 		}
 	}
 }
