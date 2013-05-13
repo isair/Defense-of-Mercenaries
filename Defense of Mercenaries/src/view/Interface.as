@@ -164,26 +164,28 @@ package view
 			var snapCoordinates:Array = Settings.currentMap.getSnapCoordinates(touch.globalX, touch.globalY);
 			var currentTile:Tile = Settings.currentMap.getTileFromCoordinates(touch.globalX, touch.globalY);
 			
-			if( snapCoordinates[1] <= (15 * Settings.tileSize))
+			if (currentTile != null)
 			{
-				if(! (currentTile.isOccupied() || currentTile.hasRoad()))
+				if( snapCoordinates[1] <= (15 * Settings.tileSize))
 				{
-					
-					switch(card.type)
+					if(! (currentTile.isOccupied() || currentTile.hasRoad()))
 					{
-						case 1:
-							ghostArray = Tower.getGhost();
-							break;
-						case 2:
-							ghostArray = SlowTower.getGhost();
-							break;
-						case 3:
-							ghostArray = CannonTower.getGhost();
-							break;
+						switch(card.type)
+						{
+							case 1:
+								ghostArray = Tower.getGhost();
+								break;
+							case 2:
+								ghostArray = SlowTower.getGhost();
+								break;
+							case 3:
+								ghostArray = CannonTower.getGhost();
+								break;
+						}
+						
+						addSnapCoords(snapCoordinates);
+						addGhost();
 					}
-					
-					addSnapCoords(snapCoordinates);
-					addGhost();
 				}
 			}
 		}

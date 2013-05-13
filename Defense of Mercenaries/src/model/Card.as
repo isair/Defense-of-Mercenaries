@@ -12,7 +12,6 @@ package model
 	
 	public class Card extends Sprite implements GameObject
 	{
-		
 		public var type:int;
 		public var cost:int;
 		public var price:TextField = new TextField(Settings.tileSize * 2, 20, "price: ", "Arial", 12, 0x000000);
@@ -45,7 +44,7 @@ package model
 					shape = new Quad(Settings.tileSize * 2, Settings.tileSize * 3, 0x25E01B, true);
 					cost = 30;
 					break;
-	
+				
 				case 3:
 					shape = new Quad(Settings.tileSize * 2, Settings.tileSize * 3, 0x2FB54A, true);
 					cost = 50;
@@ -71,7 +70,7 @@ package model
 			
 			if ( (touch != null) && (touch.phase != TouchPhase.HOVER) )
 			{
-				Settings.ui.handleTouch(this, touch);			
+				Settings.ui.handleTouch(this, touch);	
 			}
 		}
 		

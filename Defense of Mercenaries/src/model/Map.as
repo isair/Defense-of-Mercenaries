@@ -64,7 +64,10 @@ package model
 			var tileX:int = x / Settings.tileSize;
 			var tileY:int = y / Settings.tileSize;
 			
-			return getTile(tileX, tileY);
+			if( (tileX >= 0) && (tileX < 16) && (tileY >= 0) && (tileY < 16))
+				return getTile(tileX, tileY);
+			else
+				return null;
 		}
 		
 		public function getSnapCoordinates(x:Number, y:Number):Array
