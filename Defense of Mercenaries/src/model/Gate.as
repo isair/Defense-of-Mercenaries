@@ -13,25 +13,32 @@ package model
 
   	public class Gate extends Sprite implements GameObject
   	{
-		private var waveNumber:int, waveInterval:int, storedEnemies:int;
-		private var spawnTimePassed:Number, waitTime:Number;
-		
 		private var position:Tile = null;
+		private var target:Base = null;
+		
+		private var working:Boolean = false;
 		
 		private var hasPath:Boolean = false;
 		private var path:Path = null;
 		
-		public function Gate()
+		private var storedEnemies:int = 0;
+		private var spawnTimePassed:Number = 0;
+		
+		private var currentWave:int = 0;
+		private var waveCount:int = 0;
+		private var waveInterval:int = 15000; // Waiting time between waves (in milliseconds).
+		
+		private var waitTime:Number = 0;
+		
+		public function Gate(target:Base)
 		{
 			super();
-			
-			waveNumber = 1;
-			waveInterval = 15000; // Waiting duration between waves.
-			
-			storedEnemies = 2 * Math.pow(waveNumber, 2) + waveNumber - 1;
-			
-			spawnTimePassed = 0;
-			waitTime = 0;
+			setTarget(target);
+		}
+		
+		public function setTarget(target:Base):void
+		{
+			this.target = target;
 		}
 		
 		public function insert(position:Tile):void
@@ -43,8 +50,10 @@ package model
 		}
 		
 		// Calculate an optimal path from gate to base using A* algorithm.
-		public function calculatePath(base:Base):Boolean
+		public function calculatePath():Boolean
 		{
+			if ( ! target) return false;
+			
 			var tiles:Vector.<Vector.<Tile>> = Settings.currentMap.getTiles();
 			var nodes:Vector.<Vector.<AStarNode>> = new Vector.<Vector.<AStarNode>>();
 			var startNode:AStarNode, endNode:AStarNode;
@@ -70,7 +79,7 @@ package model
 					// Set startNode and endNode.
 					if (tile.x == position.x && tile.y == position.y)
 						startNode = node;
-					else if (tile.x == base.getPosition().x && tile.y == base.getPosition().y)
+					else if (tile.x == target.getPosition().x && tile.y == target.getPosition().y)
 						endNode = node;
 					
 					previousNode = node;
@@ -119,14 +128,42 @@ package model
 			for (i = 0; i < pathNodes.length; i++)
 				tiles[pathNodes[i].position.x][pathNodes[i].position.y].setIsRoad(true);
 			
-			hasPath = true;
-			
 			return true;
+		}
+		
+		public function start(waveCount:int, callback:Function):void
+		{
+			hasPath = calculatePath();
+			
+			if ( ! hasPath) return;
+			
+			this.waveCount = waveCount;
+			currentWave = 0;
+			storedEnemies = 2;
+			working = true;
+		}
+		
+		public function pause():void
+		{
+			working = false;
+		}
+		
+		public function resume():void
+		{
+			working = true;
+		}
+		
+		public function stop():void
+		{
+			storedEnemies = 0;
+			currentWave = 0;
+			waveCount = 0;
+			working = false;
 		}
 		
 		public function update(deltaTime:Number):void
 		{
-			if ( ! hasPath) return;
+			if ( ! hasPath || ! working || currentWave >= waveCount) return;
 			
 			if (waitTime > 0)
 			{
@@ -139,7 +176,6 @@ package model
 			if (storedEnemies > 0)
 			{
 				spawnTimePassed += deltaTime;
-				trace("spawnTimePassed:" + spawnTimePassed);
 				
 				if(spawnTimePassed >= 1500)
 				{
@@ -152,14 +188,13 @@ package model
 			{
 				spawnTimePassed = 0;
 				waitTime = waveInterval;
-				waveNumber++;
-				storedEnemies = 2 + waveNumber * (4/3);
+				currentWave++;
+				storedEnemies = 2 + currentWave * 1.3;
 			}
 		}
 		
 		public function spawnEnemy():void
 		{
-			trace("added enemy");
 			Settings.currentMap.addChild(new Enemy(100, 1, new Point(x, y), (new Path()).copyPath(path)));
 		}
 	}

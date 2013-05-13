@@ -18,7 +18,8 @@ package state
 	
 	public class Game extends GameState
 	{
-		private var assetManager:AssetManager;
+		private var assetManager:AssetManager = null;
+		private var currentRound:int = 0;
 		
 		public function Game()
 		{
@@ -62,15 +63,23 @@ package state
 			map.insertOccupier(obstacle3, 3, 7);
 			map.insertOccupier(obstacle4, 6, 2);
 			
-			var gate:Gate = new Gate();
+			var gate:Gate = new Gate(base);
 			map.insertGate(gate, 0, 0);
-			gate.calculatePath(base);
 			
 			addChild(map);
 			addChild(ui);
 			
 			// Start the background music.
 			var bgm:SoundChannel = assetManager.playSound("bgm", 0, int.MAX_VALUE);
+			
+			// Start the first round with 5 waves.
+			gate.start(5, onRoundEnd);
+		}
+		
+		private function onRoundEnd():void
+		{
+			// TODO: The state between rounds.
+			trace("Round ended.");
 		}
 	}
 }

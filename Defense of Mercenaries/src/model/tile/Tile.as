@@ -98,13 +98,12 @@ package model.tile
 		
 		public function setIsRoad(isRoad:Boolean):void
 		{
-			if (this.isRoad != isRoad)
-			{
-				removeChildren();
-				init(null);
-			}
+			if (this.isRoad == isRoad) return;
 			
 			this.isRoad = isRoad;
+			
+			removeChildren();
+			init(null);
 		}
 	}
 }
