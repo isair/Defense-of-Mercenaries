@@ -1,23 +1,22 @@
 package view
 {
-	import model.Card;
 	import model.BonusCard;
+	import model.Card;
+	import model.GameObject;
+	import model.enemy.Enemy;
 	import model.tile.Tile;
-	import model.tower.SlowTower;
 	import model.tower.CannonTower;
+	import model.tower.FastTower;
+	import model.tower.SlowTower;
 	import model.tower.Tower;
 	
-	import model.GameObject;
-	
-	import model.enemy.Enemy;
-	
 	import starling.display.Quad;
+	import starling.display.Shape;
 	import starling.display.Sprite;
 	import starling.events.Event;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
-	import starling.display.Shape;
 	
 	public class Interface extends Sprite implements GameObject
 	{
@@ -153,6 +152,10 @@ package view
 						Settings.currentMap.insertOccupierToTile(cannonTower, currentTile);
 						Settings.currentGold -= card.cost;
 						break;
+					case 4:
+						var fastTower:FastTower = new FastTower();
+						Settings.currentMap.insertOccupierToTile(fastTower, currentTile);
+						Settings.currentGold -= card.cost;
 				}
 			}
 		}
@@ -181,6 +184,8 @@ package view
 							case 3:
 								ghostArray = CannonTower.getGhost();
 								break;
+							case 4:
+								ghostArray = FastTower.getGhost();
 						}
 						
 						addSnapCoords(snapCoordinates);
