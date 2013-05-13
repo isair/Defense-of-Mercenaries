@@ -4,6 +4,7 @@ package view
 	import model.BonusCard;
 	import model.tile.Tile;
 	import model.tower.SlowTower;
+	import model.tower.CannonTower;
 	import model.tower.Tower;
 	
 	import model.GameObject;
@@ -148,6 +149,9 @@ package view
 						Settings.currentGold -= card.cost;
 						break;
 					case 3:
+						var cannonTower:CannonTower = new CannonTower();
+						Settings.currentMap.insertOccupierToTile(cannonTower, currentTile);
+						Settings.currentGold -= card.cost;
 						break;
 				}
 			}
@@ -169,17 +173,17 @@ package view
 					{
 						case 1:
 							ghostArray = Tower.getGhost();
-							addSnapCoords(snapCoordinates);
-							addGhost();
 							break;
 						case 2:
 							ghostArray = SlowTower.getGhost();
-							addSnapCoords(snapCoordinates);
-							addGhost();
 							break;
 						case 3:
+							ghostArray = CannonTower.getGhost();
 							break;
 					}
+					
+					addSnapCoords(snapCoordinates);
+					addGhost();
 				}
 			}
 		}

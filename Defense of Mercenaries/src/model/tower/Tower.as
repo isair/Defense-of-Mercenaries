@@ -21,8 +21,8 @@ package model.tower
 		private var influenceRange:int;
 		private static var towerShape:Quad = new Quad(Settings.tileSize, Settings.tileSize, 0x7A4F2C, true);
 		private var shape:Quad;
-		private var attackInterval:int = 1000;
-		private var currentInterval:int = attackInterval - 1;
+		public var attackInterval:int = 1000;
+		public var currentInterval:int = attackInterval - 1;
 		private var previousInterval:Number = 0;
 		private var boosted:Boolean = false;
 		
@@ -85,7 +85,7 @@ package model.tower
 		
 		public function shoot(enemy:Enemy):void
 		{
-			var bullet:Projectile = new Projectile(enemy, 10, damage, this);
+			var bullet:Projectile = new Projectile(enemy, Settings.tileSize/4, damage, this);
 			bullet.x = x + Settings.tileSize / 2;
 			bullet.y = y + Settings.tileSize / 2;
 			Settings.currentMap.addChild(bullet);

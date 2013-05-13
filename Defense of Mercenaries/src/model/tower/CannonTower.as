@@ -1,6 +1,6 @@
 package model.tower
 {
-	import model.projectile.SlowProjectile;
+	import model.projectile.CannonProjectile;
 	import model.enemy.Enemy;
 	import model.tile.Tile;
 	
@@ -8,28 +8,30 @@ package model.tower
 	import starling.events.Event;
 	import starling.display.Shape;
 	
-	public class SlowTower extends Tower
+	public class CannonTower extends Tower
 	{
-		private static var towerShape:Quad = new Quad(Settings.tileSize, Settings.tileSize, 0x3787B0, true);
+		private static var towerShape:Quad = new Quad(Settings.tileSize, Settings.tileSize, 0x009933, true);
 		private var shape:Quad;
-		private var damage:int = 15;
-		private var slowAmount:Number = 30;
-		private var slowDuration:Number = 500;
+		private var damage:int = 20;
+		private var blastRadius:Number = Settings.tileSize;
 
-		public function SlowTower()
+		public function CannonTower()
 		{
 			super();
+			
+			super.attackInterval = 2500;
+			super.currentInterval = super.attackInterval - 1;
 		}
 		
 		public override function init(e:Event):void
 		{
-			this.shape = new Quad(Settings.tileSize, Settings.tileSize, 0x3787B0, true);
+			this.shape = new Quad(Settings.tileSize, Settings.tileSize, 0x009933, true);
 			addChild(shape);
 		}
 		
 		public override function shoot(enemy:Enemy):void
 		{			
-			var bullet:SlowProjectile = new SlowProjectile(enemy, Settings.tileSize/4, damage, this, slowAmount, slowDuration);
+			var bullet:CannonProjectile = new CannonProjectile(enemy, Settings.tileSize/8, damage, this, blastRadius);
 			bullet.x = x + Settings.tileSize / 2;
 			bullet.y = y + Settings.tileSize / 2;
 			Settings.currentMap.addChild(bullet);
