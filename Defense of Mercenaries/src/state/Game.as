@@ -40,6 +40,8 @@ package state
 		
 		private function startGame():void
 		{
+			var halfSize:Number = GlobalState.mapSize / 2;
+			
 			var map:Map = new Map();
 			map.generateMap();
 			
@@ -50,7 +52,7 @@ package state
 			
 			var base:Base = new Base();
 			GlobalState.base = base;
-			map.insertOccupier(base, 8, 10);
+			map.insertOccupier(base, Main.randomBetween(0, GlobalState.mapSize - 1), halfSize * 1.3 + Main.randomBetween(0, halfSize * .4));
 			
 			var obstacle1:Obstacle = new Obstacle();
 			var obstacle2:Obstacle = new Obstacle();			
@@ -63,7 +65,7 @@ package state
 			map.insertOccupier(obstacle4, 6, 2);
 			
 			var gate:Gate = new Gate(base);
-			map.insertGate(gate, 0, 0);
+			map.insertGate(gate, Main.randomBetween(0, GlobalState.mapSize - 1), 0);
 			
 			addChild(map);
 			addChild(ui);

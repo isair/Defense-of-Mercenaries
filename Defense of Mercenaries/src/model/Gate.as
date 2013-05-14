@@ -209,8 +209,12 @@ package model
 		
 		public function spawnEnemy():void
 		{
-			GlobalState.currentMap.addChild(new Enemy(100 * powerMultiplier, 1 * powerMultiplier, new Point(x, y), (new Path()).copyPath(path), currentId));
+			var enemy:Enemy = new Enemy(100 * powerMultiplier, 1 * powerMultiplier, new Point(x, y), (new Path()).copyPath(path), currentId);
+			enemy.x = position.x;
+			enemy.y = position.y;
 			currentId++;
+			
+			GlobalState.currentMap.addChild(enemy);
 		}
 	}
 }

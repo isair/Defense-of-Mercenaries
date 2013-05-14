@@ -45,6 +45,7 @@ package model
 		{
 			tiles = new Vector.<Vector.<Tile>>();
 			
+			// Cover the whole map with grass tiles.
 			for (var column:uint = 0; column < GlobalState.mapSize; column++)
 			{
 				tiles[column] = new Vector.<Tile>();
@@ -67,7 +68,7 @@ package model
 			var tileX:int = x / GlobalState.tileSize;
 			var tileY:int = y / GlobalState.tileSize;
 			
-			if( (tileX >= 0) && (tileX < 16) && (tileY >= 0) && (tileY < 16))
+			if (tileX >= 0 && tileX < 16 && tileY >= 0 && tileY < 16)
 				return getTile(tileX, tileY);
 			else
 				return null;
@@ -93,8 +94,9 @@ package model
 		
 		public function update(deltaTime:Number):void
 		{
-			this.sortChildren(function sortByY(a:Object, b:Object):int{
-				if((a is Projectile) && (b is Projectile))
+			sortChildren(function sortByY(a:Object, b:Object):int
+			{
+				if ((a is Projectile) && (b is Projectile))
 				{
 					return 0;
 				}
@@ -106,20 +108,20 @@ package model
 				{
 					return -1;
 				}
-				else if((a is Enemy) && (b is Enemy))
+				else if ((a is Enemy) && (b is Enemy))
 				{
-					if(a.y > b.y)
+					if (a.y > b.y)
 						return 1;
 					else if(a.y < b.y)
 						return -1;
 					else
 						return 0;
 				}
-				else if(a is Enemy)
+				else if (a is Enemy)
 				{
 					return 1;
 				}
-				else if(b is Enemy)
+				else if (b is Enemy)
 				{
 					return -1;
 				}
