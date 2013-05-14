@@ -21,7 +21,7 @@ package view
 		private var timePassed:Number = 0;
 		
 		public function Hand()
-		{
+		{			
 			super();
 			
 			addEventListener(Event.ADDED_TO_STAGE, init);
@@ -123,6 +123,12 @@ package view
 			{
 				timePassed += deltaTime;
 				goldText.text = Settings.currentGold+"";
+				
+				buttonText.text = "NEXT ROUND";
+				
+		/*		if (!Settings.roundBreak && Settings.waveBreak) {
+					buttonText.text = "FORCE WAVE";
+				} */
 				
 				if (timePassed > 3000)
 				{
