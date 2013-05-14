@@ -26,13 +26,13 @@ package model
 			
 			switch(counter)
 			{
-				case 0: result = new Quad(Settings.tileSize / 2, Settings.tileSize / 2, 0x666666, true);
+				case 0: result = new Quad(GlobalState.tileSize / 2, GlobalState.tileSize / 2, 0x666666, true);
 					break;
-				case 1: result = new Quad(Settings.tileSize / 2, Settings.tileSize / 2, 0x333333, true);
+				case 1: result = new Quad(GlobalState.tileSize / 2, GlobalState.tileSize / 2, 0x333333, true);
 					break;
-				case 2: result = new Quad(Settings.tileSize / 2, Settings.tileSize / 2, 0x999999, true);
+				case 2: result = new Quad(GlobalState.tileSize / 2, GlobalState.tileSize / 2, 0x999999, true);
 					break;
-				default: result = new Quad(Settings.tileSize / 2, Settings.tileSize / 2, 0x666666, true);
+				default: result = new Quad(GlobalState.tileSize / 2, GlobalState.tileSize / 2, 0x666666, true);
 					break;
 			}
 			
@@ -45,8 +45,8 @@ package model
 		{
 			this.position = position;
 			
-			x = position.getX() + Settings.tileSize / 4;
-			y = position.getY() + Settings.tileSize / 4;
+			x = position.getX() + GlobalState.tileSize / 4;
+			y = position.getY() + GlobalState.tileSize / 4;
 			
 		}
 		

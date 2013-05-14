@@ -14,7 +14,7 @@ package model
 	{
 		public var type:int;
 		public var cost:int;
-		public var price:TextField = new TextField(Settings.tileSize * 2, 20, "price: ", "Arial", 12, 0x000000);
+		public var price:TextField = new TextField(GlobalState.tileSize * 2, 20, "price: ", "Arial", 12, 0x000000);
 		private var shape:Quad;
 		private var recentlyClicked:Boolean = false;
 		private var timePassed:Number = 0;
@@ -36,29 +36,29 @@ package model
 			switch (type)
 			{
 				case 1: 
-					shape = new Quad(Settings.tileSize * 2, Settings.tileSize * 3, 0x4DB370, true);
+					shape = new Quad(GlobalState.tileSize * 2, GlobalState.tileSize * 3, 0x4DB370, true);
 					cost = 20;
 					break;
 				
 				case 2:
-					shape = new Quad(Settings.tileSize * 2, Settings.tileSize * 3, 0x25E01B, true);
+					shape = new Quad(GlobalState.tileSize * 2, GlobalState.tileSize * 3, 0x25E01B, true);
 					cost = 30;
 					break;
 				
 				case 3:
-					shape = new Quad(Settings.tileSize * 2, Settings.tileSize * 3, 0x2FB54A, true);
+					shape = new Quad(GlobalState.tileSize * 2, GlobalState.tileSize * 3, 0x2FB54A, true);
 					cost = 30;
 					break;
 				
 				case 4:
-					shape = new Quad(Settings.tileSize * 2, Settings.tileSize * 3, 0x1C9133, true);
+					shape = new Quad(GlobalState.tileSize * 2, GlobalState.tileSize * 3, 0x1C9133, true);
 					cost = 50;
 					break;
 			}
 			
 			// Placeholder price tag
 			price.text = "price: " + cost;
-			price.y = Settings.tileSize * 3 - 20;
+			price.y = GlobalState.tileSize * 3 - 20;
 			
 			addChild(shape);
 			addChild(price);
@@ -70,7 +70,7 @@ package model
 			
 			if ( (touch != null) && (touch.phase != TouchPhase.HOVER) )
 			{
-				Settings.ui.handleTouch(this, touch);	
+				GlobalState.ui.handleTouch(this, touch);	
 			}
 		}
 		
@@ -79,8 +79,8 @@ package model
 			var globalX:Number = this.x;
 			var globalY:Number = this.y + 650;
 			
-			if((touch.globalX > globalX) && (touch.globalX < globalX + Settings.tileSize * 2) &&
-				(touch.globalY > globalY) && (touch.globalY < globalY + Settings.tileSize * 3))
+			if((touch.globalX > globalX) && (touch.globalX < globalX + GlobalState.tileSize * 2) &&
+				(touch.globalY > globalY) && (touch.globalY < globalY + GlobalState.tileSize * 3))
 			{
 				return true;
 			}
@@ -97,14 +97,14 @@ package model
 		{		
 			if(!disabled)
 			{
-				if(Settings.currentGold < this.cost)
+				if(GlobalState.currentGold < this.cost)
 				{
 					disable();
 				}
 			}
 			else
 			{
-				if(Settings.currentGold >= this.cost)
+				if(GlobalState.currentGold >= this.cost)
 				{
 					enable();
 				}

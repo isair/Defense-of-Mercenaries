@@ -17,9 +17,9 @@ package model.tower
 	{
 		private var position:Tile;
 		private var damage:int = 20;
-		public var range:int = Settings.tileSize * 5;
+		public var range:int = GlobalState.tileSize * 5;
 		private var influenceRange:int;
-		private static var towerShape:Quad = new Quad(Settings.tileSize, Settings.tileSize, 0x7A4F2C, true);
+		private static var towerShape:Quad = new Quad(GlobalState.tileSize, GlobalState.tileSize, 0x7A4F2C, true);
 		private var shape:Quad;
 		public var attackInterval:int = 1500;
 		public var currentInterval:int = attackInterval - 1;
@@ -35,7 +35,7 @@ package model.tower
 		
 		public override function init(e:Event):void
 		{			
-			this.shape = new Quad(Settings.tileSize, Settings.tileSize, 0x7A4F2C, true);
+			this.shape = new Quad(GlobalState.tileSize, GlobalState.tileSize, 0x7A4F2C, true);
 			addChild(shape);
 		}
 		
@@ -57,9 +57,9 @@ package model.tower
 			var firstEnemy:Enemy = null;
 			var currentLeast:int = 9999;
 			
-			for (var i:int = 0; i < Settings.currentMap.numChildren; i++)
+			for (var i:int = 0; i < GlobalState.currentMap.numChildren; i++)
 			{
-				var child:Object = Settings.currentMap.getChildAt(i);
+				var child:Object = GlobalState.currentMap.getChildAt(i);
 				
 				if (child is Enemy)
 				{					
@@ -90,7 +90,7 @@ package model.tower
 			
 			var hyp:Number = Math.sqrt( deltaX * deltaX + deltaY * deltaY );
 			
-			if( (hyp - (Settings.tileSize / 4)) < range )
+			if( (hyp - (GlobalState.tileSize / 4)) < range )
 				return true;
 			else
 				return false;
@@ -98,10 +98,10 @@ package model.tower
 		
 		public function shoot(enemy:Enemy):void
 		{
-			var bullet:Projectile = new Projectile(enemy, Settings.tileSize/4, damage, this);
-			bullet.x = x + Settings.tileSize / 2;
-			bullet.y = y + Settings.tileSize / 2;
-			Settings.currentMap.addChild(bullet);
+			var bullet:Projectile = new Projectile(enemy, GlobalState.tileSize/4, damage, this);
+			bullet.x = x + GlobalState.tileSize / 2;
+			bullet.y = y + GlobalState.tileSize / 2;
+			GlobalState.currentMap.addChild(bullet);
 		}
 		
 		public static function getGhost():Array
@@ -111,7 +111,7 @@ package model.tower
 			var shape:Shape = new Shape();
 			shape.graphics.beginFill(0xFF0000, 0.3);
 			shape.graphics.lineStyle(1, 0xFF0000, 0.7);
-			shape.graphics.drawCircle(Settings.tileSize / 2, Settings.tileSize / 2, Settings.tileSize * 5);
+			shape.graphics.drawCircle(GlobalState.tileSize / 2, GlobalState.tileSize / 2, GlobalState.tileSize * 5);
 			shape.graphics.endFill();
 			ghostArray[0] = shape;
 			

@@ -45,11 +45,11 @@ package model
 		{
 			tiles = new Vector.<Vector.<Tile>>();
 			
-			for (var column:uint = 0; column < Settings.mapSize; column++)
+			for (var column:uint = 0; column < GlobalState.mapSize; column++)
 			{
 				tiles[column] = new Vector.<Tile>();
 				
-				for (var row:uint = 0; row < Settings.mapSize; row++)
+				for (var row:uint = 0; row < GlobalState.mapSize; row++)
 				{
 					tiles[column][row] = new Grass(new Point(column, row));
 					addChild(tiles[column][row]);
@@ -64,8 +64,8 @@ package model
 		
 		public function getTileFromCoordinates(x:Number, y:Number):Tile
 		{
-			var tileX:int = x / Settings.tileSize;
-			var tileY:int = y / Settings.tileSize;
+			var tileX:int = x / GlobalState.tileSize;
+			var tileY:int = y / GlobalState.tileSize;
 			
 			if( (tileX >= 0) && (tileX < 16) && (tileY >= 0) && (tileY < 16))
 				return getTile(tileX, tileY);
@@ -77,11 +77,11 @@ package model
 		{
 			var snapCoordinates:Array = new Array(2);
 			
-			var tileX:int = x / Settings.tileSize;
-			var tileY:int = y / Settings.tileSize;
+			var tileX:int = x / GlobalState.tileSize;
+			var tileY:int = y / GlobalState.tileSize;
 			
-			snapCoordinates[0] = tileX * Settings.tileSize;
-			snapCoordinates[1] = tileY * Settings.tileSize;
+			snapCoordinates[0] = tileX * GlobalState.tileSize;
+			snapCoordinates[1] = tileY * GlobalState.tileSize;
 			
 			return snapCoordinates;
 		}

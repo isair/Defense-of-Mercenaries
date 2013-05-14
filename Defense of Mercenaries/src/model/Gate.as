@@ -58,7 +58,7 @@ package model
 		{
 			if ( ! target) return false;
 			
-			var tiles:Vector.<Vector.<Tile>> = Settings.currentMap.getTiles();
+			var tiles:Vector.<Vector.<Tile>> = GlobalState.currentMap.getTiles();
 			var nodes:Vector.<Vector.<AStarNode>> = new Vector.<Vector.<AStarNode>>();
 			var startNode:AStarNode, endNode:AStarNode;
 			
@@ -145,7 +145,7 @@ package model
 			this.powerMultiplier = powerMultiplier;
 			this.callback = callback;
 			
-			Settings.currentWave = 0;
+			GlobalState.currentWave = 0;
 			storedEnemies = 2;
 			working = true;
 		}
@@ -163,7 +163,7 @@ package model
 		public function stop():void
 		{
 			storedEnemies = 0;
-			Settings.currentWave = 0;
+			GlobalState.currentWave = 0;
 			waveCount = 0;
 			working = false;
 		}
@@ -172,7 +172,7 @@ package model
 		{
 			if ( ! hasPath || ! working) return;
 			
-			if (Settings.currentWave >= waveCount && callback != null)
+			if (GlobalState.currentWave >= waveCount && callback != null)
 			{
 				stop();
 				callback();
@@ -202,14 +202,14 @@ package model
 			{
 				spawnTimePassed = 0;
 				waitTime = waveInterval;
-				Settings.currentWave++;
-				storedEnemies = 2 + Settings.currentWave * 1.3;
+				GlobalState.currentWave++;
+				storedEnemies = 2 + GlobalState.currentWave * 1.3;
 			}
 		}
 		
 		public function spawnEnemy():void
 		{
-			Settings.currentMap.addChild(new Enemy(100 * powerMultiplier, 1 * powerMultiplier, new Point(x, y), (new Path()).copyPath(path), currentId));
+			GlobalState.currentMap.addChild(new Enemy(100 * powerMultiplier, 1 * powerMultiplier, new Point(x, y), (new Path()).copyPath(path), currentId));
 			currentId++;
 		}
 	}

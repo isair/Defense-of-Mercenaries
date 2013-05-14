@@ -10,10 +10,10 @@ package model.tower
 	
 	public class CannonTower extends Tower
 	{
-		private static var towerShape:Quad = new Quad(Settings.tileSize, Settings.tileSize, 0x009933, true);
+		private static var towerShape:Quad = new Quad(GlobalState.tileSize, GlobalState.tileSize, 0x009933, true);
 		private var shape:Quad;
 		private var damage:int = 20;
-		private var blastRadius:Number = Settings.tileSize;
+		private var blastRadius:Number = GlobalState.tileSize;
 
 		public function CannonTower()
 		{
@@ -25,16 +25,16 @@ package model.tower
 		
 		public override function init(e:Event):void
 		{
-			this.shape = new Quad(Settings.tileSize, Settings.tileSize, 0x009933, true);
+			this.shape = new Quad(GlobalState.tileSize, GlobalState.tileSize, 0x009933, true);
 			addChild(shape);
 		}
 		
 		public override function shoot(enemy:Enemy):void
 		{			
-			var bullet:CannonProjectile = new CannonProjectile(enemy, Settings.tileSize/8, damage, this, blastRadius);
-			bullet.x = x + Settings.tileSize / 2;
-			bullet.y = y + Settings.tileSize / 2;
-			Settings.currentMap.addChild(bullet);
+			var bullet:CannonProjectile = new CannonProjectile(enemy, GlobalState.tileSize/8, damage, this, blastRadius);
+			bullet.x = x + GlobalState.tileSize / 2;
+			bullet.y = y + GlobalState.tileSize / 2;
+			GlobalState.currentMap.addChild(bullet);
 		}
 		
 		public static function getGhost():Array
@@ -44,7 +44,7 @@ package model.tower
 			var shape:Shape = new Shape();
 			shape.graphics.beginFill(0xFF0000, 0.3);
 			shape.graphics.lineStyle(1, 0xFF0000, 0.7);
-			shape.graphics.drawCircle(Settings.tileSize / 2, Settings.tileSize / 2, Settings.tileSize * 5);
+			shape.graphics.drawCircle(GlobalState.tileSize / 2, GlobalState.tileSize / 2, GlobalState.tileSize * 5);
 			shape.graphics.endFill();
 			ghostArray[0] = shape;
 

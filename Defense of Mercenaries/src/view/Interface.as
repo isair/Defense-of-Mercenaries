@@ -30,10 +30,10 @@ package view
 			super();
 						
 			hand = new Hand();
-			hand.y = Settings.tileSize * 16;
+			hand.y = GlobalState.tileSize * 16;
 			
 			hud = new HUD();
-			hud.y = Settings.tileSize * 19.5;
+			hud.y = GlobalState.tileSize * 19.5;
 			
 			addChild(hand);	
 			addChild(hud);
@@ -71,14 +71,14 @@ package view
 				freezeEnemies();
 			}
 			
-			Settings.currentGold -= bonusCard.cost;
+			GlobalState.currentGold -= bonusCard.cost;
 		}
 		
 		public function freezeEnemies():void
 		{
-			for (var i:int = 0; i < Settings.currentMap.numChildren; i++)
+			for (var i:int = 0; i < GlobalState.currentMap.numChildren; i++)
 			{
-				var child:Object = Settings.currentMap.getChildAt(i);
+				var child:Object = GlobalState.currentMap.getChildAt(i);
 				
 				if (child is Enemy)
 				{
@@ -86,15 +86,15 @@ package view
 				}
 			}
 			
-			Settings.freezeTimer = 2000;
-			Settings.freezeActive = true;
+			GlobalState.freezeTimer = 2000;
+			GlobalState.freezeActive = true;
 		}
 		
 		public function unfreezeEnemies():void
 		{
-			for (var i:int = 0; i < Settings.currentMap.numChildren; i++)
+			for (var i:int = 0; i < GlobalState.currentMap.numChildren; i++)
 			{
-				var child:Object = Settings.currentMap.getChildAt(i);
+				var child:Object = GlobalState.currentMap.getChildAt(i);
 				
 				if (child is Enemy)
 				{
@@ -102,14 +102,14 @@ package view
 				}
 			}
 			
-			Settings.freezeActive = false;
+			GlobalState.freezeActive = false;
 		}
 		
 		public function boostTowers():void
 		{
-			for (var i:int = 0; i < Settings.currentMap.numChildren; i++)
+			for (var i:int = 0; i < GlobalState.currentMap.numChildren; i++)
 			{
-				var child:Object = Settings.currentMap.getChildAt(i);
+				var child:Object = GlobalState.currentMap.getChildAt(i);
 				
 				if (child is Tower)
 				{
@@ -117,15 +117,15 @@ package view
 				}
 			}
 			
-			Settings.boostTimer = 3000;
-			Settings.boostActive = true;
+			GlobalState.boostTimer = 3000;
+			GlobalState.boostActive = true;
 		}
 		
 		public function revertBoost():void
 		{
-			for (var i:int = 0; i < Settings.currentMap.numChildren; i++)
+			for (var i:int = 0; i < GlobalState.currentMap.numChildren; i++)
 			{
-				var child:Object = Settings.currentMap.getChildAt(i);
+				var child:Object = GlobalState.currentMap.getChildAt(i);
 				
 				if (child is Tower)
 				{
@@ -133,12 +133,12 @@ package view
 				}
 			}
 			
-			Settings.boostActive = false;
+			GlobalState.boostActive = false;
 		}
 		
 		public function constructTower(touch:Touch, card:Card):void
 		{
-			var currentTile:Tile = Settings.currentMap.getTileFromCoordinates(touch.globalX, touch.globalY);
+			var currentTile:Tile = GlobalState.currentMap.getTileFromCoordinates(touch.globalX, touch.globalY);
 			
 			if(! (currentTile.isOccupied() || currentTile.hasRoad()))
 			{
@@ -146,23 +146,23 @@ package view
 				{
 					case 1:
 						var tower:Tower = new Tower();
-						Settings.currentMap.insertOccupierToTile(tower, currentTile);
-						Settings.currentGold -= card.cost;
+						GlobalState.currentMap.insertOccupierToTile(tower, currentTile);
+						GlobalState.currentGold -= card.cost;
 						break;
 					case 2:
 						var slowTower:SlowTower = new SlowTower();
-						Settings.currentMap.insertOccupierToTile(slowTower, currentTile);
-						Settings.currentGold -= card.cost;
+						GlobalState.currentMap.insertOccupierToTile(slowTower, currentTile);
+						GlobalState.currentGold -= card.cost;
 						break;
 					case 3:
 						var fastTower:FastTower = new FastTower();
-						Settings.currentMap.insertOccupierToTile(fastTower, currentTile);
-						Settings.currentGold -= card.cost;
+						GlobalState.currentMap.insertOccupierToTile(fastTower, currentTile);
+						GlobalState.currentGold -= card.cost;
 						break;
 					case 4:
 						var cannonTower:CannonTower = new CannonTower();
-						Settings.currentMap.insertOccupierToTile(cannonTower, currentTile);
-						Settings.currentGold -= card.cost;
+						GlobalState.currentMap.insertOccupierToTile(cannonTower, currentTile);
+						GlobalState.currentGold -= card.cost;
 						break;
 				}
 			}
@@ -172,12 +172,12 @@ package view
 		{
 			removeGhost();
 			
-			var snapCoordinates:Array = Settings.currentMap.getSnapCoordinates(touch.globalX, touch.globalY);
-			var currentTile:Tile = Settings.currentMap.getTileFromCoordinates(touch.globalX, touch.globalY);
+			var snapCoordinates:Array = GlobalState.currentMap.getSnapCoordinates(touch.globalX, touch.globalY);
+			var currentTile:Tile = GlobalState.currentMap.getTileFromCoordinates(touch.globalX, touch.globalY);
 			
 			if (currentTile != null)
 			{
-				if( snapCoordinates[1] <= (15 * Settings.tileSize))
+				if( snapCoordinates[1] <= (15 * GlobalState.tileSize))
 				{
 					if(! (currentTile.isOccupied() || currentTile.hasRoad()))
 					{
@@ -211,9 +211,9 @@ package view
 				if(q != null)
 				{
 					if(q is Shape)
-						Settings.currentMap.addChild(q as Shape);
+						GlobalState.currentMap.addChild(q as Shape);
 					if(q is Quad)
-						Settings.currentMap.addChild(q as Quad);
+						GlobalState.currentMap.addChild(q as Quad);
 				}
 			}
 		}
@@ -225,9 +225,9 @@ package view
 				if(q != null)
 				{
 					if(q is Shape)
-						Settings.currentMap.removeChild(q as Shape);
+						GlobalState.currentMap.removeChild(q as Shape);
 					if(q is Quad)
-						Settings.currentMap.removeChild(q as Quad);
+						GlobalState.currentMap.removeChild(q as Quad);
 				}
 			}
 		}
@@ -255,21 +255,21 @@ package view
 		
 		public function update(deltaTime:Number):void
 		{
-			if ( Settings.boostActive )
+			if ( GlobalState.boostActive )
 			{
-				Settings.boostTimer -= deltaTime;
+				GlobalState.boostTimer -= deltaTime;
 				
-				if ( Settings.boostTimer <= 0 )
+				if ( GlobalState.boostTimer <= 0 )
 				{
 					revertBoost();
 				}
 			}
 			
-			if ( Settings.freezeActive )
+			if ( GlobalState.freezeActive )
 			{
-				Settings.freezeTimer -= deltaTime;
+				GlobalState.freezeTimer -= deltaTime;
 				
-				if ( Settings.freezeTimer <= 0 )
+				if ( GlobalState.freezeTimer <= 0 )
 				{
 					unfreezeEnemies();
 				}

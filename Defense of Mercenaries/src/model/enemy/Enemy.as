@@ -46,15 +46,15 @@ package model.enemy
 		
 		public function init(e:Event):void
 		{
-			healthBar = new Quad(Settings.tileSize * (4/5), Settings.tileSize / 10, 0x69E01F, true);
-			healthBarEmpty = new Quad(Settings.tileSize * (4/5), Settings.tileSize / 10, 0xE33D3D, true);
-			healthBar.x = Settings.tileSize / 10;
-			healthBarEmpty.x = Settings.tileSize / 10;
-			healthBar.y = - Settings.tileSize / 5;
-			healthBarEmpty.y = - Settings.tileSize / 5;
+			healthBar = new Quad(GlobalState.tileSize * (4/5), GlobalState.tileSize / 10, 0x69E01F, true);
+			healthBarEmpty = new Quad(GlobalState.tileSize * (4/5), GlobalState.tileSize / 10, 0xE33D3D, true);
+			healthBar.x = GlobalState.tileSize / 10;
+			healthBarEmpty.x = GlobalState.tileSize / 10;
+			healthBar.y = - GlobalState.tileSize / 5;
+			healthBarEmpty.y = - GlobalState.tileSize / 5;
 			healthBar.alpha = 0;
 			healthBarEmpty.alpha = 0;
-			addChild(new Quad(Settings.tileSize, Settings.tileSize, 0xcc0000, true));
+			addChild(new Quad(GlobalState.tileSize, GlobalState.tileSize, 0xcc0000, true));
 			addChild(healthBarEmpty);
 			addChild(healthBar);
 		}
@@ -66,7 +66,7 @@ package model.enemy
 			if(health <= 0 && !this.dead)
 			{
 				this.dead = true;
-				Settings.currentGold += 5;
+				GlobalState.currentGold += 5;
 				this.removeFromParent(true);
 			}
 			
@@ -104,7 +104,7 @@ package model.enemy
 		{
 			if (damaged)
 			{
-				healthBar.width = Settings.tileSize * (4/5) * (health / 100);
+				healthBar.width = GlobalState.tileSize * (4/5) * (health / 100);
 			}
 			
 			if (!frozen)
@@ -129,17 +129,17 @@ package model.enemy
 					// TODO: Reduce base health at the end of the path.
 					if (moveDirection == Path.NONE)
 					{
-						Settings.base.damage();
+						GlobalState.base.damage();
 						this.removeFromParent(true);
 					}
 				}
 				else // Move in given direction for a single tile length.
 				{
-					var deltaPos:Number = (((Settings.tileSize as Number) * deltaTime * speed) / (1000));
+					var deltaPos:Number = (((GlobalState.tileSize as Number) * deltaTime * speed) / (1000));
 					distanceMoved += deltaPos;
 					
-					if (distanceMoved >= Settings.tileSize)
-						deltaPos -= (distanceMoved - Settings.tileSize);
+					if (distanceMoved >= GlobalState.tileSize)
+						deltaPos -= (distanceMoved - GlobalState.tileSize);
 					
 					switch (moveDirection)
 					{
@@ -163,7 +163,7 @@ package model.enemy
 							break;
 					}
 					
-					if (distanceMoved >= Settings.tileSize)
+					if (distanceMoved >= GlobalState.tileSize)
 						moveDirection = Path.NONE;
 				}
 			}

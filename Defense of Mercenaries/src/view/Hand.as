@@ -36,8 +36,8 @@ package view
 			
 			for(var i:int=0; i<cards.length; i++)
 			{
-				cards[i].x = Settings.tileSize * 2.25 * i;
-				cards[i].y = Settings.tileSize / 4;
+				cards[i].x = GlobalState.tileSize * 2.25 * i;
+				cards[i].y = GlobalState.tileSize / 4;
 				
 				addChild(cards[i]);
 			}
@@ -69,13 +69,13 @@ package view
 		
 		public function generateGoldCounter():void
 		{
-			var goldCounter:Quad = new Quad(Settings.tileSize * 2.5, Settings.tileSize, 0xE0E01B, true);
-			goldCounter.x = Settings.tileSize * 13.5;
-			goldCounter.y = Settings.tileSize / 4;
+			var goldCounter:Quad = new Quad(GlobalState.tileSize * 2.5, GlobalState.tileSize, 0xE0E01B, true);
+			goldCounter.x = GlobalState.tileSize * 13.5;
+			goldCounter.y = GlobalState.tileSize / 4;
 			
-			goldText = new TextField(Settings.tileSize * 2.5, Settings.tileSize, Settings.currentGold+"", "Arial", 30, 0x000000);
-			goldText.x = Settings.tileSize * 13.5;
-			goldText.y = Settings.tileSize / 4;
+			goldText = new TextField(GlobalState.tileSize * 2.5, GlobalState.tileSize, GlobalState.currentGold+"", "Arial", 30, 0x000000);
+			goldText.x = GlobalState.tileSize * 13.5;
+			goldText.y = GlobalState.tileSize / 4;
 			
 			addChild(goldCounter);
 			addChild(goldText);
@@ -84,13 +84,13 @@ package view
 		public function generateButton():void
 		{
 			
-			var button:Quad = new Quad(Settings.tileSize * 2.5, Settings.tileSize * 1.75, 0xF01620, true);
-			button.x = Settings.tileSize * 13.5;
-			button.y = Settings.tileSize * 1.50;
+			var button:Quad = new Quad(GlobalState.tileSize * 2.5, GlobalState.tileSize * 1.75, 0xF01620, true);
+			button.x = GlobalState.tileSize * 13.5;
+			button.y = GlobalState.tileSize * 1.50;
 			
-			buttonText = new TextField(Settings.tileSize * 2, Settings.tileSize * 1.25, "END TURN", "Arial", Settings.tileSize * 15 / 40, 0x000000);
-			buttonText.x = Settings.tileSize * 13.5;
-			buttonText.y = Settings.tileSize * 1.65;
+			buttonText = new TextField(GlobalState.tileSize * 2, GlobalState.tileSize * 1.25, "END TURN", "Arial", GlobalState.tileSize * 15 / 40, 0x000000);
+			buttonText.x = GlobalState.tileSize * 13.5;
+			buttonText.y = GlobalState.tileSize * 1.65;
 			
 			addChild(button);
 			addChild(buttonText);
@@ -103,7 +103,7 @@ package view
 		
 		public function generateBackground():void
 		{
-			var background:Quad = new Quad(Settings.tileSize * 16, Settings.tileSize * 3.5, 0x111111, true);
+			var background:Quad = new Quad(GlobalState.tileSize * 16, GlobalState.tileSize * 3.5, 0x111111, true);
 			addChild(background);
 		}
 		
@@ -113,26 +113,26 @@ package view
 			
 			if (touch) 
 			{
-				Settings.currentGold += 10; 
+				GlobalState.currentGold += 10; 
 			}
 		}
 		
 		public function update(deltaTime:Number):void
 		{
-			if (!Settings.roundBreak)
+			if (!GlobalState.roundBreak)
 			{
 				timePassed += deltaTime;
-				goldText.text = Settings.currentGold+"";
+				goldText.text = GlobalState.currentGold+"";
 				
 				buttonText.text = "NEXT ROUND";
 				
-				if (!Settings.roundBreak && Settings.waveBreak) {
+				if (!GlobalState.roundBreak && GlobalState.waveBreak) {
 					buttonText.text = "FORCE WAVE";
 				} 
 				
 				if (timePassed > 3000)
 				{
-					Settings.currentGold += 1;
+					GlobalState.currentGold += 1;
 					timePassed -= 3000;
 				}
 			}

@@ -29,32 +29,32 @@ package view
 		
 		public function update(deltaTime:Number):void
 		{
-			if( (round - 1) != Settings.currentRound)
+			if( (round - 1) != GlobalState.currentRound)
 			{
-				round = Settings.currentRound + 1;
+				round = GlobalState.currentRound + 1;
 				roundText.text = "Current Round: " + round;
 			}
 			
-			if( wave != Settings.currentWave)
+			if( wave != GlobalState.currentWave)
 			{
-				wave = Settings.currentWave;
+				wave = GlobalState.currentWave;
 				waveText.text = "Waves Spawned: " + wave;
 			}
 		}
 		
 		public function generateBackground():void
 		{
-			var hudBackground:Quad = new Quad(Settings.tileSize * 16, Settings.tileSize * 0.75, 0x8884CF, true);
+			var hudBackground:Quad = new Quad(GlobalState.tileSize * 16, GlobalState.tileSize * 0.75, 0x8884CF, true);
 			addChild(hudBackground);
 		}
 		
 		public function generateText():void
 		{
-			roundText = new TextField(Settings.tileSize * 8, Settings.tileSize * 0.5, "Current Round: 1", "Arial", 13, 0x000000);
-			roundText.x = Settings.tileSize * 8;
+			roundText = new TextField(GlobalState.tileSize * 8, GlobalState.tileSize * 0.5, "Current Round: 1", "Arial", 13, 0x000000);
+			roundText.x = GlobalState.tileSize * 8;
 			addChild(roundText);
 			
-			waveText = new TextField(Settings.tileSize * 8, Settings.tileSize * 0.5, "Waves Spawned: 0", "Arial", 13, 0x000000);
+			waveText = new TextField(GlobalState.tileSize * 8, GlobalState.tileSize * 0.5, "Waves Spawned: 0", "Arial", 13, 0x000000);
 			addChild(waveText);
 		}
 	}

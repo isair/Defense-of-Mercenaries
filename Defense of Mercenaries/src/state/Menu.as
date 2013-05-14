@@ -38,7 +38,7 @@ package state
 		
 		private function startMenu():void
 		{
-			var size:Number = Settings.mapSize * Settings.tileSize;
+			var size:Number = GlobalState.mapSize * GlobalState.tileSize;
 			
 			addChild(new Quad(size, size, 0xff0000, true));
 			

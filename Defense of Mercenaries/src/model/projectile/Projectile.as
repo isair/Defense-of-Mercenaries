@@ -38,15 +38,15 @@ package model.projectile
 		
 		public function update(deltaTime:Number):void
 		{						
-			var deltaX:Number = (target.x + Settings.tileSize / 2) - (x);
-			var deltaY:Number = (target.y + Settings.tileSize / 2) - (y);
+			var deltaX:Number = (target.x + GlobalState.tileSize / 2) - (x);
+			var deltaY:Number = (target.y + GlobalState.tileSize / 2) - (y);
 			
 			var hyp:Number = Math.sqrt( deltaX * deltaX + deltaY * deltaY );
 			
 			var absX:Number = Math.abs(deltaX);
 			var absY:Number = Math.abs(deltaY);
 						
-			if( (absX < (Settings.tileSize / 4)) && (absY < (Settings.tileSize / 4)))
+			if( (absX < (GlobalState.tileSize / 4)) && (absY < (GlobalState.tileSize / 4)))
 			{
 				hit();
 				
@@ -57,8 +57,8 @@ package model.projectile
 				var velocityX:Number = (deltaX / hyp) * velocity;
 				var velocityY:Number = (deltaY / hyp) * velocity;
 				
-				x += (((Settings.tileSize as Number) * deltaTime * velocityX) / 1000);
-				y += (((Settings.tileSize as Number) * deltaTime * velocityY) / 1000);
+				x += (((GlobalState.tileSize as Number) * deltaTime * velocityX) / 1000);
+				y += (((GlobalState.tileSize as Number) * deltaTime * velocityY) / 1000);
 			}
 		}
 		

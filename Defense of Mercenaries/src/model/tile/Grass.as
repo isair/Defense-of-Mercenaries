@@ -20,7 +20,7 @@ package model.tile
 		
 		public override function draw():void
 		{
-			var size:Number = Settings.tileSize;
+			var size:Number = GlobalState.tileSize;
 			var texture:Texture = Game.assetManager.getTexture("grassTexture");
 			
 			if (texture)

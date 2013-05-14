@@ -27,8 +27,8 @@ package model.tile
 			
 			this.position = position;
 			
-			x = (position.x) * Settings.tileSize;
-			y = (position.y) * Settings.tileSize;
+			x = (position.x) * GlobalState.tileSize;
+			y = (position.y) * GlobalState.tileSize;
 			
 			addEventListener(Event.ADDED_TO_STAGE, init);
 		}
@@ -43,7 +43,7 @@ package model.tile
 		
 		private function drawRoad():void
 		{
-			var size:Number = Settings.tileSize;
+			var size:Number = GlobalState.tileSize;
 			var texture:Texture = Game.assetManager.getTexture("roadTexture");
 			
 			if (texture)
@@ -60,15 +60,15 @@ package model.tile
 			}
 			else // Draw a simple quad if texture fails to load.
 			{
-				addChild(new Quad(Settings.tileSize, Settings.tileSize, 0x61380b, true));
+				addChild(new Quad(GlobalState.tileSize, GlobalState.tileSize, 0x61380b, true));
 			}
 		}
 		
 		// Override this method for different tiles.
 		public function draw():void
 		{
-			var outerSquare:Quad = new Quad(Settings.tileSize, Settings.tileSize, 0x000000, true);
-			var innerSquare:Quad = new Quad(Settings.tileSize - borderSize * 2, Settings.tileSize - borderSize * 2, 0xB3956D, true);
+			var outerSquare:Quad = new Quad(GlobalState.tileSize, GlobalState.tileSize, 0x000000, true);
+			var innerSquare:Quad = new Quad(GlobalState.tileSize - borderSize * 2, GlobalState.tileSize - borderSize * 2, 0xB3956D, true);
 			
 			innerSquare.x = borderSize;
 			innerSquare.y = borderSize;
@@ -79,12 +79,12 @@ package model.tile
 		
 		public function getX():int
 		{
-			return position.x * Settings.tileSize;
+			return position.x * GlobalState.tileSize;
 		}
 		
 		public function getY():int
 		{
-			return position.y * Settings.tileSize;
+			return position.y * GlobalState.tileSize;
 		}
 		
 		public function occupy(occupier:Occupier):void
@@ -109,12 +109,12 @@ package model.tile
 		
 		public function getCenterX():int
 		{
-			return x + Settings.tileSize / 2;
+			return x + GlobalState.tileSize / 2;
 		}
 		
 		public function getCenterY():int
 		{
-			return y + Settings.tileSize / 2;
+			return y + GlobalState.tileSize / 2;
 		}
 		
 		public function setIsRoad(isRoad:Boolean):void

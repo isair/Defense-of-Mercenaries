@@ -43,13 +43,13 @@ package state
 			var map:Map = new Map();
 			map.generateMap();
 			
-			Settings.currentMap = map;
+			GlobalState.currentMap = map;
 			
 			var ui:Interface = new Interface();
-			Settings.ui = ui;
+			GlobalState.ui = ui;
 			
 			var base:Base = new Base();
-			Settings.base = base;
+			GlobalState.base = base;
 			map.insertOccupier(base, 8, 10);
 			
 			var obstacle1:Obstacle = new Obstacle();
@@ -73,12 +73,12 @@ package state
 			
 			// Start the first round with 5 waves and with power multiplier as 1.
 			gate.start(5, 1, onRoundEnd);
-			Settings.roundBreak = false;
+			GlobalState.roundBreak = false;
 		}
 		
 		private function onRoundEnd():void
 		{
-			Settings.roundBreak = true;
+			GlobalState.roundBreak = true;
 		}
 	}
 }

@@ -28,19 +28,19 @@ package model
 			switch (type)
 			{
 				case 5: 
-					shape = new Quad(Settings.tileSize * 2, Settings.tileSize * 3, 0xE0D91B, true);
+					shape = new Quad(GlobalState.tileSize * 2, GlobalState.tileSize * 3, 0xE0D91B, true);
 					cost = 100;
 					break;
 				
 				case 6: 
-					shape = new Quad(Settings.tileSize * 2, Settings.tileSize * 3, 0xE0811B, true);
+					shape = new Quad(GlobalState.tileSize * 2, GlobalState.tileSize * 3, 0xE0811B, true);
 					cost = 100;
 					break;
 			}
 			
 			// Placeholder price tag
 			price.text = "price: " + cost;
-			price.y = Settings.tileSize * 3 - 20;
+			price.y = GlobalState.tileSize * 3 - 20;
 			
 			addChild(shape);
 			addChild(price);
@@ -52,7 +52,7 @@ package model
 			
 			if( (touch != null) && (touch.phase == TouchPhase.ENDED) )
 			{
-					Settings.ui.handleBonusTouch(this, touch);			
+					GlobalState.ui.handleBonusTouch(this, touch);			
 			}
 		}
 		
@@ -60,17 +60,17 @@ package model
 		{			
 			if(!disabled)
 			{
-				if ( Settings.currentGold < this.cost )
+				if ( GlobalState.currentGold < this.cost )
 				{
 					disable();
 				}
 					
-				else if ( this.type == 5 && Settings.boostActive )
+				else if ( this.type == 5 && GlobalState.boostActive )
 				{
 					disable();
 				}
 					
-				else if ( this.type == 6 && Settings.freezeActive )
+				else if ( this.type == 6 && GlobalState.freezeActive )
 				{
 					disable();
 				}
@@ -78,14 +78,14 @@ package model
 				
 			else
 			{
-				if ( Settings.currentGold >= cost )
+				if ( GlobalState.currentGold >= cost )
 				{
-					if ( this.type == 5 && !Settings.boostActive )
+					if ( this.type == 5 && !GlobalState.boostActive )
 					{
 						enable();
 					}
 						
-					else if ( this.type == 6 && !Settings.freezeActive )
+					else if ( this.type == 6 && !GlobalState.freezeActive )
 					{
 						enable();
 					}

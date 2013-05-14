@@ -5,7 +5,7 @@ package
 	
 	import view.Interface;
 
-	public class Settings
+	public class GlobalState
 	{
 		public static const tileSize:int = 40, mapSize:int = 16;
 		
@@ -24,6 +24,6 @@ package
 		public static var freezeActive:Boolean = false;
 		public static var freezeTimer:Number = 0;
 		
-		public function Settings() {}
+		public function GlobalState() {}
 	}
 }

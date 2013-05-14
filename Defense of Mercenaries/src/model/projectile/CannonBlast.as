@@ -40,8 +40,8 @@ package model.projectile
 		{
 			timer += deltaTime;
 			alpha -= deltaTime / 1000;
-			height -= Settings.tileSize / 100;
-			width -= Settings.tileSize / 100;
+			height -= GlobalState.tileSize / 100;
+			width -= GlobalState.tileSize / 100;
 			
 			if (timer >= 750)
 			{
