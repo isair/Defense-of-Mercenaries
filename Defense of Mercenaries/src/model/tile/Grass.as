@@ -23,7 +23,7 @@ package model.tile
 			var size:Number = Settings.tileSize;
 			var texture:Texture = Game.assetManager.getTexture("grassTexture");
 			
-			if (texture != null)
+			if (texture)
 			{
 				var shape:Shape = new Shape();
 				addChild(shape);
@@ -35,7 +35,7 @@ package model.tile
 				shape.graphics.drawRect(0, 0, size, size);
 				shape.graphics.endFill();
 			}
-			else
+			else // Draw a simple quad if texture fails to load.
 			{
 				addChild(new Quad(size, size, 0x57c023, true));
 			}
