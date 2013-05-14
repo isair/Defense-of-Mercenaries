@@ -20,19 +20,22 @@ package model.tile
 		
 		public override function draw():void
 		{
-			var size:int = Settings.tileSize;
+			var size:Number = Settings.tileSize;
 			var texture:Texture = Game.assetManager.getTexture("grassTexture");
 			
-			if (texture != null)
+			if (texture)
 			{
 				var shape:Shape = new Shape();
 				addChild(shape);
 				
-				shape.graphics.beginTextureFill(texture, new Matrix());
+				var scaleMatrix:Matrix = new Matrix();
+				scaleMatrix.scale(texture.width / size, texture.height / size);
+				
+				shape.graphics.beginTextureFill(texture, scaleMatrix);
 				shape.graphics.drawRect(0, 0, size, size);
 				shape.graphics.endFill();
 			}
-			else
+			else // Draw a simple quad if texture fails to load.
 			{
 				addChild(new Quad(size, size, 0x57c023, true));
 			}

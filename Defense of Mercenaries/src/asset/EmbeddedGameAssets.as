@@ -8,6 +8,9 @@ package asset
 		[Embed(source="/asset/tile/grass.png")]
 		public static const grassTexture:Class;
 		
+		[Embed(source="/asset/tile/road.png")]
+		public static const roadTexture:Class;
+		
 		public function EmbeddedGameAssets() {}
 	}
 }
