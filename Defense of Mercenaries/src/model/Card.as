@@ -52,7 +52,7 @@ package model
 				
 				case 4:
 					shape = new Quad(Settings.tileSize * 2, Settings.tileSize * 3, 0x1C9133, true);
-					cost = 100;
+					cost = 30;
 					break;
 			}
 			

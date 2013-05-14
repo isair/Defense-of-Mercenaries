@@ -36,6 +36,7 @@ package model.tower
 			ghostArray[0] = shape;
 			
 			var ghost:Quad = towerShape;
+			ghost.color = 0xE01B6A; // why is this necessary?
 			ghost.alpha = 0.3;
 			ghostArray[1] = ghost;
 			
