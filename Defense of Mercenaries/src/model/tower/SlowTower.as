@@ -29,7 +29,9 @@ package model.tower
 		
 		public override function findFirstEnemy():Boolean
 		{
+			var firstSlowedEnemy:Enemy = null;
 			var firstEnemy:Enemy = null;
+			var currentLeast:int = 9999;
 			
 			for (var i:int = 0; i < Settings.currentMap.numChildren; i++)
 			{
@@ -39,25 +41,29 @@ package model.tower
 				{
 					if (inRange(child as Enemy))
 					{
-						if (firstEnemy == null)
+						if ((child as Enemy).id < currentLeast)
 						{
-							firstEnemy = (child as Enemy);
-						}
-						
-						if (!(child as Enemy).slowed)
-						{
-							shoot(child as Enemy);
-							return true;
+							if (!(child as Enemy).slowed)
+							{
+								firstEnemy = (child as Enemy);
+							}
+							
+							currentLeast = (child as Enemy).id;
+							firstSlowedEnemy = (child as Enemy);
 						}
 					}
 				}
 			}
 			
-			if (firstEnemy == null)
+			if (firstSlowedEnemy == null)
 				return false;
 			else
 			{
-				shoot(firstEnemy);
+				if (firstEnemy == null)
+					shoot(firstSlowedEnemy);
+				else
+					shoot(firstEnemy);
+				
 				return true;
 			}
 		}

@@ -54,20 +54,33 @@ package model.tower
 		
 		public function findFirstEnemy():Boolean
 		{
+			var firstEnemy:Enemy = null;
+			var currentLeast:int = 9999;
+			
 			for (var i:int = 0; i < Settings.currentMap.numChildren; i++)
 			{
 				var child:Object = Settings.currentMap.getChildAt(i);
 				
-				if (child is Enemy){
+				if (child is Enemy)
+				{					
 					if (inRange(child as Enemy))
 					{
-						shoot(child as Enemy);
-						return true;
+						if ((child as Enemy).id < currentLeast)
+						{
+							firstEnemy = (child as Enemy);
+							currentLeast = (child as Enemy).id;
+						}
 					}
 				}
 			}
 			
-			return false;
+			if (firstEnemy != null)
+			{
+				shoot(firstEnemy);
+				return true;
+			}
+			else
+				return false;
 		}
 		
 		public function inRange(enemy:Enemy):Boolean

@@ -11,6 +11,8 @@ package model.enemy
 	
 	public class Enemy extends Sprite implements GameObject
 	{
+		public var id:int;
+		
 		private var health:Number = 100;
 		private var speed:Number = 1;
 		private var position:Point = null;
@@ -29,10 +31,11 @@ package model.enemy
 		private var moveDirection:int = Path.NONE;
 		private var distanceMoved:Number = 0;
 		
-		public function Enemy(health:Number, speed:Number, position:Point, path:Path)
+		public function Enemy(health:Number, speed:Number, position:Point, path:Path, id:int)
 		{
 			super();
 			
+			this.id = id;
 			this.health = health;
 			this.speed = speed;
 			this.position = position;

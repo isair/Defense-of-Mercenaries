@@ -13,6 +13,8 @@ package model
 
   	public class Gate extends Sprite implements GameObject
   	{
+		private var currentId:int = 0;
+		
 		private var position:Tile = null;
 		private var target:Base = null;
 		
@@ -198,7 +200,8 @@ package model
 		
 		public function spawnEnemy():void
 		{
-			Settings.currentMap.addChild(new Enemy(100 * powerMultiplier, 1 * powerMultiplier, new Point(x, y), (new Path()).copyPath(path)));
+			Settings.currentMap.addChild(new Enemy(100 * powerMultiplier, 1 * powerMultiplier, new Point(x, y), (new Path()).copyPath(path), currentId));
+			currentId++;
 		}
 	}
 }

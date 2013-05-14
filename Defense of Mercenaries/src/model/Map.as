@@ -5,6 +5,7 @@ package model
 	import model.tile.Tile;
 	import model.tower.Tower;
 	import model.enemy.Enemy;
+	import model.projectile.Projectile;
 	
 	import starling.display.Sprite;
 	
@@ -92,7 +93,19 @@ package model
 		public function update(deltaTime:Number):void
 		{
 			this.sortChildren(function sortByY(a:Object, b:Object):int{
-				if((a is Enemy) && (b is Enemy))
+				if((a is Projectile) && (b is Projectile))
+				{
+					return 0;
+				}
+				else if (a is Projectile)
+				{
+					return 1;
+				}
+				else if (b is Projectile)
+				{
+					return -1;
+				}
+				else if((a is Enemy) && (b is Enemy))
 				{
 					if(a.y > b.y)
 						return 1;
