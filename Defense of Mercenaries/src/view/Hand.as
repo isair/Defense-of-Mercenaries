@@ -119,13 +119,16 @@ package view
 		
 		public function update(deltaTime:Number):void
 		{
-			timePassed += deltaTime;
-			goldText.text = Settings.currentGold+"";
-			
-			if (timePassed > 3000)
+			if (Settings.roundBreak)
 			{
-				Settings.currentGold += 1;
-				timePassed -= 3000;
+				timePassed += deltaTime;
+				goldText.text = Settings.currentGold+"";
+				
+				if (timePassed > 3000)
+				{
+					Settings.currentGold += 1;
+					timePassed -= 3000;
+				}
 			}
 		}
 	}

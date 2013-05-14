@@ -19,18 +19,12 @@ package state
 	public class Game extends GameState
 	{
 		private var assetManager:AssetManager = null;
-		private var currentRound:int = 0;
 		
 		public function Game()
 		{
 			super();
 		}
-		
-		public function getCurrentRound():int
-		{
-			return currentRound;
-		}
-		
+				
 		public override function init(e:Event):void
 		{
 			assetManager = new AssetManager();

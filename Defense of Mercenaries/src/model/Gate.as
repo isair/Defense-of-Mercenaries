@@ -27,7 +27,6 @@ package model
 		private var powerMultiplier:Number = 0;
 		private var spawnTimePassed:Number = 0;
 		
-		private var currentWave:int = 0;
 		private var waveCount:int = 0;
 		private var waveInterval:int = 15000; // Waiting time between waves (in milliseconds).
 		
@@ -143,7 +142,7 @@ package model
 			this.waveCount = waveCount;
 			this.powerMultiplier = powerMultiplier;
 			
-			currentWave = 0;
+			Settings.currentWave = 0;
 			storedEnemies = 2;
 			working = true;
 		}
@@ -161,14 +160,14 @@ package model
 		public function stop():void
 		{
 			storedEnemies = 0;
-			currentWave = 0;
+			Settings.currentWave = 0;
 			waveCount = 0;
 			working = false;
 		}
 		
 		public function update(deltaTime:Number):void
 		{
-			if ( ! hasPath || ! working || currentWave >= waveCount) return;
+			if ( ! hasPath || ! working || Settings.currentWave >= waveCount) return;
 			
 			if (waitTime > 0)
 			{
@@ -193,8 +192,8 @@ package model
 			{
 				spawnTimePassed = 0;
 				waitTime = waveInterval;
-				currentWave++;
-				storedEnemies = 2 + currentWave * 1.3;
+				Settings.currentWave++;
+				storedEnemies = 2 + Settings.currentWave * 1.3;
 			}
 		}
 		
