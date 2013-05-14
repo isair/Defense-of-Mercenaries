@@ -24,18 +24,16 @@ package view
 		{
 			super();
 			
-			generateBackground();
-			generateCards();
-			generateGoldCounter();
-			generateButton();
-			
-			Settings.currentGold = 30;
-			
 			addEventListener(Event.ADDED_TO_STAGE, init);
 		}
 		
 		public function init(e:Event):void
 		{
+			generateBackground();
+			generateCards();
+			generateGoldCounter();
+			generateButton();
+			
 			for(var i:int=0; i<cards.length; i++)
 			{
 				cards[i].x = Settings.tileSize * 2.25 * i;
@@ -78,7 +76,7 @@ package view
 			goldText = new TextField(Settings.tileSize * 2.5, Settings.tileSize, Settings.currentGold+"", "Arial", 30, 0x000000);
 			goldText.x = Settings.tileSize * 13.5;
 			goldText.y = Settings.tileSize / 4;
-
+			
 			addChild(goldCounter);
 			addChild(goldText);
 		}
@@ -115,7 +113,7 @@ package view
 			
 			if (touch) 
 			{
-				 Settings.currentGold += 10; 
+				Settings.currentGold += 10; 
 			}
 		}
 		

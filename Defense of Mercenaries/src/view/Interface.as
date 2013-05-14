@@ -21,6 +21,7 @@ package view
 	public class Interface extends Sprite implements GameObject
 	{
 		private var hand:Hand;
+		private var hud:HUD;
 		private var ghostArray:Array = new Array(2);
 		
 		public function Interface()
@@ -29,7 +30,12 @@ package view
 			
 			hand = new Hand();
 			hand.y = Settings.tileSize * 16;
-			addChild(hand);
+			
+			hud = new HUD();
+			hud.y = Settings.tileSize * 19.5;
+			
+			addChild(hand);	
+			addChild(hud);
 		}
 		
 		public function handleTouch(card:Card, touch:Touch):void
