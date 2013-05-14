@@ -79,12 +79,12 @@ package model.tile
 		
 		public function getX():int
 		{
-			return (position.x) * Settings.tileSize;
+			return position.x * Settings.tileSize;
 		}
 		
 		public function getY():int
 		{
-			return (position.y) * Settings.tileSize;
+			return position.y * Settings.tileSize;
 		}
 		
 		public function occupy(occupier:Occupier):void
@@ -93,15 +93,8 @@ package model.tile
 		}
 		
 		public function isOccupied():Boolean
-		{
-			if(occupier == null)
-			{
-				return false;
-			}
-			else
-			{
-				return true;
-			}
+		{	
+			return occupier != null;
 		}
 		
 		public function hasRoad():Boolean
@@ -116,12 +109,12 @@ package model.tile
 		
 		public function getCenterX():int
 		{
-			return (this.x + (Settings.tileSize / 2));
+			return x + Settings.tileSize / 2;
 		}
 		
 		public function getCenterY():int
 		{
-			return (this.y + (Settings.tileSize / 2));
+			return y + Settings.tileSize / 2;
 		}
 		
 		public function setIsRoad(isRoad:Boolean):void

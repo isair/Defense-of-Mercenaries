@@ -32,6 +32,8 @@ package model
 		
 		private var waitTime:Number = 0;
 		
+		private var callback:Function = null;
+		
 		public function Gate(target:Base)
 		{
 			super();
@@ -141,6 +143,7 @@ package model
 			
 			this.waveCount = waveCount;
 			this.powerMultiplier = powerMultiplier;
+			this.callback = callback;
 			
 			Settings.currentWave = 0;
 			storedEnemies = 2;
@@ -167,7 +170,14 @@ package model
 		
 		public function update(deltaTime:Number):void
 		{
-			if ( ! hasPath || ! working || Settings.currentWave >= waveCount) return;
+			if ( ! hasPath || ! working) return;
+			
+			if (Settings.currentWave >= waveCount && callback != null)
+			{
+				stop();
+				callback();
+				return;
+			}
 			
 			if (waitTime > 0)
 			{
