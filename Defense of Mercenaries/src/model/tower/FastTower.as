@@ -11,11 +11,13 @@ package model.tower
 		private static var towerShape:Quad = new Quad(Settings.tileSize, Settings.tileSize, 0xE01B6A, true);
 		private var shape:Quad;
 		
-		// TODO: Change attack interval, damage etc
 		
 		public function FastTower()
 		{
 			super();
+			
+			super.attackInterval = 1000;
+			super.range = Settings.tileSize * 4;
 		}
 		
 		public override function init(e:Event):void
@@ -36,7 +38,6 @@ package model.tower
 			ghostArray[0] = shape;
 			
 			var ghost:Quad = towerShape;
-			ghost.color = 0xE01B6A; // why is this necessary?
 			ghost.alpha = 0.3;
 			ghostArray[1] = ghost;
 			

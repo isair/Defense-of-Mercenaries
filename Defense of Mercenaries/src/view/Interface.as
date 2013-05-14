@@ -186,6 +186,7 @@ package view
 								break;
 							case 4:
 								ghostArray = FastTower.getGhost();
+								break;
 						}
 						
 						addSnapCoords(snapCoordinates);
