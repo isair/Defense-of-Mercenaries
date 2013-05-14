@@ -26,6 +26,11 @@ package state
 			super();
 		}
 		
+		public function getCurrentRound():int
+		{
+			return currentRound;
+		}
+		
 		public override function init(e:Event):void
 		{
 			assetManager = new AssetManager();
