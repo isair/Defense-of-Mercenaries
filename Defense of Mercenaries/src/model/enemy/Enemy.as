@@ -16,7 +16,7 @@ package model.enemy
 		private var position:Point = null;
 		private var dead:Boolean = false;
 		
-		private var slowed:Boolean = false;
+		public var slowed:Boolean = false;
 		private var frozen:Boolean = false;
 		private var slowAmount:Number = 0;
 		private var slowDuration:Number = 0;

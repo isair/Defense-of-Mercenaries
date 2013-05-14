@@ -148,14 +148,15 @@ package view
 						Settings.currentGold -= card.cost;
 						break;
 					case 3:
+						var fastTower:FastTower = new FastTower();
+						Settings.currentMap.insertOccupierToTile(fastTower, currentTile);
+						Settings.currentGold -= card.cost;
+						break;
+					case 4:
 						var cannonTower:CannonTower = new CannonTower();
 						Settings.currentMap.insertOccupierToTile(cannonTower, currentTile);
 						Settings.currentGold -= card.cost;
 						break;
-					case 4:
-						var fastTower:FastTower = new FastTower();
-						Settings.currentMap.insertOccupierToTile(fastTower, currentTile);
-						Settings.currentGold -= card.cost;
 				}
 			}
 		}
@@ -182,10 +183,10 @@ package view
 								ghostArray = SlowTower.getGhost();
 								break;
 							case 3:
-								ghostArray = CannonTower.getGhost();
+								ghostArray = FastTower.getGhost();
 								break;
 							case 4:
-								ghostArray = FastTower.getGhost();
+								ghostArray = CannonTower.getGhost();
 								break;
 						}
 						

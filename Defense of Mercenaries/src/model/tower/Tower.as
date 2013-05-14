@@ -17,11 +17,11 @@ package model.tower
 	{
 		private var position:Tile;
 		private var damage:int = 20;
-		private var range:int = Settings.tileSize * 5;
+		public var range:int = Settings.tileSize * 5;
 		private var influenceRange:int;
 		private static var towerShape:Quad = new Quad(Settings.tileSize, Settings.tileSize, 0x7A4F2C, true);
 		private var shape:Quad;
-		public var attackInterval:int = 1000;
+		public var attackInterval:int = 1500;
 		public var currentInterval:int = attackInterval - 1;
 		private var previousInterval:Number = 0;
 		private var boosted:Boolean = false;
@@ -52,7 +52,7 @@ package model.tower
 			}
 		}
 		
-		private function findFirstEnemy():Boolean
+		public function findFirstEnemy():Boolean
 		{
 			for (var i:int = 0; i < Settings.currentMap.numChildren; i++)
 			{
@@ -77,7 +77,7 @@ package model.tower
 			
 			var hyp:Number = Math.sqrt( deltaX * deltaX + deltaY * deltaY );
 			
-			if( hyp < range )
+			if( (hyp - (Settings.tileSize / 4)) < range )
 				return true;
 			else
 				return false;
