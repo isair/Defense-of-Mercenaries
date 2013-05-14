@@ -18,7 +18,7 @@ package state
 	
 	public class Game extends GameState
 	{
-		private var assetManager:AssetManager = null;
+		public static var assetManager:AssetManager = null;
 		
 		public function Game()
 		{

@@ -3,6 +3,7 @@ package model
 	import flash.geom.Point;
 	
 	import model.tile.Tile;
+	import model.tile.Grass;
 	import model.tower.Tower;
 	import model.enemy.Enemy;
 	import model.projectile.Projectile;
@@ -50,7 +51,7 @@ package model
 				
 				for (var row:uint = 0; row < Settings.mapSize; row++)
 				{
-					tiles[column][row] = new Tile(new Point(column, row));
+					tiles[column][row] = new Grass(new Point(column, row));
 					addChild(tiles[column][row]);
 				}
 			}
