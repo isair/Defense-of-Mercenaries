@@ -126,9 +126,9 @@ package view
 				
 				buttonText.text = "NEXT ROUND";
 				
-		/*		if (!Settings.roundBreak && Settings.waveBreak) {
+				if (!Settings.roundBreak && Settings.waveBreak) {
 					buttonText.text = "FORCE WAVE";
-				} */
+				} 
 				
 				if (timePassed > 3000)
 				{

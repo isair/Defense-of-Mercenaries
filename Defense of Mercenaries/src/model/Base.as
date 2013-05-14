@@ -1,7 +1,7 @@
 package model
 {
 	import model.tile.Tile;
-	
+		
 	import starling.display.Quad;
 	import starling.display.Sprite;
 	import starling.events.Event;
@@ -47,6 +47,17 @@ package model
 			healthBar.width = Settings.tileSize * (3/2) * (health / 10);
 			
 			text.text = health+"";
+			
+			if (health <= 0) {
+				baseDeath();
+			}
+		}
+		
+		public function baseDeath():void
+		{
+			// GAME OVER
+			text.text = "dead";
+			healthBar.visible = false;
 		}
 	}
 }
