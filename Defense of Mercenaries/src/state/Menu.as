@@ -11,6 +11,8 @@ package state
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
 	import starling.utils.AssetManager;
+	
+	import starling.text.TextField;
 
 	public class Menu extends GameState
 	{
