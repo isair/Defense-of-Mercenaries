@@ -4,10 +4,11 @@ package model
 	
 	import model.tile.Tile;
 	import model.tower.Tower;
+	import model.enemy.Enemy;
 	
 	import starling.display.Sprite;
 	
-	public class Map extends Sprite
+	public class Map extends Sprite implements GameObject
 	{
 		private var tiles:Vector.<Vector.<Tile>>;
 		
@@ -29,7 +30,7 @@ package model
 			occupier.insert(tile);
 			addChild(occupier);
 		}
-				
+		
 		public function insertOccupier(occupier:Occupier, column:int, row:int):void
 		{
 			var tile:Tile = tiles[column][row];
@@ -76,7 +77,7 @@ package model
 			
 			var tileX:int = x / Settings.tileSize;
 			var tileY:int = y / Settings.tileSize;
-
+			
 			snapCoordinates[0] = tileX * Settings.tileSize;
 			snapCoordinates[1] = tileY * Settings.tileSize;
 			
@@ -86,6 +87,33 @@ package model
 		public function getTile(column:int, row:int):Tile
 		{
 			return tiles[column][row];
+		}
+		
+		public function update(deltaTime:Number):void
+		{
+			this.sortChildren(function sortByY(a:Object, b:Object):int{
+				if((a is Enemy) && (b is Enemy))
+				{
+					if(a.y > b.y)
+						return 1;
+					else if(a.y < b.y)
+						return -1;
+					else
+						return 0;
+				}
+				else if(a is Enemy)
+				{
+					return 1;
+				}
+				else if(b is Enemy)
+				{
+					return -1;
+				}
+				else
+				{
+					return 0;
+				}
+			});
 		}
 	}
 }
