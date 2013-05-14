@@ -113,8 +113,10 @@ package view
 		{		
 			var touch:Touch = ev.getTouch(this, TouchPhase.ENDED);
 			
-			if (touch) {
-				buttonText.text = "TOUCHED" ; }
+			if (touch) 
+			{
+				 Settings.currentGold += 10; 
+			}
 		}
 		
 		public function update(deltaTime:Number):void

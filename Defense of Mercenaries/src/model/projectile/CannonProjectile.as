@@ -116,7 +116,7 @@ package model.projectile
 					deltaY = Math.abs((child.y + Settings.tileSize / 2) - this.targetY);
 					hyp = Math.sqrt( deltaX * deltaX + deltaY * deltaY );
 
-					if (hyp <= blastRadius)
+					if ((hyp - (Settings.tileSize / 4)) <= blastRadius)
 					{
 						(child as Enemy).damage(this.strength);
 					}

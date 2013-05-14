@@ -51,6 +51,7 @@ package state
 			Settings.ui = ui;
 			
 			var base:Base = new Base();
+			Settings.base = base;
 			map.insertOccupier(base, 8, 10);
 			
 			var obstacle1:Obstacle = new Obstacle();

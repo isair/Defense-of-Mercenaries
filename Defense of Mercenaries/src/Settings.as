@@ -1,5 +1,6 @@
 package
 {
+	import model.Base;
 	import model.Map;
 	
 	import view.Interface;
@@ -7,6 +8,7 @@ package
 	public class Settings
 	{
 		public static const tileSize:int = 40, mapSize:int = 16;
+		public static var base:Base = null;
 		public static var currentMap:Map = null;
 		public static var roundBreak:Boolean = false;
 		public static var currentGold:int = 30;

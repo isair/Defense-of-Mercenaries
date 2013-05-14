@@ -16,6 +16,10 @@ package model.enemy
 		private var position:Point = null;
 		private var dead:Boolean = false;
 		
+		private var healthBar:Quad;
+		private var healthBarEmpty:Quad;
+		private var damaged:Boolean = false;
+		
 		public var slowed:Boolean = false;
 		private var frozen:Boolean = false;
 		private var slowAmount:Number = 0;
@@ -39,7 +43,17 @@ package model.enemy
 		
 		public function init(e:Event):void
 		{
+			healthBar = new Quad(Settings.tileSize * (4/5), Settings.tileSize / 10, 0x69E01F, true);
+			healthBarEmpty = new Quad(Settings.tileSize * (4/5), Settings.tileSize / 10, 0xE33D3D, true);
+			healthBar.x = Settings.tileSize / 10;
+			healthBarEmpty.x = Settings.tileSize / 10;
+			healthBar.y = - Settings.tileSize / 5;
+			healthBarEmpty.y = - Settings.tileSize / 5;
+			healthBar.alpha = 0;
+			healthBarEmpty.alpha = 0;
 			addChild(new Quad(Settings.tileSize, Settings.tileSize, 0xcc0000, true));
+			addChild(healthBarEmpty);
+			addChild(healthBar);
 		}
 		
 		public function damage(value:int):void
@@ -51,6 +65,13 @@ package model.enemy
 				this.dead = true;
 				Settings.currentGold += 5;
 				this.removeFromParent(true);
+			}
+			
+			if (!damaged)
+			{
+				damaged = true;
+				healthBar.alpha = 1;
+				healthBarEmpty.alpha = 1;
 			}
 		}
 		
@@ -78,6 +99,11 @@ package model.enemy
 		
 		public function update(deltaTime:Number):void
 		{
+			if (damaged)
+			{
+				healthBar.width = Settings.tileSize * (4/5) * (health / 100);
+			}
+			
 			if (!frozen)
 			{
 				if (this.slowed)
@@ -99,7 +125,10 @@ package model.enemy
 					
 					// TODO: Reduce base health at the end of the path.
 					if (moveDirection == Path.NONE)
+					{
+						Settings.base.damage();
 						this.removeFromParent(true);
+					}
 				}
 				else // Move in given direction for a single tile length.
 				{
