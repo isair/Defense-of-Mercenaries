@@ -3,7 +3,6 @@ package view
 	import model.GameObject;
 	
 	import starling.display.Sprite;
-	
 	import starling.text.TextField;
 	import starling.events.Event;
 	import starling.display.Quad;
@@ -19,7 +18,6 @@ package view
 		public function HUD()
 		{
 			super();
-			
 			addEventListener(Event.ADDED_TO_STAGE, init);
 		}
 		

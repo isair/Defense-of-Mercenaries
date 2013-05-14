@@ -14,7 +14,7 @@ package
 		public static var ui:Interface;
 
 		public static var roundBreak:Boolean = false;
-		public static var waveBreak:Boolean = true;
+		public static var waveBreak:Boolean = false;
 		public static var currentRound:int = 0;
 		public static var currentWave:int = 0;
 		public static var currentGold:int = 30;

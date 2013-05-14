@@ -10,11 +10,10 @@ package state
 	import model.Obstacle;
 	import model.tower.SlowTower;
 	import model.tower.Tower;
+	import view.Interface;
 	
 	import starling.events.Event;
 	import starling.utils.AssetManager;
-	
-	import view.Interface;
 	
 	public class Game extends GameState
 	{
@@ -24,7 +23,7 @@ package state
 		{
 			super();
 		}
-				
+		
 		public override function init(e:Event):void
 		{
 			assetManager = new AssetManager();

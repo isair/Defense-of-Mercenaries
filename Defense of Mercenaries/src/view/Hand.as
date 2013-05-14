@@ -119,7 +119,7 @@ package view
 		
 		public function update(deltaTime:Number):void
 		{
-			if (Settings.roundBreak)
+			if (!Settings.roundBreak)
 			{
 				timePassed += deltaTime;
 				goldText.text = Settings.currentGold+"";
