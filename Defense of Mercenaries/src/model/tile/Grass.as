@@ -20,7 +20,7 @@ package model.tile
 		
 		public override function draw():void
 		{
-			var size:int = Settings.tileSize;
+			var size:Number = Settings.tileSize;
 			var texture:Texture = Game.assetManager.getTexture("grassTexture");
 			
 			if (texture != null)
@@ -28,7 +28,10 @@ package model.tile
 				var shape:Shape = new Shape();
 				addChild(shape);
 				
-				shape.graphics.beginTextureFill(texture, new Matrix());
+				var scaleMatrix:Matrix = new Matrix();
+				scaleMatrix.scale(texture.width / size, texture.height / size);
+				
+				shape.graphics.beginTextureFill(texture, scaleMatrix);
 				shape.graphics.drawRect(0, 0, size, size);
 				shape.graphics.endFill();
 			}
