@@ -34,6 +34,12 @@ package asset
 
 		[Embed(source="/asset/tower/obs3.png")]
 		public static const obs3Texture:Class;
+		
+		[Embed(source="/asset/interface/wall.png")]
+		public static const wallTexture:Class;
+		
+		[Embed(source="/asset/interface/gate.png")]
+		public static const gateTexture:Class;
 				
 		public function EmbeddedGameAssets() {}
 	}

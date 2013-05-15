@@ -7,9 +7,13 @@ package model
   	import model.astar.AStarNode;
   	import model.enemy.Enemy;
   	import model.tile.Tile;
+	import state.Game;
   	
   	import starling.display.Quad;
   	import starling.display.Sprite;
+	import starling.events.Event;
+	import starling.display.Image;
+	import starling.textures.Texture;
 
   	public class Gate extends Sprite implements GameObject
   	{
@@ -38,6 +42,17 @@ package model
 		{
 			super();
 			setTarget(target);
+			
+			addEventListener(Event.ADDED_TO_STAGE, init);
+		}
+		
+		public function init(e:Event):void
+		{
+			var texture:Texture = Game.assetManager.getTexture("gateTexture");
+			var gate:Image = new Image(texture);
+			gate.y = - GlobalState.tileSize;
+			
+			addChild(gate);
 		}
 		
 		public function setTarget(target:Base):void

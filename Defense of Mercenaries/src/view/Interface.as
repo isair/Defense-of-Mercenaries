@@ -30,10 +30,10 @@ package view
 			super();
 						
 			hand = new Hand();
-			hand.y = GlobalState.tileSize * 16;
+			hand.y = GlobalState.tileSize * 17;
 			
 			hud = new HUD();
-			hud.y = GlobalState.tileSize * 19.5;
+			hud.y = GlobalState.tileSize * 20.5;
 			
 			addChild(hand);	
 			addChild(hud);

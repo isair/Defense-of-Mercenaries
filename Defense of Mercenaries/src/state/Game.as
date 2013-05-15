@@ -10,10 +10,12 @@ package state
 	import model.Obstacle;
 	import model.tower.SlowTower;
 	import model.tower.Tower;
-	import view.Interface;
 	
 	import starling.events.Event;
 	import starling.utils.AssetManager;
+	
+	import view.Interface;
+	import view.TopHUD;
 	
 	public class Game extends GameState
 	{
@@ -42,7 +44,10 @@ package state
 		{
 			var halfSize:Number = GlobalState.mapSize / 2;
 			
+			var top:TopHUD = new TopHUD();
+			
 			var map:Map = new Map();
+			map.y = GlobalState.tileSize;
 			map.generateMap();
 			
 			GlobalState.currentMap = map;
@@ -67,6 +72,7 @@ package state
 			var gate:Gate = new Gate(base);
 			map.insertGate(gate, Main.randomBetween(0, GlobalState.mapSize - 1), 0);
 			
+			addChild(top);
 			addChild(map);
 			addChild(ui);
 			
