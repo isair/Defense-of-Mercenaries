@@ -6,6 +6,7 @@ package model.projectile
 	import starling.display.Shape;
 	import starling.events.Event;
 	import starling.text.TextField;
+	import starling.display.Sprite;
 	
 	public class CannonProjectile extends Projectile
 	{
@@ -106,9 +107,11 @@ package model.projectile
 			cannonBlast.y = this.targetY;
 			GlobalState.currentMap.addChild(cannonBlast);
 			
-			for (var i:int = 0; i < GlobalState.currentMap.numChildren; i++)
+			var targets:Sprite = GlobalState.currentMap.getEnemiesAndOccupiers();
+			
+			for (var i:int = 0; i < targets.numChildren; i++)
 			{
-				var child:Object = GlobalState.currentMap.getChildAt(i);
+				var child:Object = targets.getChildAt(i);
 				
 				if (child is Enemy)
 				{
