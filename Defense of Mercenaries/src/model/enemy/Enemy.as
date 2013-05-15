@@ -5,9 +5,15 @@ package model.enemy
 	import model.GameObject;
 	import model.Path;
 	
+	import starling.core.Starling;
+	import starling.display.MovieClip;
 	import starling.display.Quad;
 	import starling.display.Sprite;
 	import starling.events.Event;
+	import starling.textures.Texture;
+	import starling.textures.TextureAtlas;
+	
+	import state.Game;
 	
 	public class Enemy extends Sprite implements GameObject
 	{
@@ -33,6 +39,18 @@ package model.enemy
 		private var totalDistanceMoved:Number = 0;
 		private var upDown:Boolean = false;
 		
+		private var currentClip:MovieClip;
+		private var upClip:MovieClip;
+		private var leftClip:MovieClip;
+		private var rightClip:MovieClip;
+		private var downClip:MovieClip;
+		
+		[Embed(source="/asset/enemy/enemy.xml", mimeType="application/octet-stream")]
+		private var AnimData:Class;
+		
+		[Embed(source="/asset/enemy/enemy.png")]
+		private var AnimTexture:Class;
+
 		public function Enemy(health:Number, speed:Number, position:Point, path:Path, id:int)
 		{
 			super();
@@ -48,6 +66,18 @@ package model.enemy
 		
 		public function init(e:Event):void
 		{
+			var _t:Texture = Texture.fromBitmap(new AnimTexture());
+			var _d:XML = XML(new AnimData());
+			
+			var _ta:TextureAtlas = new TextureAtlas(_t, _d);
+			
+			upClip = new MovieClip(_ta.getTextures("up"), 5);
+			leftClip = new MovieClip(_ta.getTextures("left"), 5);
+			rightClip = new MovieClip(_ta.getTextures("right"), 5);
+			downClip = new MovieClip(_ta.getTextures("down"), 5);
+			
+			currentClip = downClip;
+
 			healthBar = new Quad(GlobalState.tileSize * (4/5), GlobalState.tileSize / 10, 0x69E01F, true);
 			healthBarEmpty = new Quad(GlobalState.tileSize * (4/5), GlobalState.tileSize / 10, 0xE33D3D, true);
 			healthBar.x = GlobalState.tileSize / 10;
@@ -56,9 +86,16 @@ package model.enemy
 			healthBarEmpty.y = - GlobalState.tileSize / 5;
 			healthBar.alpha = 0;
 			healthBarEmpty.alpha = 0;
-			addChild(new Quad(GlobalState.tileSize, GlobalState.tileSize, 0xcc0000, true));
+			
+			//addChild(new Quad(GlobalState.tileSize, GlobalState.tileSize, 0xcc0000, true));
+			addChild(currentClip);
 			addChild(healthBarEmpty);
 			addChild(healthBar);
+			
+			Starling.juggler.add(downClip);
+			Starling.juggler.add(upClip);
+			Starling.juggler.add(leftClip);
+			Starling.juggler.add(rightClip);
 		}
 		
 		public function damage(value:int):void
@@ -107,6 +144,13 @@ package model.enemy
 			return totalDistanceMoved;
 		}
 		
+		public function updateClip(clip:MovieClip):void
+		{
+			removeChild(currentClip);
+			currentClip = clip;
+			addChild(currentClip);
+		}
+		
 		public function update(deltaTime:Number):void
 		{
 			if (damaged)
@@ -152,6 +196,11 @@ package model.enemy
 					switch (moveDirection)
 					{
 						case Path.UP:
+							if (currentClip != upClip)
+							{
+								updateClip(upClip);
+							}
+							
 							if(!upDown)
 							{
 								upDown = true;
@@ -162,6 +211,11 @@ package model.enemy
 							break;
 						
 						case Path.RIGHT:
+							if (currentClip != rightClip)
+							{
+								updateClip(rightClip);
+							}
+							
 							if(upDown)
 								upDown = false;
 
@@ -169,6 +223,11 @@ package model.enemy
 							break;
 						
 						case Path.DOWN:
+							if (currentClip != downClip)
+							{
+								updateClip(downClip);
+							}
+
 							if(!upDown)
 							{
 								upDown = true;
@@ -179,6 +238,11 @@ package model.enemy
 							break;
 						
 						case Path.LEFT:
+							if (currentClip != leftClip)
+							{
+								updateClip(leftClip);
+							}
+
 							if(upDown)
 								upDown = false;
 

@@ -1,42 +1,47 @@
 package model
-{
+{	
 	import model.tile.Tile;
+	import state.Game;
 	
+	import starling.display.Image;
 	import starling.display.Quad;
 	import starling.events.Event;
+	import starling.textures.Texture;
 	
 	public class Obstacle extends Occupier
 	{
 		private var position:Tile;
-		private var shape:Quad;
+		private var image:Image;
 		private static var counter:int = 0;
 		
 		public function Obstacle()
 		{
 			super();
-			
-			this.shape = getShape();
-			
+						
 			addEventListener(Event.ADDED_TO_STAGE, init);
 		}
 		
-		public function getShape():Quad
+		public function getShape():Image
 		{
-			var result:Quad;
+			var result:Image;
+			var texture:Texture;
 			
 			switch(counter)
 			{
-				case 0: result = new Quad(GlobalState.tileSize / 2, GlobalState.tileSize / 2, 0x666666, true);
+				case 0: texture = Game.assetManager.getTexture("obs1Texture");
+					break; 
+				case 1: texture = Game.assetManager.getTexture("obs2Texture");
 					break;
-				case 1: result = new Quad(GlobalState.tileSize / 2, GlobalState.tileSize / 2, 0x333333, true);
+				case 2: texture = Game.assetManager.getTexture("obs3Texture");
 					break;
-				case 2: result = new Quad(GlobalState.tileSize / 2, GlobalState.tileSize / 2, 0x999999, true);
-					break;
-				default: result = new Quad(GlobalState.tileSize / 2, GlobalState.tileSize / 2, 0x666666, true);
+				default: 
 					break;
 			}
 			
-			counter++;
+			// Filtered out dead-tree for now
+			counter = (counter + 1) % 2;
+			
+			result = new Image(texture);
 			
 			return result;
 		}
@@ -45,14 +50,15 @@ package model
 		{
 			this.position = position;
 			
-			x = position.getX() + GlobalState.tileSize / 4;
-			y = position.getY() + GlobalState.tileSize / 4;
-			
+			x = position.getX();
+			y = position.getY();
 		}
 		
 		public override function init(e:Event):void
 		{
-			addChild(shape);
+			image = getShape();
+			image.y = - GlobalState.tileSize / 8;
+			addChild(image);
 		}
 	}
 }

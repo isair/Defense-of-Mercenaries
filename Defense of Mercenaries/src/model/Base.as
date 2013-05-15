@@ -1,11 +1,14 @@
 package model
 {
 	import model.tile.Tile;
+	import state.Game;
 		
 	import starling.display.Quad;
 	import starling.display.Sprite;
 	import starling.events.Event;
 	import starling.text.TextField;
+	import starling.display.Image;
+	import starling.textures.Texture;
 	
 	public class Base extends Occupier
 	{
@@ -33,9 +36,11 @@ package model
 			healthBarEmpty.x = - GlobalState.tileSize / 4;
 			healthBar.y = (GlobalState.tileSize as Number) * (7 / 6);
 			healthBarEmpty.y = (GlobalState.tileSize as Number) * (7 / 6);
-			var shape:Quad = new Quad(GlobalState.tileSize, GlobalState.tileSize, 0xFF55AA, true);
-			
-			addChild(shape);
+
+			var baseTexture:Texture = Game.assetManager.getTexture("baseTexture");
+			var baseImage:Image = new Image(baseTexture);
+
+			addChild(baseImage);
 			addChild(healthBarEmpty);
 			addChild(healthBar);
 			addChild(text);

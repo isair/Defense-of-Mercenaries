@@ -22,7 +22,19 @@ package asset
 		
 		[Embed(source="/asset/tower/cannontower.png")]
 		public static const cannonTowerTexture:Class;
+		
+		[Embed(source="/asset/tower/base.png")]
+		public static const baseTexture:Class;
+		
+		[Embed(source="/asset/tower/obs1.png")]
+		public static const obs1Texture:Class;
+		
+		[Embed(source="/asset/tower/obs2.png")]
+		public static const obs2Texture:Class;
 
+		[Embed(source="/asset/tower/obs3.png")]
+		public static const obs3Texture:Class;
+				
 		public function EmbeddedGameAssets() {}
 	}
 }

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker http://texturepacker.com-->
+<!-- $TexturePacker:SmartUpdate:ec7ba640772465ef1f61e2debe89aa76$ -->
+<TextureAtlas imagePath="enemy.png">
+    <SubTexture name="down-1" x="2" y="82" width="30" height="40" frameX="-10" frameY="0" frameWidth="40" frameHeight="40"/>
+    <SubTexture name="down-2" x="2" y="124" width="30" height="38" frameX="-9" frameY="-2" frameWidth="40" frameHeight="40"/>
+    <SubTexture name="down-3" x="70" y="80" width="30" height="40" frameX="-8" frameY="0" frameWidth="40" frameHeight="40"/>
+    <SubTexture name="down-4" x="34" y="122" width="30" height="38" frameX="-8" frameY="-2" frameWidth="40" frameHeight="40"/>
+    <SubTexture name="left-1" x="2" y="2" width="38" height="38" frameX="0" frameY="-1" frameWidth="40" frameHeight="40"/>
+    <SubTexture name="left-2" x="78" y="2" width="34" height="36" frameX="-1" frameY="-3" frameWidth="40" frameHeight="40"/>
+    <SubTexture name="left-3" x="36" y="42" width="32" height="38" frameX="-3" frameY="0" frameWidth="40" frameHeight="40"/>
+    <SubTexture name="left-4" x="42" y="2" width="34" height="38" frameX="-1" frameY="-1" frameWidth="40" frameHeight="40"/>
+    <SubTexture name="right-1" x="2" y="42" width="32" height="38" frameX="-8" frameY="0" frameWidth="40" frameHeight="40"/>
+    <SubTexture name="right-2" x="34" y="162" width="28" height="38" frameX="-12" frameY="-1" frameWidth="40" frameHeight="40"/>
+    <SubTexture name="right-3" x="78" y="40" width="32" height="38" frameX="-8" frameY="-1" frameWidth="40" frameHeight="40"/>
+    <SubTexture name="right-4" x="98" y="162" width="28" height="38" frameX="-12" frameY="-1" frameWidth="40" frameHeight="40"/>
+    <SubTexture name="up-1" x="34" y="82" width="30" height="38" frameX="-6" frameY="-1" frameWidth="40" frameHeight="40"/>
+    <SubTexture name="up-2" x="66" y="160" width="30" height="36" frameX="-6" frameY="-1" frameWidth="40" frameHeight="40"/>
+    <SubTexture name="up-3" x="98" y="122" width="28" height="38" frameX="-8" frameY="-1" frameWidth="40" frameHeight="40"/>
+    <SubTexture name="up-4" x="66" y="122" width="30" height="36" frameX="-6" frameY="-1" frameWidth="40" frameHeight="40"/>
+</TextureAtlas>
