@@ -2,6 +2,7 @@ package model
 {
 	import model.tile.Tile;
 	import state.Game;
+	import state.GameOver;
 		
 	import starling.display.Quad;
 	import starling.display.Sprite;
@@ -63,6 +64,8 @@ package model
 			// GAME OVER
 			text.text = "dead";
 			healthBar.visible = false;
+			
+			Main.getInstance().setState(GameOver);
 		}
 	}
 }

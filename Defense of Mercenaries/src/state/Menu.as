@@ -11,12 +11,14 @@ package state
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
 	import starling.utils.AssetManager;
-	
 	import starling.text.TextField;
 
 	public class Menu extends GameState
 	{
 		private var assetManager:AssetManager;
+		
+		private var welcomeText:TextField;
+		private var startPrompt:TextField;
 		
 		public function Menu()
 		{
@@ -40,7 +42,15 @@ package state
 		{
 			var size:Number = GlobalState.mapSize * GlobalState.tileSize;
 			
-			addChild(new Quad(size, size, 0xff0000, true));
+			welcomeText = new TextField(size, GlobalState.tileSize * 4, "WELCOME TO DEFENSE OF MERCENARIES", "Verdana", 25);
+			startPrompt = new TextField(size, GlobalState.tileSize * 4, "TAP TO START GAME", "Verdana", 25);
+			
+			startPrompt.y = welcomeText.y + 100;
+			
+			addChild(new Quad(size, size, 0x81E01B, true));
+			
+			addChild(welcomeText);
+			addChild(startPrompt);
 			
 			// Start the background music.
 			var bgm:SoundChannel = assetManager.playSound("bgm", 0, int.MAX_VALUE);
