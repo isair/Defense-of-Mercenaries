@@ -36,7 +36,7 @@ package model.projectile
 			this.targetY = target.y + GlobalState.tileSize / 2;
 			
 			var targetDeltaX:Number = targetX - (owner.x + GlobalState.tileSize / 2);
-			var targetDeltaY:Number = targetY - (owner.y + GlobalState.tileSize / 2);
+			var targetDeltaY:Number = targetY - (owner.y);
 			
 			var hyp:Number = Math.sqrt( targetDeltaX * targetDeltaX + targetDeltaY * targetDeltaY );
 			

@@ -165,6 +165,8 @@ package view
 						GlobalState.currentGold -= card.cost;
 						break;
 				}
+				
+				GlobalState.currentMap.childrenSort();
 			}
 		}
 		
@@ -247,7 +249,7 @@ package view
 					if(q is Quad)
 					{
 						(q as Quad).x = snapCoords[0];
-						(q as Quad).y = snapCoords[1];
+						(q as Quad).y = snapCoords[1] - GlobalState.tileSize / 2;
 					}
 				}
 			}

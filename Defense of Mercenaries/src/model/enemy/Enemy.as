@@ -30,6 +30,7 @@ package model.enemy
 		private var path:Path = null;
 		private var moveDirection:int = Path.NONE;
 		private var distanceMoved:Number = 0;
+		private var upDown:Boolean = false;
 		
 		public function Enemy(health:Number, speed:Number, position:Point, path:Path, id:int)
 		{
@@ -144,18 +145,36 @@ package model.enemy
 					switch (moveDirection)
 					{
 						case Path.UP:
+							if(!upDown)
+							{
+								upDown = true;
+								GlobalState.currentMap.childrenSort();
+							}
+							
 							y -= deltaPos;
 							break;
 						
 						case Path.RIGHT:
+							if(upDown)
+								upDown = false;
+
 							x += deltaPos;
 							break;
 						
 						case Path.DOWN:
+							if(!upDown)
+							{
+								upDown = true;
+								GlobalState.currentMap.childrenSort();
+							}
+
 							y += deltaPos;
 							break;
 						
 						case Path.LEFT:
+							if(upDown)
+								upDown = false;
+
 							x -= deltaPos;
 							break;
 						

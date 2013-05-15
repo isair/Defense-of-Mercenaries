@@ -3,15 +3,18 @@ package model.tower
 	import model.projectile.CannonProjectile;
 	import model.enemy.Enemy;
 	import model.tile.Tile;
+	import state.Game;
 	
+	import starling.display.Image;
+	import starling.textures.Texture;
 	import starling.display.Quad;
 	import starling.events.Event;
 	import starling.display.Shape;
 	
 	public class CannonTower extends Tower
 	{
-		private static var towerShape:Quad = new Quad(GlobalState.tileSize, GlobalState.tileSize, 0x009933, true);
-		private var shape:Quad;
+		private static 	var cannonTowerTexture:Texture = Game.assetManager.getTexture("cannonTowerTexture");
+		private static var cannonTowerShape:Image = new Image(cannonTowerTexture);
 		private var damage:int = 20;
 		private var blastRadius:Number = GlobalState.tileSize;
 
@@ -25,15 +28,16 @@ package model.tower
 		
 		public override function init(e:Event):void
 		{
-			this.shape = new Quad(GlobalState.tileSize, GlobalState.tileSize, 0x009933, true);
-			addChild(shape);
+			var cannonTowerShape = new Image(cannonTowerTexture);
+			cannonTowerShape.y = - GlobalState.tileSize / 2;
+			addChild(cannonTowerShape);
 		}
 		
 		public override function shoot(enemy:Enemy):void
 		{			
 			var bullet:CannonProjectile = new CannonProjectile(enemy, GlobalState.tileSize/8, damage, this, blastRadius);
 			bullet.x = x + GlobalState.tileSize / 2;
-			bullet.y = y + GlobalState.tileSize / 2;
+			bullet.y = y;
 			GlobalState.currentMap.addChild(bullet);
 		}
 		
@@ -48,7 +52,7 @@ package model.tower
 			shape.graphics.endFill();
 			ghostArray[0] = shape;
 
-			var ghost:Quad = towerShape;
+			var ghost:Quad = cannonTowerShape;
 			ghost.alpha = 0.3;
 			ghostArray[1] = ghost;
 			

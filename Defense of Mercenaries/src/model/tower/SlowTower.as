@@ -3,15 +3,18 @@ package model.tower
 	import model.enemy.Enemy;
 	import model.projectile.SlowProjectile;
 	import model.tile.Tile;
+	import state.Game;
 	
 	import starling.display.Quad;
 	import starling.display.Shape;
 	import starling.events.Event;
+	import starling.display.Image;
+	import starling.textures.Texture;
 	
 	public class SlowTower extends Tower
 	{
-		private static var towerShape:Quad = new Quad(GlobalState.tileSize, GlobalState.tileSize, 0x3787B0, true);
-		private var shape:Quad;
+		private static 	var slowTowerTexture:Texture = Game.assetManager.getTexture("slowTowerTexture");
+		private static var slowTowerShape:Image = new Image(slowTowerTexture);
 		private var damage:int = 15;
 		private var slowAmount:Number = 40;
 		private var slowDuration:Number = 2700;
@@ -23,8 +26,9 @@ package model.tower
 		
 		public override function init(e:Event):void
 		{
-			this.shape = new Quad(GlobalState.tileSize, GlobalState.tileSize, 0x3787B0, true);
-			addChild(shape);
+			var slowTowerShape = new Image(slowTowerTexture);
+			slowTowerShape.y = - GlobalState.tileSize / 2;
+			addChild(slowTowerShape);
 		}
 		
 		public override function findFirstEnemy():Boolean
@@ -72,7 +76,7 @@ package model.tower
 		{			
 			var bullet:SlowProjectile = new SlowProjectile(enemy, GlobalState.tileSize/4, damage, this, slowAmount, slowDuration);
 			bullet.x = x + GlobalState.tileSize / 2;
-			bullet.y = y + GlobalState.tileSize / 2;
+			bullet.y = y;
 			GlobalState.currentMap.addChild(bullet);
 		}
 		
@@ -87,7 +91,7 @@ package model.tower
 			shape.graphics.endFill();
 			ghostArray[0] = shape;
 			
-			var ghost:Quad = towerShape;
+			var ghost:Quad = slowTowerShape;
 			ghost.alpha = 0.3;
 			ghostArray[1] = ghost;
 			

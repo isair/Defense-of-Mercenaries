@@ -8,7 +8,11 @@ package model.tower
 	import model.enemy.Enemy;
 	import model.projectile.Projectile;
 	import model.tile.Tile;
-	
+	import asset.EmbeddedGameAssets;
+	import state.Game;
+
+	import starling.textures.Texture;
+	import starling.display.Image;
 	import starling.display.Quad;
 	import starling.display.Shape;
 	import starling.events.Event;
@@ -19,7 +23,8 @@ package model.tower
 		private var damage:int = 20;
 		public var range:int = GlobalState.tileSize * 5;
 		private var influenceRange:int;
-		private static var towerShape:Quad = new Quad(GlobalState.tileSize, GlobalState.tileSize, 0x7A4F2C, true);
+		private static 	var towerTexture:Texture = Game.assetManager.getTexture("towerTexture");
+		private static var towerShape:Image = new Image(towerTexture);
 		private var shape:Quad;
 		public var attackInterval:int = 1500;
 		public var currentInterval:int = attackInterval - 1;
@@ -35,8 +40,11 @@ package model.tower
 		
 		public override function init(e:Event):void
 		{			
-			this.shape = new Quad(GlobalState.tileSize, GlobalState.tileSize, 0x7A4F2C, true);
-			addChild(shape);
+			var towerImage:Image = new Image(towerTexture);
+			towerImage.y = - GlobalState.tileSize / 2;
+			
+			//this.shape = new Quad(GlobalState.tileSize, GlobalState.tileSize, 0x7A4F2C, true);
+			addChild(towerImage);
 		}
 		
 		public function update(deltaTime:Number):void
@@ -100,7 +108,7 @@ package model.tower
 		{
 			var bullet:Projectile = new Projectile(enemy, GlobalState.tileSize/4, damage, this);
 			bullet.x = x + GlobalState.tileSize / 2;
-			bullet.y = y + GlobalState.tileSize / 2;
+			bullet.y = y;
 			GlobalState.currentMap.addChild(bullet);
 		}
 		

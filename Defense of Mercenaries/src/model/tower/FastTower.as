@@ -1,16 +1,17 @@
 package model.tower
 {
-	
 	import starling.display.Quad;
 	import starling.display.Shape;
 	import starling.events.Event;
+	import starling.display.Image;
+	import starling.textures.Texture;
+	
+	import state.Game;
 	
 	public class FastTower extends Tower
 	{
-		
-		private static var towerShape:Quad = new Quad(GlobalState.tileSize, GlobalState.tileSize, 0xE01B6A, true);
-		private var shape:Quad;
-		
+		private static 	var fastTowerTexture:Texture = Game.assetManager.getTexture("fastTowerTexture");
+		private static var fastTowerShape:Image = new Image(fastTowerTexture);
 		
 		public function FastTower()
 		{
@@ -22,8 +23,9 @@ package model.tower
 		
 		public override function init(e:Event):void
 		{
-			this.shape = new Quad(GlobalState.tileSize, GlobalState.tileSize, 0xE01B6A, true);
-			addChild(shape);
+			var fastTowerShape = new Image(fastTowerTexture);
+			fastTowerShape.y = - GlobalState.tileSize / 2;
+			addChild(fastTowerShape);
 		}
 		
 		public static function getGhost():Array
@@ -37,7 +39,7 @@ package model.tower
 			shape.graphics.endFill();
 			ghostArray[0] = shape;
 			
-			var ghost:Quad = towerShape;
+			var ghost:Quad = fastTowerShape;
 			ghost.alpha = 0.3;
 			ghostArray[1] = ghost;
 			

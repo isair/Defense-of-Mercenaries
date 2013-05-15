@@ -10,7 +10,7 @@ package model
 	
 	import starling.display.Sprite;
 	
-	public class Map extends Sprite implements GameObject
+	public class Map extends Sprite
 	{
 		private var tiles:Vector.<Vector.<Tile>>;
 		
@@ -92,43 +92,57 @@ package model
 			return tiles[column][row];
 		}
 		
-		public function update(deltaTime:Number):void
+		public function childrenSort():void
 		{
 			sortChildren(function sortByY(a:Object, b:Object):int
 			{
-				if ((a is Projectile) && (b is Projectile))
+				if ((a is Projectile) || (b is Projectile))
 				{
-					return 0;
+					if ((a is Projectile) && (b is Projectile))
+					{
+						return 0;
+					}
+					else if (b is Projectile)
+					{
+						return -1;
+					}
+					else
+					{
+						return 1;
+					}
 				}
-				else if (a is Projectile)
+				else if ((a is Tile) || (b is Tile))
 				{
-					return 1;
+					if (a is Tile)
+					{
+						return -1;
+					}
+					else if (b is Tile)
+					{
+						return 1;
+					}
+					else
+						return 0;
 				}
-				else if (b is Projectile)
-				{
-					return -1;
-				}
-				else if ((a is Enemy) && (b is Enemy))
+				else
 				{
 					if (a.y > b.y)
 						return 1;
 					else if(a.y < b.y)
 						return -1;
 					else
-						return 0;
-				}
-				else if (a is Enemy)
-				{
-					return 1;
-				}
-				else if (b is Enemy)
-				{
-					return -1;
-				}
-				else
-				{
-					return 0;
-				}
+					{
+						if((a is Enemy) && (b is Enemy))
+						{
+							if (a.id < b.id)
+								return 1;
+							else
+								return -1;
+						}
+						else
+							return 0;
+					}
+				}			
 			});
 		}
 	}
