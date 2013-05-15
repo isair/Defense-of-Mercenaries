@@ -10,12 +10,11 @@ package state
 	import model.Obstacle;
 	import model.tower.SlowTower;
 	import model.tower.Tower;
-	
-	import starling.events.Event;
-	import starling.utils.AssetManager;
-	
 	import view.Interface;
 	import view.TopHUD;
+	
+	import starling.events.Event;
+	import starling.utils.AssetManager;	
 	
 	public class Game extends GameState
 	{
@@ -30,7 +29,6 @@ package state
 		{
 			assetManager = new AssetManager();
 			
-			// Enqueue game assets.
 			assetManager.enqueue(EmbeddedGameAssets);
 			
 			assetManager.loadQueue(function(ratio:Number):void
@@ -76,7 +74,6 @@ package state
 			addChild(map);
 			addChild(ui);
 			
-			// Start the background music.
 			var bgm:SoundChannel = assetManager.playSound("bgm", 0, int.MAX_VALUE);
 			
 			// Start the first round with 5 waves and with power multiplier as 1.

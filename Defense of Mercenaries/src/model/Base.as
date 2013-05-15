@@ -3,7 +3,7 @@ package model
 	import model.tile.Tile;
 	import state.Game;
 	import state.GameOver;
-		
+	
 	import starling.display.Quad;
 	import starling.display.Sprite;
 	import starling.events.Event;
@@ -18,14 +18,14 @@ package model
 		private var healthBar:Quad;
 		private var healthBarEmpty:Quad;
 		private var text:TextField;
-				
+		
 		public function Base()
 		{
 			super();
 			
 			addEventListener(Event.ADDED_TO_STAGE, init);
 		}
-				
+		
 		public override function init(e:Event):void
 		{
 			text = new TextField(GlobalState.tileSize * (3 / 2), GlobalState.tileSize / 2, health+"", "Arial", 12, 0x000000);
@@ -37,10 +37,10 @@ package model
 			healthBarEmpty.x = - GlobalState.tileSize / 4;
 			healthBar.y = (GlobalState.tileSize as Number) * (7 / 6);
 			healthBarEmpty.y = (GlobalState.tileSize as Number) * (7 / 6);
-
+			
 			var baseTexture:Texture = Game.assetManager.getTexture("baseTexture");
 			var baseImage:Image = new Image(baseTexture);
-
+			
 			addChild(baseImage);
 			addChild(healthBarEmpty);
 			addChild(healthBar);
@@ -60,11 +60,7 @@ package model
 		}
 		
 		public function baseDeath():void
-		{
-			// GAME OVER
-			text.text = "dead";
-			healthBar.visible = false;
-			
+		{		
 			Main.getInstance().setState(GameOver);
 		}
 	}

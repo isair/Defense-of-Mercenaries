@@ -12,7 +12,7 @@ package state
 	import starling.events.TouchPhase;
 	import starling.utils.AssetManager;
 	import starling.text.TextField;
-
+	
 	public class Menu extends GameState
 	{
 		private var assetManager:AssetManager;
@@ -29,7 +29,6 @@ package state
 		{
 			assetManager = new AssetManager();
 			
-			// Enqueue menu assets.
 			assetManager.enqueue(EmbeddedMenuAssets);
 			
 			assetManager.loadQueue(function(ratio:Number):void
@@ -52,10 +51,8 @@ package state
 			addChild(welcomeText);
 			addChild(startPrompt);
 			
-			// Start the background music.
 			var bgm:SoundChannel = assetManager.playSound("bgm", 0, int.MAX_VALUE);
 			
-			// Add touch event listener.
 			addEventListener(TouchEvent.TOUCH, onTouch);
 		}
 		
