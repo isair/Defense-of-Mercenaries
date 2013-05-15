@@ -30,6 +30,7 @@ package model.enemy
 		private var path:Path = null;
 		private var moveDirection:int = Path.NONE;
 		private var distanceMoved:Number = 0;
+		private var totalDistanceMoved:Number = 0;
 		private var upDown:Boolean = false;
 		
 		public function Enemy(health:Number, speed:Number, position:Point, path:Path, id:int)
@@ -101,6 +102,11 @@ package model.enemy
 			this.frozen = false;
 		}
 		
+		public function getDistanceMoved():Number
+		{
+			return totalDistanceMoved;
+		}
+		
 		public function update(deltaTime:Number):void
 		{
 			if (damaged)
@@ -138,6 +144,7 @@ package model.enemy
 				{
 					var deltaPos:Number = (((GlobalState.tileSize as Number) * deltaTime * speed) / (1000));
 					distanceMoved += deltaPos;
+					totalDistanceMoved += deltaPos;
 					
 					if (distanceMoved >= GlobalState.tileSize)
 						deltaPos -= (distanceMoved - GlobalState.tileSize);

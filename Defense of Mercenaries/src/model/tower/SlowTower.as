@@ -5,6 +5,7 @@ package model.tower
 	import model.tile.Tile;
 	import state.Game;
 	
+	import starling.display.Sprite;
 	import starling.display.Quad;
 	import starling.display.Shape;
 	import starling.events.Event;
@@ -37,9 +38,11 @@ package model.tower
 			var firstEnemy:Enemy = null;
 			var currentLeast:int = 9999;
 			
-			for (var i:int = 0; i < GlobalState.currentMap.numChildren; i++)
+			var targets:Sprite = GlobalState.currentMap.getEnemiesAndOccupiers();
+
+			for (var i:int = 0; i < targets.numChildren; i++)
 			{
-				var child:Object = GlobalState.currentMap.getChildAt(i);
+				var child:Object = targets.getChildAt(i);
 				
 				if (child is Enemy)
 				{

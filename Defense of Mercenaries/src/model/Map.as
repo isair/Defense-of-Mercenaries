@@ -2,17 +2,18 @@ package model
 {
 	import flash.geom.Point;
 	
-	import model.tile.Tile;
-	import model.tile.Grass;
-	import model.tower.Tower;
 	import model.enemy.Enemy;
 	import model.projectile.Projectile;
+	import model.tile.Grass;
+	import model.tile.Tile;
+	import model.tower.Tower;
 	
 	import starling.display.Sprite;
 	
 	public class Map extends Sprite
 	{
 		private var tiles:Vector.<Vector.<Tile>>;
+		private var enemiesAndOccupiers:Sprite = new Sprite();
 		
 		public function Map()
 		{
@@ -23,14 +24,14 @@ package model
 		{
 			var tile:Tile = tiles[column][row];
 			gate.insert(tile);
-			addChild(gate);
+			enemiesAndOccupiers.addChild(gate);
 		}
 		
 		public function insertOccupierToTile(occupier:Occupier, tile:Tile):void
 		{
 			tile.occupy(occupier);
 			occupier.insert(tile);
-			addChild(occupier);
+			enemiesAndOccupiers.addChild(occupier);
 		}
 		
 		public function insertOccupier(occupier:Occupier, column:int, row:int):void
@@ -38,7 +39,12 @@ package model
 			var tile:Tile = tiles[column][row];
 			tile.occupy(occupier);
 			occupier.insert(tile);
-			addChild(occupier);
+			enemiesAndOccupiers.addChild(occupier);
+		}
+		
+		public function insertEnemy(enemy:Enemy):void
+		{
+			enemiesAndOccupiers.addChildAt(enemy, 0);
 		}
 		
 		public function generateMap():void
@@ -56,6 +62,8 @@ package model
 					addChild(tiles[column][row]);
 				}
 			}
+			
+			addChild(enemiesAndOccupiers);
 		}
 		
 		public function getTiles():Vector.<Vector.<Tile>>
@@ -92,57 +100,32 @@ package model
 			return tiles[column][row];
 		}
 		
+		public function getEnemiesAndOccupiers():Sprite
+		{
+			return enemiesAndOccupiers;
+		}
+		
 		public function childrenSort():void
 		{
-			sortChildren(function sortByY(a:Object, b:Object):int
+			enemiesAndOccupiers.sortChildren(function sortByY(a:Object, b:Object):int
 			{
-				if ((a is Projectile) || (b is Projectile))
-				{
-					if ((a is Projectile) && (b is Projectile))
-					{
-						return 0;
-					}
-					else if (b is Projectile)
-					{
-						return -1;
-					}
-					else
-					{
-						return 1;
-					}
-				}
-				else if ((a is Tile) || (b is Tile))
-				{
-					if (a is Tile)
-					{
-						return -1;
-					}
-					else if (b is Tile)
-					{
-						return 1;
-					}
-					else
-						return 0;
-				}
+				if (a.y > b.y)
+					return 1;
+				else if(a.y < b.y)
+					return -1;
 				else
 				{
-					if (a.y > b.y)
-						return 1;
-					else if(a.y < b.y)
-						return -1;
-					else
+					if((a is Enemy) && (b is Enemy))
 					{
-						if((a is Enemy) && (b is Enemy))
-						{
-							if (a.id < b.id)
-								return 1;
-							else
-								return -1;
-						}
+						// Temporary in front check
+						if ((a as Enemy).getDistanceMoved() < (b as Enemy).getDistanceMoved())
+							return -1;
 						else
-							return 0;
+							return 1;
 					}
-				}			
+					else
+						return 0;
+				}
 			});
 		}
 	}

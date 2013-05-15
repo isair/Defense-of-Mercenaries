@@ -214,7 +214,7 @@ package model
 			enemy.y = position.y;
 			currentId++;
 			
-			GlobalState.currentMap.addChild(enemy);
+			GlobalState.currentMap.insertEnemy(enemy);
 		}
 	}
 }
