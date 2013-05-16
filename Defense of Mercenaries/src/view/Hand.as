@@ -110,7 +110,6 @@ package view
 			
 			if (touch) 
 			{
-				GlobalState.currentGold += 10; 
 			}
 		}
 		
