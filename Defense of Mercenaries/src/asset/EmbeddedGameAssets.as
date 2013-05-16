@@ -46,6 +46,12 @@ package asset
 		[Embed(source="/asset/interface/wall.png")]
 		public static const wallTexture:Class;
 		
+		[Embed(source="/asset/interface/bottomwall.png")]
+		public static const hudTexture:Class;
+		
+		[Embed(source="/asset/interface/border.png")]
+		public static const borderTexture:Class;
+		
 		[Embed(source="/asset/interface/gate.png")]
 		public static const gateTexture:Class;
 		

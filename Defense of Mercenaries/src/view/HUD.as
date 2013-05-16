@@ -1,11 +1,13 @@
 package view
 {
 	import model.GameObject;
+	import state.Game;
 	
 	import starling.display.Sprite;
 	import starling.text.TextField;
 	import starling.events.Event;
-	import starling.display.Quad;
+	import starling.display.Image;
+	import starling.textures.Texture;
 	
 	public class HUD extends Sprite implements GameObject
 	{
@@ -45,17 +47,18 @@ package view
 		
 		public function generateBackground():void
 		{
-			var hudBackground:Quad = new Quad(GlobalState.tileSize * 16, GlobalState.tileSize * 0.75, 0x8884CF, true);
-			addChild(hudBackground);
+			var texture:Texture = Game.assetManager.getTexture("hudTexture");
+			var wall:Image = new Image(texture);
+			addChild(wall);
 		}
 		
 		public function generateText():void
 		{
-			roundText = new TextField(GlobalState.tileSize * 8, GlobalState.tileSize * 0.75, "Current Round: 1 / 5", "Aharoni", 18, 0x000000);
+			roundText = new TextField(GlobalState.tileSize * 8, GlobalState.tileSize * 0.9, "Current Round: 1 / 5", "Aharoni", 18, 0x000000);
 			roundText.x = GlobalState.tileSize * 8;
 			addChild(roundText);
 			
-			waveText = new TextField(GlobalState.tileSize * 8, GlobalState.tileSize * 0.75, "Waves Spawned: 0 / 3", "Aharoni", 18, 0x000000);
+			waveText = new TextField(GlobalState.tileSize * 8, GlobalState.tileSize * 0.9, "Waves Spawned: 0 / 3", "Aharoni", 18, 0x000000);
 			addChild(waveText);
 		}
 	}

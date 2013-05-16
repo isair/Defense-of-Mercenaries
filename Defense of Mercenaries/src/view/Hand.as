@@ -104,8 +104,13 @@ package view
 		
 		public function generateBackground():void
 		{
+			var	texture:Texture = Game.assetManager.getTexture("borderTexture");
+			var border:Image = new Image(texture);
+			border.y = - GlobalState.tileSize / 10;
+
 			var background:Quad = new Quad(GlobalState.tileSize * 16, GlobalState.tileSize * 3.5, 0x111111, true);
 			addChild(background);
+			addChild(border);
 		}
 		
 		public function buttonTouched(ev:TouchEvent):void
