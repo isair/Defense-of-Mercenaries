@@ -20,7 +20,6 @@ package view
 	
 	public class Interface extends Sprite implements GameObject
 	{
-		
 		private var hand:Hand;
 		private var hud:HUD;
 		private var ghostArray:Array = new Array(2);
@@ -41,35 +40,27 @@ package view
 		
 		public function handleTouch(card:Card, touch:Touch):void
 		{
-			switch(touch.phase)
+			switch (touch.phase)
 			{				
 				case TouchPhase.MOVED:
-					
-					drawGhost(touch, card);
-					// dragging
-					
+					drawGhost(touch, card); // dragging
 					break;
 				
 				case TouchPhase.ENDED:
-					
 					// released
 					removeGhost();
 					constructTower(touch, card);
-					
 					break;
 			}
-			
 			//When construction completes -- deduct gold
 		}
 		
 		public function handleBonusTouch(bonusCard:BonusCard, touch:Touch):void 
 		{
-			if (bonusCard.type == 5) {
+			if (bonusCard.type == 5)
 				boostTowers();
-			}
-			else if (bonusCard.type == 6) {
+			else if (bonusCard.type == 6)
 				freezeEnemies();
-			}
 			
 			GlobalState.currentGold -= bonusCard.cost;
 		}
@@ -148,9 +139,9 @@ package view
 		{
 			var currentTile:Tile = GlobalState.currentMap.getTileFromCoordinates(touch.globalX, touch.globalY);
 			
-			if(! (currentTile.isOccupied() || currentTile.hasRoad()))
+			if ( ! (currentTile.isOccupied() || currentTile.hasRoad()))
 			{
-				switch(card.type)
+				switch (card.type)
 				{
 					case 1:
 						var tower:Tower = new Tower();
@@ -187,11 +178,11 @@ package view
 			
 			if (currentTile != null)
 			{
-				if( snapCoordinates[1] <= (15 * GlobalState.tileSize))
+				if (snapCoordinates[1] <= (15 * GlobalState.tileSize))
 				{
-					if(! (currentTile.isOccupied() || currentTile.hasRoad()))
+					if ( ! (currentTile.isOccupied() || currentTile.hasRoad()))
 					{
-						switch(card.type)
+						switch (card.type)
 						{
 							case 1:
 								ghostArray = Tower.getGhost();
@@ -216,9 +207,9 @@ package view
 		
 		public function addGhost():void
 		{
-			for each(var q:Object in ghostArray)
+			for each (var q:Object in ghostArray)
 			{
-				if(q != null)
+				if (q != null)
 				{
 					if(q is Shape)
 						GlobalState.currentMap.addChild(q as Shape);
@@ -230,9 +221,9 @@ package view
 		
 		public function removeGhost():void
 		{
-			for each(var q:Object in ghostArray)
+			for each (var q:Object in ghostArray)
 			{
-				if(q != null)
+				if (q != null)
 				{
 					if(q is Shape)
 						GlobalState.currentMap.removeChild(q as Shape);
@@ -244,17 +235,17 @@ package view
 		
 		public function addSnapCoords(snapCoords:Array):void
 		{
-			for each(var q:Object in ghostArray)
+			for each (var q:Object in ghostArray)
 			{
-				if( q!= null)
+				if (q!= null)
 				{
-					if(q is Shape)
+					if (q is Shape)
 					{
 						(q as Shape).x = snapCoords[0];
 						(q as Shape).y = snapCoords[1];
 					}
 					
-					if(q is Quad)
+					if (q is Quad)
 					{
 						(q as Quad).x = snapCoords[0];
 						(q as Quad).y = snapCoords[1] - GlobalState.tileSize / 2;
@@ -265,24 +256,20 @@ package view
 		
 		public function update(deltaTime:Number):void
 		{
-			if ( GlobalState.boostActive )
+			if (GlobalState.boostActive)
 			{
 				GlobalState.boostTimer -= deltaTime;
 				
-				if ( GlobalState.boostTimer <= 0 )
-				{
+				if (GlobalState.boostTimer <= 0)
 					revertBoost();
-				}
 			}
 			
-			if ( GlobalState.freezeActive )
+			if (GlobalState.freezeActive)
 			{
 				GlobalState.freezeTimer -= deltaTime;
 				
-				if ( GlobalState.freezeTimer <= 0 )
-				{
+				if (GlobalState.freezeTimer <= 0)
 					unfreezeEnemies();
-				}
 			}
 		}
 	}
