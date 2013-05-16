@@ -132,11 +132,19 @@ package model.enemy
 		public function freeze():void
 		{
 			this.frozen = true;
+			Starling.juggler.remove(downClip);
+			Starling.juggler.remove(upClip);
+			Starling.juggler.remove(leftClip);
+			Starling.juggler.remove(rightClip);
 		}
 		
 		public function unfreeze():void
 		{
 			this.frozen = false;
+			Starling.juggler.add(downClip);
+			Starling.juggler.add(upClip);
+			Starling.juggler.add(leftClip);
+			Starling.juggler.add(rightClip);
 		}
 		
 		public function getDistanceMoved():Number

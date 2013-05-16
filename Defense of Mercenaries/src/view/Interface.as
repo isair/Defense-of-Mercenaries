@@ -76,9 +76,11 @@ package view
 		
 		public function freezeEnemies():void
 		{
-			for (var i:int = 0; i < GlobalState.currentMap.numChildren; i++)
+			var targets:Sprite = GlobalState.currentMap.getEnemiesAndOccupiers();
+
+			for (var i:int = 0; i < targets.numChildren; i++)
 			{
-				var child:Object = GlobalState.currentMap.getChildAt(i);
+				var child:Object = targets.getChildAt(i);
 				
 				if (child is Enemy)
 				{
@@ -92,9 +94,11 @@ package view
 		
 		public function unfreezeEnemies():void
 		{
-			for (var i:int = 0; i < GlobalState.currentMap.numChildren; i++)
+			var targets:Sprite = GlobalState.currentMap.getEnemiesAndOccupiers();
+
+			for (var i:int = 0; i < targets.numChildren; i++)
 			{
-				var child:Object = GlobalState.currentMap.getChildAt(i);
+				var child:Object = targets.getChildAt(i);
 				
 				if (child is Enemy)
 				{
@@ -107,9 +111,11 @@ package view
 		
 		public function boostTowers():void
 		{
-			for (var i:int = 0; i < GlobalState.currentMap.numChildren; i++)
+			var targets:Sprite = GlobalState.currentMap.getEnemiesAndOccupiers();
+
+			for (var i:int = 0; i < targets.numChildren; i++)
 			{
-				var child:Object = GlobalState.currentMap.getChildAt(i);
+				var child:Object = targets.getChildAt(i);
 				
 				if (child is Tower)
 				{
@@ -123,9 +129,11 @@ package view
 		
 		public function revertBoost():void
 		{
-			for (var i:int = 0; i < GlobalState.currentMap.numChildren; i++)
+			var targets:Sprite = GlobalState.currentMap.getEnemiesAndOccupiers();
+
+			for (var i:int = 0; i < targets.numChildren; i++)
 			{
-				var child:Object = GlobalState.currentMap.getChildAt(i);
+				var child:Object = targets.getChildAt(i);
 				
 				if (child is Tower)
 				{
