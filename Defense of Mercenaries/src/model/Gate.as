@@ -24,7 +24,7 @@ package model
 		
 		private var working:Boolean = false;
 		
-		private var hasPath:Boolean = false;
+		public var hasPath:Boolean = false;
 		private var path:Path = null;
 		
 		private var storedEnemies:int = 0;
@@ -32,7 +32,7 @@ package model
 		private var spawnTimePassed:Number = 0;
 		
 		private var waveCount:int = 0;
-		private var waveInterval:int = 13000; // Waiting time between waves (in milliseconds).
+		private var waveInterval:int = 10000; // Waiting time between waves (in milliseconds).
 		
 		private var waitTime:Number = 0;
 		

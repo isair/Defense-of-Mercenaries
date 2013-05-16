@@ -16,7 +16,7 @@ package model.tower
 	{
 		private static 	var cannonTowerTexture:Texture = Game.assetManager.getTexture("cannonTowerTexture");
 		private static var cannonTowerShape:Image = new Image(cannonTowerTexture);
-		private var damage:int = 10;
+		private var damage:int = 13;
 		private var blastRadius:Number = GlobalState.tileSize;
 
 		public function CannonTower()

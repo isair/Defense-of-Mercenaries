@@ -144,7 +144,6 @@ package model
 				{
 					if((a is Enemy) && (b is Enemy))
 					{
-						// Temporary in front check
 						if ((a as Enemy).getDistanceMoved() < (b as Enemy).getDistanceMoved())
 							return -1;
 						else

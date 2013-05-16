@@ -62,13 +62,13 @@ package state
 			var baseY:int = Main.randomBetween(0, halfSize * .4);
 			map.insertOccupier(base, baseX, halfSize * 1.3 + baseY);
 			
-			var gateX:int = (0, GlobalState.mapSize - 1);
+			var gateX:int = Main.randomBetween(0, GlobalState.mapSize - 1);
 			
 			var obstacle:Obstacle;
 			var randX:int;
 			var randY:int;
 			
-			for(var i:int=0; i<12; i++)
+			for(var i:int=0; i<24; i++)
 			{
 				randX = Main.randomBetween(0, GlobalState.mapSize - 1);
 				randY = Main.randomBetween(0, GlobalState.mapSize - 1);

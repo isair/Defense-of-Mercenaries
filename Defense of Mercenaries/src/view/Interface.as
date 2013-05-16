@@ -154,79 +154,84 @@ package view
 			var tower:Tower = null;
 			var temp:Obstacle = new Obstacle();
 			
-			if ( ! (currentTile.isOccupied()))
+			if ( currentTile != null )
 			{
-				if ( GlobalState.roundBreak || !currentTile.hasRoad() )
+				if ( ! (currentTile.isOccupied()))
 				{
-					switch (card.type)
+					if ( GlobalState.roundBreak || !currentTile.hasRoad() )
 					{
-						case 1:							
-							if( currentTile.hasRoad() )
-							{
-								GlobalState.currentMap.insertOccupierToTile(temp, currentTile);
-								if(Game.gate.calculatePath())
+						switch (card.type)
+						{
+							case 1:							
+								if( currentTile.hasRoad() )
+								{
+									GlobalState.currentMap.insertOccupierToTile(temp, currentTile);
+									if(Game.gate.calculatePath())
+									{
+										tower = new Tower();
+									}
+									GlobalState.currentMap.removeOccupierFromTile(temp, currentTile);
+								}
+								else
 								{
 									tower = new Tower();
 								}
-								GlobalState.currentMap.removeOccupierFromTile(temp, currentTile);
-							}
-							else
-							{
-								tower = new Tower();
-							}
-							break;
-						case 2:
-							if( currentTile.hasRoad() )
-							{
-								GlobalState.currentMap.insertOccupierToTile(temp, currentTile);
-								if(Game.gate.calculatePath())
+								break;
+							case 2:
+								if( currentTile.hasRoad() )
+								{
+									GlobalState.currentMap.insertOccupierToTile(temp, currentTile);
+									if(Game.gate.calculatePath())
+									{
+										tower = new SlowTower();
+									}
+									GlobalState.currentMap.removeOccupierFromTile(temp, currentTile);
+								}
+								else
 								{
 									tower = new SlowTower();
 								}
-								GlobalState.currentMap.removeOccupierFromTile(temp, currentTile);
-							}
-							else
-							{
-								tower = new SlowTower();
-							}
-							break;
-						case 3:
-							if( currentTile.hasRoad() )
-							{
-								GlobalState.currentMap.insertOccupierToTile(temp, currentTile);
-								if(Game.gate.calculatePath())
+								break;
+							case 3:
+								if( currentTile.hasRoad() )
+								{
+									GlobalState.currentMap.insertOccupierToTile(temp, currentTile);
+									if(Game.gate.calculatePath())
+									{
+										tower = new FastTower();
+									}
+									GlobalState.currentMap.removeOccupierFromTile(temp, currentTile);
+								}
+								else
 								{
 									tower = new FastTower();
 								}
-								GlobalState.currentMap.removeOccupierFromTile(temp, currentTile);
-							}
-							else
-							{
-								tower = new FastTower();
-							}
-							break;
-						case 4:
-							if( currentTile.hasRoad() )
-							{
-								GlobalState.currentMap.insertOccupierToTile(temp, currentTile);
-								if(Game.gate.calculatePath())
+								break;
+							case 4:
+								if( currentTile.hasRoad() )
+								{
+									GlobalState.currentMap.insertOccupierToTile(temp, currentTile);
+									if(Game.gate.calculatePath())
+									{
+										tower = new CannonTower();
+									}
+									GlobalState.currentMap.removeOccupierFromTile(temp, currentTile);
+								}
+								else
 								{
 									tower = new CannonTower();
 								}
-								GlobalState.currentMap.removeOccupierFromTile(temp, currentTile);
-							}
-							else
-							{
-								tower = new CannonTower();
-							}
-							break;
-					}
-					
-					if (tower != null)
-					{
-						GlobalState.currentGold -= card.cost;
-						GlobalState.currentMap.insertOccupierToTile(tower, currentTile);
-						GlobalState.currentMap.childrenSort();
+								break;
+						}
+						
+						Game.gate.hasPath = true;
+						
+						if (tower != null)
+						{
+							GlobalState.currentGold -= card.cost;
+							GlobalState.currentMap.insertOccupierToTile(tower, currentTile);
+							GlobalState.currentMap.childrenSort();
+						}
 					}
 				}
 			}

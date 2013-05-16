@@ -41,6 +41,7 @@ package model.enemy
 		private var distanceMoved:Number = 0;
 		private var totalDistanceMoved:Number = 0;
 		private var upDown:Boolean = false;
+		private var leftRight:Boolean = false;
 		
 		private var currentClip:MovieClip;
 		private var upClip:MovieClip;
@@ -218,6 +219,9 @@ package model.enemy
 								GlobalState.currentMap.childrenSort();
 							}
 							
+							if(leftRight)
+								leftRight = false;
+							
 							y -= deltaPos;
 							break;
 						
@@ -227,6 +231,12 @@ package model.enemy
 								updateClip(rightClip);
 							}
 							
+							if(!leftRight)
+							{
+								leftRight = true;
+								GlobalState.currentMap.childrenSort();
+							}	
+
 							if(upDown)
 								upDown = false;
 
@@ -244,6 +254,9 @@ package model.enemy
 								upDown = true;
 								GlobalState.currentMap.childrenSort();
 							}
+							
+							if(leftRight)
+								leftRight = false;
 
 							y += deltaPos;
 							break;
@@ -253,10 +266,17 @@ package model.enemy
 							{
 								updateClip(leftClip);
 							}
+							
+							if(!leftRight)
+							{
+								leftRight = true;
+								GlobalState.currentMap.childrenSort();
+							}	
 
 							if(upDown)
 								upDown = false;
-
+	
+							
 							x -= deltaPos;
 							break;
 						
