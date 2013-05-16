@@ -42,6 +42,12 @@ package model
 			enemiesAndOccupiers.addChild(occupier);
 		}
 		
+		public function removeOccupierFromTile(occupier:Occupier, tile:Tile):void
+		{
+			tile.deoccupy();
+			occupier.removeFromParent(true);
+		}
+		
 		public function insertEnemy(enemy:Enemy):void
 		{
 			enemiesAndOccupiers.addChildAt(enemy, 0);

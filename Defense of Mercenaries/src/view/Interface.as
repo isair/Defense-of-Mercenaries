@@ -9,6 +9,8 @@ package view
 	import model.tower.FastTower;
 	import model.tower.SlowTower;
 	import model.tower.Tower;
+	import model.Obstacle;
+	import state.Game;
 	
 	import starling.display.Quad;
 	import starling.display.Shape;
@@ -27,7 +29,7 @@ package view
 		public function Interface()
 		{
 			super();
-						
+			
 			hand = new Hand();
 			hand.y = GlobalState.tileSize * 17;
 			
@@ -68,7 +70,7 @@ package view
 		public function freezeEnemies():void
 		{
 			var targets:Sprite = GlobalState.currentMap.getEnemiesAndOccupiers();
-
+			
 			for (var i:int = 0; i < targets.numChildren; i++)
 			{
 				var child:Object = targets.getChildAt(i);
@@ -86,7 +88,7 @@ package view
 		public function unfreezeEnemies():void
 		{
 			var targets:Sprite = GlobalState.currentMap.getEnemiesAndOccupiers();
-
+			
 			for (var i:int = 0; i < targets.numChildren; i++)
 			{
 				var child:Object = targets.getChildAt(i);
@@ -103,7 +105,7 @@ package view
 		public function boostTowers():void
 		{
 			var targets:Sprite = GlobalState.currentMap.getEnemiesAndOccupiers();
-
+			
 			for (var i:int = 0; i < targets.numChildren; i++)
 			{
 				var child:Object = targets.getChildAt(i);
@@ -121,7 +123,7 @@ package view
 		public function revertBoost():void
 		{
 			var targets:Sprite = GlobalState.currentMap.getEnemiesAndOccupiers();
-
+			
 			for (var i:int = 0; i < targets.numChildren; i++)
 			{
 				var child:Object = targets.getChildAt(i);
@@ -138,34 +140,84 @@ package view
 		public function constructTower(touch:Touch, card:Card):void
 		{
 			var currentTile:Tile = GlobalState.currentMap.getTileFromCoordinates(touch.globalX, touch.globalY);
+			var tower:Tower = null;
+			var temp:Obstacle = new Obstacle();
 			
-			if ( ! (currentTile.isOccupied() || currentTile.hasRoad()))
+			if ( ! (currentTile.isOccupied()))
 			{
-				switch (card.type)
+				if ( GlobalState.roundBreak || !currentTile.hasRoad() )
 				{
-					case 1:
-						var tower:Tower = new Tower();
+					switch (card.type)
+					{
+						case 1:							
+							if( currentTile.hasRoad() )
+							{
+								GlobalState.currentMap.insertOccupierToTile(temp, currentTile);
+								if(Game.gate.calculatePath())
+								{
+									tower = new Tower();
+								}
+								GlobalState.currentMap.removeOccupierFromTile(temp, currentTile);
+							}
+							else
+							{
+								tower = new Tower();
+							}
+							break;
+						case 2:
+							if( currentTile.hasRoad() )
+							{
+								GlobalState.currentMap.insertOccupierToTile(temp, currentTile);
+								if(Game.gate.calculatePath())
+								{
+									tower = new SlowTower();
+								}
+								GlobalState.currentMap.removeOccupierFromTile(temp, currentTile);
+							}
+							else
+							{
+								tower = new SlowTower();
+							}
+							break;
+						case 3:
+							if( currentTile.hasRoad() )
+							{
+								GlobalState.currentMap.insertOccupierToTile(temp, currentTile);
+								if(Game.gate.calculatePath())
+								{
+									tower = new FastTower();
+								}
+								GlobalState.currentMap.removeOccupierFromTile(temp, currentTile);
+							}
+							else
+							{
+								tower = new FastTower();
+							}
+							break;
+						case 4:
+							if( currentTile.hasRoad() )
+							{
+								GlobalState.currentMap.insertOccupierToTile(temp, currentTile);
+								if(Game.gate.calculatePath())
+								{
+									tower = new CannonTower();
+								}
+								GlobalState.currentMap.removeOccupierFromTile(temp, currentTile);
+							}
+							else
+							{
+								tower = new CannonTower();
+							}
+							break;
+					}
+					
+					if (tower != null)
+					{
+						GlobalState.currentGold -= card.cost;
 						GlobalState.currentMap.insertOccupierToTile(tower, currentTile);
-						GlobalState.currentGold -= card.cost;
-						break;
-					case 2:
-						var slowTower:SlowTower = new SlowTower();
-						GlobalState.currentMap.insertOccupierToTile(slowTower, currentTile);
-						GlobalState.currentGold -= card.cost;
-						break;
-					case 3:
-						var fastTower:FastTower = new FastTower();
-						GlobalState.currentMap.insertOccupierToTile(fastTower, currentTile);
-						GlobalState.currentGold -= card.cost;
-						break;
-					case 4:
-						var cannonTower:CannonTower = new CannonTower();
-						GlobalState.currentMap.insertOccupierToTile(cannonTower, currentTile);
-						GlobalState.currentGold -= card.cost;
-						break;
+						GlobalState.currentMap.childrenSort();
+					}
 				}
-				
-				GlobalState.currentMap.childrenSort();
 			}
 		}
 		
@@ -180,26 +232,29 @@ package view
 			{
 				if (snapCoordinates[1] <= (15 * GlobalState.tileSize))
 				{
-					if ( ! (currentTile.isOccupied() || currentTile.hasRoad()))
+					if ( ! (currentTile.isOccupied()))
 					{
-						switch (card.type)
+						if ( GlobalState.roundBreak || !currentTile.hasRoad() )
 						{
-							case 1:
-								ghostArray = Tower.getGhost();
-								break;
-							case 2:
-								ghostArray = SlowTower.getGhost();
-								break;
-							case 3:
-								ghostArray = FastTower.getGhost();
-								break;
-							case 4:
-								ghostArray = CannonTower.getGhost();
-								break;
+							switch (card.type)
+							{
+								case 1:
+									ghostArray = Tower.getGhost();
+									break;
+								case 2:
+									ghostArray = SlowTower.getGhost();
+									break;
+								case 3:
+									ghostArray = FastTower.getGhost();
+									break;
+								case 4:
+									ghostArray = CannonTower.getGhost();
+									break;
+							}
+							
+							addSnapCoords(snapCoordinates);
+							addGhost();
 						}
-						
-						addSnapCoords(snapCoordinates);
-						addGhost();
 					}
 				}
 			}

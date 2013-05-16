@@ -53,7 +53,7 @@ package model
 			
 			if( (touch != null) && (touch.phase == TouchPhase.ENDED) )
 			{
-					GlobalState.ui.handleBonusTouch(this, touch);			
+				GlobalState.ui.handleBonusTouch(this, touch);			
 			}
 		}
 		
@@ -61,7 +61,11 @@ package model
 		{			
 			if(!disabled)
 			{
-				if ( GlobalState.currentGold < this.cost )
+				if (GlobalState.roundBreak)
+				{
+					disable();
+				}
+				else if ( GlobalState.currentGold < this.cost )
 				{
 					disable();
 				}
@@ -79,16 +83,19 @@ package model
 				
 			else
 			{
-				if ( GlobalState.currentGold >= cost )
+				if ( !GlobalState.roundBreak )
 				{
-					if ( this.type == 5 && !GlobalState.boostActive )
+					if ( GlobalState.currentGold >= cost )
 					{
-						enable();
-					}
-						
-					else if ( this.type == 6 && !GlobalState.freezeActive )
-					{
-						enable();
+						if ( this.type == 5 && !GlobalState.boostActive )
+						{
+							enable();
+						}
+							
+						else if ( this.type == 6 && !GlobalState.freezeActive )
+						{
+							enable();
+						}
 					}
 				}
 			}

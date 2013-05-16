@@ -1,26 +1,30 @@
 package view
 {	
+	import model.BonusCard;
 	import model.Card;
 	import model.GameObject;
-	import model.BonusCard;
-	import state.Game;
 	
 	import starling.display.Button;
-	import starling.display.Quad;
 	import starling.display.Image;
-	import starling.textures.Texture;
+	import starling.display.Quad;
 	import starling.display.Sprite;
 	import starling.events.Event;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
 	import starling.text.TextField;
+	import starling.textures.Texture;
+	
+	import state.Game;
 	
 	public class Hand extends Sprite implements GameObject
 	{
 		private var cards:Array = null;
 		private var goldText:TextField;
 		private var timePassed:Number = 0;
+		
+		private var buttonDisabled:Boolean = false;
+		private var button:Image;
 		
 		public function Hand()
 		{			
@@ -77,7 +81,7 @@ package view
 			goldCounter.x = GlobalState.tileSize * 13.5 - GlobalState.tileSize / 4;
 			goldCounter.y = GlobalState.tileSize / 4;
 			goldText = new TextField(GlobalState.tileSize * 2, GlobalState.tileSize * 0.9, GlobalState.currentGold+"", "Aharoni", 30, 0x000000);
-			goldText.x = GlobalState.tileSize * 14;
+			goldText.x = GlobalState.tileSize * 14  - GlobalState.tileSize / 4;
 			goldText.y = GlobalState.tileSize / 4;
 			
 			addChild(goldCounter);
@@ -87,7 +91,7 @@ package view
 		public function generateButton():void
 		{
 			var texture:Texture = Game.assetManager.getTexture("startroundTexture");
-			var button:Image = new Image(texture);
+			button = new Image(texture);
 			button.x = GlobalState.tileSize * 13.5 - GlobalState.tileSize / 4;
 			button.y = GlobalState.tileSize * 1.50;
 			
@@ -112,18 +116,42 @@ package view
 				Game.newRound();
 		}
 		
+		public function enableButton():void
+		{
+			buttonDisabled = false;
+			button.touchable = true;
+			button.alpha = 1;
+		}
+		
+		public function disableButton():void
+		{
+			buttonDisabled = true;
+			button.touchable = false;
+			button.alpha = 0.3;
+		}
+		
 		public function update(deltaTime:Number):void
 		{
+			goldText.text = GlobalState.currentGold+"";
+
 			if (!GlobalState.roundBreak)
 			{
+				if (!buttonDisabled)
+					disableButton();
+				
 				timePassed += deltaTime;
-				goldText.text = GlobalState.currentGold+"";
 				
 				if (timePassed > 3000)
 				{
 					GlobalState.currentGold += 1;
 					timePassed -= 3000;
 				}
+			}
+			
+			else
+			{
+				if (buttonDisabled)
+					enableButton();
 			}
 		}
 	}

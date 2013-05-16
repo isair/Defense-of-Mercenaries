@@ -92,6 +92,11 @@ package model.tile
 			this.occupier = occupier;
 		}
 		
+		public function deoccupy():void
+		{
+			this.occupier = null;
+		}
+		
 		public function isOccupied():Boolean
 		{	
 			return occupier != null;
