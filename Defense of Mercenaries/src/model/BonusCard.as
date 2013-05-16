@@ -1,7 +1,8 @@
 package model
 {
 	
-	import starling.display.Quad;
+	import starling.textures.Texture;
+	import starling.display.Image;
 	import starling.display.Sprite;
 	import starling.events.Event;
 	import starling.events.Touch;
@@ -13,7 +14,7 @@ package model
 	
 	public class BonusCard extends Card
 	{
-		private var shape:Quad;
+		private var shape:Image;
 		private var recentlyClicked:Boolean = false;
 		private var timePassed:Number = 0;	
 		private var disabled:Boolean = false;
@@ -25,25 +26,25 @@ package model
 		
 		public override function init(e:Event):void
 		{
+			var texture:Texture;
+			
 			switch (type)
 			{
 				case 5: 
-					shape = new Quad(GlobalState.tileSize * 2, GlobalState.tileSize * 3, 0xE0D91B, true);
+					texture = Game.assetManager.getTexture("boostTexture");
 					cost = 100;
 					break;
 				
 				case 6: 
-					shape = new Quad(GlobalState.tileSize * 2, GlobalState.tileSize * 3, 0xE0811B, true);
+					texture = Game.assetManager.getTexture("freezeTexture");
 					cost = 100;
 					break;
 			}
 			
-			// Placeholder price tag
-			price.text = "price: " + cost;
-			price.y = GlobalState.tileSize * 3 - 20;
+			shape = new Image(texture);
 			
+			// Placeholder price tag
 			addChild(shape);
-			addChild(price);
 		}
 		
 		public override function cardTouched(ev:TouchEvent):void

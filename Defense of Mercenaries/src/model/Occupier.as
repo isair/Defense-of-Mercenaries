@@ -8,7 +8,7 @@ package model
 	
 	public class Occupier extends Sprite
 	{		
-		private var position:Tile;
+		public var position:Tile;
 		
 		public function Occupier()
 		{

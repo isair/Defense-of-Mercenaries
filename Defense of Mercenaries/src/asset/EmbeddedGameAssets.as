@@ -44,6 +44,24 @@ package asset
 		[Embed(source="/asset/interface/gate.png")]
 		public static const gateTexture:Class;
 		
+		[Embed(source="/asset/interface/towercard.png")]
+		public static const basicTexture:Class;
+		
+		[Embed(source="/asset/interface/frostcard.png")]
+		public static const frostTexture:Class;
+
+		[Embed(source="/asset/interface/rapidcard.png")]
+		public static const rapidTexture:Class;
+		
+		[Embed(source="/asset/interface/cannoncard.png")]
+		public static const cannonTexture:Class;
+		
+		[Embed(source="/asset/interface/boostcard.png")]
+		public static const boostTexture:Class;
+		
+		[Embed(source="/asset/interface/freezecard.png")]
+		public static const freezeTexture:Class;
+		
 		[Embed(source="/asset/enemy/enemy.xml", mimeType="application/octet-stream")]
 		private static const EnemyData:Class;
 		

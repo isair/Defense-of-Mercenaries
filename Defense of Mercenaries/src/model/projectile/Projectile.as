@@ -32,7 +32,7 @@ package model.projectile
 		
 		private function init():void
 		{
-			this.shape = new Quad(5, 5, 0x000000, true);
+			this.shape = new Quad(GlobalState.tileSize / 8, GlobalState.tileSize / 8, 0x000000, true);
 			addChild(shape);
 		}
 		

@@ -20,7 +20,6 @@ package model.tower
 	
 	public class Tower extends Occupier implements GameObject
 	{
-		private var position:Tile;
 		private var damage:int = 20;
 		public var range:int = GlobalState.tileSize * 3.5;
 		private var influenceRange:int;

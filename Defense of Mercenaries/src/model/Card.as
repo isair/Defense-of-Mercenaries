@@ -1,6 +1,7 @@
 package model
 {
-	import starling.display.Quad;
+	import starling.textures.Texture;
+	import starling.display.Image;
 	import starling.display.Sprite;
 	import starling.events.Event;
 	import starling.events.Touch;
@@ -14,9 +15,7 @@ package model
 	{
 		public var type:int;
 		public var cost:int;
-		public var price:TextField = new TextField(GlobalState.tileSize * 2, 20, "price: ", "Arial", 12, 0x000000);
-		private var shape:Quad;
-		private var recentlyClicked:Boolean = false;
+		private var shape:Image;
 		private var timePassed:Number = 0;
 		private var disabled:Boolean = false;
 		
@@ -32,36 +31,36 @@ package model
 		
 		public function init(e:Event):void
 		{
+			var texture:Texture;
 			
 			switch (type)
 			{
 				case 1: 
-					shape = new Quad(GlobalState.tileSize * 2, GlobalState.tileSize * 3, 0x4DB370, true);
+					texture = Game.assetManager.getTexture("basicTexture");
 					cost = 10;
 					break;
 				
 				case 2:
-					shape = new Quad(GlobalState.tileSize * 2, GlobalState.tileSize * 3, 0x25E01B, true);
+					texture = Game.assetManager.getTexture("frostTexture");
 					cost = 20;
 					break;
 				
 				case 3:
-					shape = new Quad(GlobalState.tileSize * 2, GlobalState.tileSize * 3, 0x2FB54A, true);
+					texture = Game.assetManager.getTexture("rapidTexture");
 					cost = 30;
 					break;
 				
 				case 4:
-					shape = new Quad(GlobalState.tileSize * 2, GlobalState.tileSize * 3, 0x1C9133, true);
+					texture = Game.assetManager.getTexture("cannonTexture");
 					cost = 50;
 					break;
 			}
 			
+			shape = new Image(texture);
+			
 			// Placeholder price tag
-			price.text = "price: " + cost;
-			price.y = GlobalState.tileSize * 3 - 20;
 			
 			addChild(shape);
-			addChild(price);
 		}
 		
 		public function cardTouched(ev:TouchEvent):void

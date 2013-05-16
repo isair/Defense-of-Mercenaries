@@ -10,7 +10,6 @@ package model
 	
 	public class Obstacle extends Occupier
 	{
-		private var position:Tile;
 		private var image:Image;
 		private static var counter:int = 0;
 		
