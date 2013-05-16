@@ -3,9 +3,12 @@ package view
 	import model.Card;
 	import model.GameObject;
 	import model.BonusCard;
+	import state.Game;
 	
 	import starling.display.Button;
 	import starling.display.Quad;
+	import starling.display.Image;
+	import starling.textures.Texture;
 	import starling.display.Sprite;
 	import starling.events.Event;
 	import starling.events.Touch;
@@ -35,7 +38,7 @@ package view
 			
 			for(var i:int=0; i<cards.length; i++)
 			{
-				cards[i].x = GlobalState.tileSize * 2.25 * i;
+				cards[i].x = GlobalState.tileSize * 2 * i + (GlobalState.tileSize / 8) * (i+1);
 				cards[i].y = GlobalState.tileSize / 4;
 				
 				addChild(cards[i]);
@@ -68,11 +71,13 @@ package view
 		
 		public function generateGoldCounter():void
 		{
-			var goldCounter:Quad = new Quad(GlobalState.tileSize * 2.5, GlobalState.tileSize, 0xE0E01B, true);
-			goldCounter.x = GlobalState.tileSize * 13.5;
+			var	texture:Texture = Game.assetManager.getTexture("goldbarTexture");
+			var goldCounter:Image = new Image(texture);
+			
+			goldCounter.x = GlobalState.tileSize * 13.5 - GlobalState.tileSize / 4;
 			goldCounter.y = GlobalState.tileSize / 4;
-			goldText = new TextField(GlobalState.tileSize * 2.5, GlobalState.tileSize, GlobalState.currentGold+"", "Aharoni", 30, 0x000000);
-			goldText.x = GlobalState.tileSize * 13.5;
+			goldText = new TextField(GlobalState.tileSize * 2, GlobalState.tileSize * 0.9, GlobalState.currentGold+"", "Aharoni", 30, 0x000000);
+			goldText.x = GlobalState.tileSize * 14;
 			goldText.y = GlobalState.tileSize / 4;
 			
 			addChild(goldCounter);
@@ -81,9 +86,9 @@ package view
 		
 		public function generateButton():void
 		{
-			
-			var button:Quad = new Quad(GlobalState.tileSize * 2.5, GlobalState.tileSize * 1.75, 0xF01620, true);
-			button.x = GlobalState.tileSize * 13.5;
+			var texture:Texture = Game.assetManager.getTexture("startroundTexture");
+			var button:Image = new Image(texture);
+			button.x = GlobalState.tileSize * 13.5 - GlobalState.tileSize / 4;
 			button.y = GlobalState.tileSize * 1.50;
 			
 			addChild(button);

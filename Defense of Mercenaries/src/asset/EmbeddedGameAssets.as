@@ -64,6 +64,15 @@ package asset
 		[Embed(source="/asset/interface/freezecard.png")]
 		public static const freezeTexture:Class;
 		
+		[Embed(source="/asset/interface/goldbar.png")]
+		public static const goldbarTexture:Class;
+		
+		[Embed(source="/asset/interface/callwave.png")]
+		public static const callwaveTexture:Class;
+		
+		[Embed(source="/asset/interface/startround.png")]
+		public static const startroundTexture:Class;
+		
 		[Embed(source="/asset/enemy/enemy.xml", mimeType="application/octet-stream")]
 		private static const enemyData:Class;
 		
