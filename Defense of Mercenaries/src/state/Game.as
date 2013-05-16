@@ -93,11 +93,6 @@ package state
 			addChild(ui);
 			
 			var bgm:SoundChannel = assetManager.playSound("bgm", 0, int.MAX_VALUE);
-			
-			// Start the first round with 5 waves and with power multiplier as 1.
-			//gate.start(5, 1, onRoundEnd);
-			//GlobalState.roundBreak = false;
-			GlobalState.roundBreak = true;
 		}
 		
 		public static function newRound():void
