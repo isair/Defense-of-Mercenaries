@@ -20,6 +20,7 @@ package state
 	public class Game extends GameState
 	{
 		public static var assetManager:AssetManager = null;
+		public static var gate:Gate = null;
 		
 		public function Game()
 		{
@@ -83,7 +84,7 @@ package state
 				}
 			}
 
-			var gate:Gate = new Gate(base);
+			gate = new Gate(base);
 			map.insertGate(gate, gateX, 0);
 			map.addLayer();
 			
