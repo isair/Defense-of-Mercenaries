@@ -25,7 +25,7 @@ package
 		public static function reset():void
 		{
 			base = null;
-			currentMap = null;
+			//currentMap = null;
 			ui = null;
 			roundBreak = true;
 			currentRound = 0;
