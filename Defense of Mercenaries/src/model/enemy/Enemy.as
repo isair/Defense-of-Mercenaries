@@ -21,7 +21,7 @@ package model.enemy
 		public var id:int;
 		
 		private var health:Number = 100;
-		private var speed:Number = 1;
+		private var speed:Number = 0.7;
 		private var position:Point = null;
 		private var dead:Boolean = false;
 		
@@ -46,13 +46,12 @@ package model.enemy
 		private var rightClip:MovieClip;
 		private var downClip:MovieClip;
 		
-		public function Enemy(health:Number, speed:Number, position:Point, path:Path, id:int)
+		public function Enemy(health:Number, position:Point, path:Path, id:int)
 		{
 			super();
 			
 			this.id = id;
 			this.health = health;
-			this.speed = speed;
 			this.position = position;
 			this.path = path;
 			

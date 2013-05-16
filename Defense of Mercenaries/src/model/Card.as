@@ -37,12 +37,12 @@ package model
 			{
 				case 1: 
 					shape = new Quad(GlobalState.tileSize * 2, GlobalState.tileSize * 3, 0x4DB370, true);
-					cost = 20;
+					cost = 10;
 					break;
 				
 				case 2:
 					shape = new Quad(GlobalState.tileSize * 2, GlobalState.tileSize * 3, 0x25E01B, true);
-					cost = 30;
+					cost = 20;
 					break;
 				
 				case 3:

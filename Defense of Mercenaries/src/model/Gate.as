@@ -32,7 +32,7 @@ package model
 		private var spawnTimePassed:Number = 0;
 		
 		private var waveCount:int = 0;
-		private var waveInterval:int = 15000; // Waiting time between waves (in milliseconds).
+		private var waveInterval:int = 13000; // Waiting time between waves (in milliseconds).
 		
 		private var waitTime:Number = 0;
 		
@@ -224,7 +224,7 @@ package model
 		
 		public function spawnEnemy():void
 		{
-			var enemy:Enemy = new Enemy(100 * powerMultiplier, 1 * powerMultiplier, new Point(x, y), (new Path()).copyPath(path), currentId);
+			var enemy:Enemy = new Enemy(100 * powerMultiplier, new Point(x, y), (new Path()).copyPath(path), currentId);
 			enemy.x = position.x + GlobalState.tileSize / 2;
 			enemy.y = position.y + GlobalState.tileSize / 2;
 			currentId++;

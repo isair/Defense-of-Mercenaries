@@ -90,7 +90,7 @@ package model.tower
 			var shape:Shape = new Shape();
 			shape.graphics.beginFill(0xFF0000, 0.3);
 			shape.graphics.lineStyle(1, 0xFF0000, 0.7);
-			shape.graphics.drawCircle(GlobalState.tileSize / 2, GlobalState.tileSize / 2, GlobalState.tileSize * 5);
+			shape.graphics.drawCircle(GlobalState.tileSize / 2, GlobalState.tileSize / 2, GlobalState.tileSize * 3.5);
 			shape.graphics.endFill();
 			ghostArray[0] = shape;
 			

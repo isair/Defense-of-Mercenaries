@@ -22,7 +22,7 @@ package model.tower
 	{
 		private var position:Tile;
 		private var damage:int = 20;
-		public var range:int = GlobalState.tileSize * 5;
+		public var range:int = GlobalState.tileSize * 3.5;
 		private var influenceRange:int;
 		private static 	var towerTexture:Texture = Game.assetManager.getTexture("towerTexture");
 		private static var towerShape:Image = new Image(towerTexture);
@@ -122,7 +122,7 @@ package model.tower
 			var shape:Shape = new Shape();
 			shape.graphics.beginFill(0xFF0000, 0.3);
 			shape.graphics.lineStyle(1, 0xFF0000, 0.7);
-			shape.graphics.drawCircle(GlobalState.tileSize / 2, GlobalState.tileSize / 2, GlobalState.tileSize * 5);
+			shape.graphics.drawCircle(GlobalState.tileSize / 2, GlobalState.tileSize / 2, GlobalState.tileSize * 3.5);
 			shape.graphics.endFill();
 			ghostArray[0] = shape;
 			

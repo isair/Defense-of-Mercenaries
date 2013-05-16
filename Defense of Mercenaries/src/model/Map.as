@@ -24,7 +24,7 @@ package model
 		{
 			var tile:Tile = tiles[column][row];
 			gate.insert(tile);
-			enemiesAndOccupiers.addChild(gate);
+			addChild(gate);
 		}
 		
 		public function insertOccupierToTile(occupier:Occupier, tile:Tile):void
@@ -62,7 +62,10 @@ package model
 					addChild(tiles[column][row]);
 				}
 			}
-			
+		}
+		
+		public function addLayer():void
+		{
 			addChild(enemiesAndOccupiers);
 		}
 		
@@ -72,9 +75,9 @@ package model
 		}
 		
 		public function getTileFromCoordinates(x:Number, y:Number):Tile
-		{
+		{	
 			var tileX:int = x / GlobalState.tileSize;
-			var tileY:int = y / GlobalState.tileSize;
+			var tileY:int = (y - GlobalState.tileSize) / GlobalState.tileSize;
 			
 			if (tileX >= 0 && tileX < 16 && tileY >= 0 && tileY < 16)
 				return getTile(tileX, tileY);
@@ -87,7 +90,7 @@ package model
 			var snapCoordinates:Array = new Array(2);
 			
 			var tileX:int = x / GlobalState.tileSize;
-			var tileY:int = y / GlobalState.tileSize;
+			var tileY:int = (y - GlobalState.tileSize) / GlobalState.tileSize;
 			
 			snapCoordinates[0] = tileX * GlobalState.tileSize;
 			snapCoordinates[1] = tileY * GlobalState.tileSize;

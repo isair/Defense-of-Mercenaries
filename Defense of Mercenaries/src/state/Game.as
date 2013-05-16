@@ -10,11 +10,12 @@ package state
 	import model.Obstacle;
 	import model.tower.SlowTower;
 	import model.tower.Tower;
-	import view.Interface;
-	import view.TopHUD;
 	
 	import starling.events.Event;
-	import starling.utils.AssetManager;	
+	import starling.utils.AssetManager;
+	
+	import view.Interface;
+	import view.TopHUD;	
 	
 	public class Game extends GameState
 	{
@@ -55,20 +56,35 @@ package state
 			
 			var base:Base = new Base();
 			GlobalState.base = base;
-			map.insertOccupier(base, Main.randomBetween(0, GlobalState.mapSize - 1), halfSize * 1.3 + Main.randomBetween(0, halfSize * .4));
+			var baseX:int = Main.randomBetween(0, GlobalState.mapSize - 1);
+			var baseY:int = Main.randomBetween(0, halfSize * .4);
+			map.insertOccupier(base, baseX, halfSize * 1.3 + baseY);
 			
-			var obstacle1:Obstacle = new Obstacle();
-			var obstacle2:Obstacle = new Obstacle();			
-			var obstacle3:Obstacle = new Obstacle();
-			var obstacle4:Obstacle = new Obstacle();
+			var gateX:int = (0, GlobalState.mapSize - 1);
 			
-			map.insertOccupier(obstacle1, 10, 10);
-			map.insertOccupier(obstacle2, 10, 7);
-			map.insertOccupier(obstacle3, 3, 7);
-			map.insertOccupier(obstacle4, 6, 2);
+			var obstacle:Obstacle;
+			var randX:int;
+			var randY:int;
 			
+			for(var i:int=0; i<12; i++)
+			{
+				randX = Main.randomBetween(0, GlobalState.mapSize - 1);
+				randY = Main.randomBetween(0, GlobalState.mapSize - 1);
+				
+				if (((randX == gateX) && (randY == 0)) || (map.getTile(randX, randY).isOccupied()))
+				{
+					i--;
+				}
+				else				
+				{
+					obstacle = new Obstacle();
+					map.insertOccupier(obstacle, randX, randY);
+				}
+			}
+
 			var gate:Gate = new Gate(base);
-			map.insertGate(gate, Main.randomBetween(0, GlobalState.mapSize - 1), 0);
+			map.insertGate(gate, gateX, 0);
+			map.addLayer();
 			
 			addChild(top);
 			addChild(map);

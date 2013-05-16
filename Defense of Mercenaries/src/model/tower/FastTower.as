@@ -17,8 +17,9 @@ package model.tower
 		{
 			super();
 			
-			super.attackInterval = 1000;
-			super.range = GlobalState.tileSize * 4;
+			super.attackInterval = 800;
+			super.currentInterval = super.attackInterval - 1;
+			super.range = GlobalState.tileSize * 2.5;
 		}
 		
 		public override function init(e:Event):void
@@ -35,7 +36,7 @@ package model.tower
 			var shape:Shape = new Shape();
 			shape.graphics.beginFill(0xFF0000, 0.3);
 			shape.graphics.lineStyle(1, 0xFF0000, 0.7);
-			shape.graphics.drawCircle(GlobalState.tileSize / 2, GlobalState.tileSize / 2, GlobalState.tileSize * 4);
+			shape.graphics.drawCircle(GlobalState.tileSize / 2, GlobalState.tileSize / 2, GlobalState.tileSize * 2.5);
 			shape.graphics.endFill();
 			ghostArray[0] = shape;
 			
