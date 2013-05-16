@@ -100,8 +100,7 @@
         <!-- <fullScreen></fullScreen> -->
 
         <!-- The render mode for the app (either auto, cpu, gpu, or direct). Optional. Default auto -->
-
-        <!-- <renderMode></renderMode> -->
+        <renderMode>direct</renderMode>
 
         <!-- Whether the default direct mode rendering context allocates storage for depth and stencil buffers.  Optional.  Default false. -->
         <!-- <depthAndStencil></depthAndStencil> -->
@@ -111,9 +110,9 @@
 
 		<!-- Display Resolution for the app (either "standard" or "high"). Optional, OSX-only. Default "standard" -->
 		<!-- <requestedDisplayResolution></requestedDisplayResolution> -->
-	<autoOrients>false</autoOrients>
-        <fullScreen>true</fullScreen>
-        <visible>true</visible>
+		<autoOrients>false</autoOrients>
+		<fullScreen>true</fullScreen>
+		<visible>true</visible>
     </initialWindow>
 
 	<!-- We recommend omitting the supportedProfiles element, -->
