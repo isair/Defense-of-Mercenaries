@@ -17,7 +17,7 @@ package asset
 		[Embed(source="/asset/menu/victory.png")]
 		public static const victory:Class;
 		
-		[Embed(source="/asset/menu/mainmenu.png")]
+		[Embed(source="/asset/menu/gameover.png")]
 		public static const gameover:Class;
 
 		
