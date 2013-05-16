@@ -4,7 +4,8 @@ package state
 	
 	import flash.media.SoundChannel;
 	
-	import starling.display.Quad;
+	import starling.display.Image;
+	import starling.textures.Texture;
 	import starling.events.Event;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
@@ -38,17 +39,12 @@ package state
 		
 		private function startGameOverScreen():void
 		{
-			var size:Number = GlobalState.mapSize * GlobalState.tileSize;
-			
-			gameOverText = new TextField(size, GlobalState.tileSize * 4, "GAME OVER", "Verdana", 25);
-			restartPrompt = new TextField(size, GlobalState.tileSize * 4, "TAP TO RETURN TO MAIN MENU", "Verdana", 25);
-			restartPrompt.y = gameOverText.y + 100;
+			var texture:Texture = assetManager.getTexture("gameover");
+			var image:Image = new Image(texture);
 			
 			GlobalState.reset();
 			
-			addChild(new Quad(size, size, 0xD49A3D, true));
-			addChild(gameOverText);
-			addChild(restartPrompt);
+			addChild(image);
 			
 			var bgm:SoundChannel = assetManager.playSound("gameOver", 0, int.MAX_VALUE);
 			

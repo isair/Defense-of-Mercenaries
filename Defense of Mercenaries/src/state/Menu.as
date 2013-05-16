@@ -6,7 +6,8 @@ package state
 	import flash.media.SoundChannel;
 	
 	import starling.core.Starling;
-	import starling.display.Quad;
+	import starling.display.Image;
+	import starling.textures.Texture;	
 	import starling.events.Event;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
@@ -40,18 +41,11 @@ package state
 		
 		private function startMenu():void
 		{
-			var size:Number = GlobalState.mapSize * GlobalState.tileSize;
+			var texture:Texture = assetManager.getTexture("mainmenu");
+			var image:Image = new Image(texture);
 			
-			welcomeText = new TextField(size, GlobalState.tileSize * 4, "WELCOME TO DEFENSE OF MERCENARIES", "Verdana", 25);
-			startPrompt = new TextField(size, GlobalState.tileSize * 4, "TAP TO START GAME", "Verdana", 25);
-			
-			startPrompt.y = welcomeText.y + 100;
-			
-			addChild(new Quad(size, size, 0x81E01B, true));
-			
-			addChild(welcomeText);
-			addChild(startPrompt);
-			
+			addChild(image);			
+	
 			var bgm:SoundChannel = assetManager.playSound("bgm", 0, int.MAX_VALUE);
 			
 			addEventListener(TouchEvent.TOUCH, onTouch);
