@@ -32,14 +32,14 @@ package view
 			if( (round - 1) != GlobalState.currentRound)
 			{
 				round = GlobalState.currentRound + 1;
-				var maxRound:int = 3 + GlobalState.currentRound * 1.5;
-				roundText.text = "Current Round: " + round + " / " + maxRound;
+				roundText.text = "Current Round: " + round + " / 5";
 			}
 			
 			if( wave != GlobalState.currentWave)
 			{
+				var maxWave:int = 3 + GlobalState.currentRound * 1.5;
 				wave = GlobalState.currentWave;
-				waveText.text = "Waves Spawned: " + wave + " / 5";
+				waveText.text = "Waves Spawned: " + wave + " / " + maxWave;
 			}
 		}
 		
