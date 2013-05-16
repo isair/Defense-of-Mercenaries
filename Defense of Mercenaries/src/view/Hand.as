@@ -108,9 +108,8 @@ package view
 		{		
 			var touch:Touch = ev.getTouch(this, TouchPhase.ENDED);
 			
-			if (touch) 
-			{
-			}
+			if (GlobalState.roundBreak && touch)
+				Game.newRound();
 		}
 		
 		public function update(deltaTime:Number):void
