@@ -152,6 +152,8 @@ package model
 		
 		public function start(waveCount:int, powerMultiplier:Number, callback:Function):void
 		{
+			if (working) return;
+			
 			hasPath = calculatePath();
 			
 			if ( ! hasPath) return;
@@ -180,6 +182,7 @@ package model
 			storedEnemies = 0;
 			GlobalState.currentWave = 0;
 			waveCount = 0;
+			waitTime = 0;
 			working = false;
 		}
 		
