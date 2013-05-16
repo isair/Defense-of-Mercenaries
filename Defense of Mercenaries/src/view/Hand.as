@@ -16,7 +16,6 @@ package view
 	public class Hand extends Sprite implements GameObject
 	{
 		private var cards:Array = null;
-		private var buttonText:TextField;
 		private var goldText:TextField;
 		private var timePassed:Number = 0;
 		
@@ -72,8 +71,7 @@ package view
 			var goldCounter:Quad = new Quad(GlobalState.tileSize * 2.5, GlobalState.tileSize, 0xE0E01B, true);
 			goldCounter.x = GlobalState.tileSize * 13.5;
 			goldCounter.y = GlobalState.tileSize / 4;
-			
-			goldText = new TextField(GlobalState.tileSize * 2.5, GlobalState.tileSize, GlobalState.currentGold+"", "Arial", 30, 0x000000);
+			goldText = new TextField(GlobalState.tileSize * 2.5, GlobalState.tileSize, GlobalState.currentGold+"", "Aharoni", 30, 0x000000);
 			goldText.x = GlobalState.tileSize * 13.5;
 			goldText.y = GlobalState.tileSize / 4;
 			
@@ -88,15 +86,9 @@ package view
 			button.x = GlobalState.tileSize * 13.5;
 			button.y = GlobalState.tileSize * 1.50;
 			
-			buttonText = new TextField(GlobalState.tileSize * 2, GlobalState.tileSize * 1.25, "END TURN", "Arial", GlobalState.tileSize * 15 / 40, 0x000000);
-			buttonText.x = GlobalState.tileSize * 13.5;
-			buttonText.y = GlobalState.tileSize * 1.65;
-			
 			addChild(button);
-			addChild(buttonText);
 			
 			button.touchable = true ;
-			buttonText.touchable = false;
 			
 			button.addEventListener(TouchEvent.TOUCH, buttonTouched) ;		
 		}
@@ -123,12 +115,6 @@ package view
 			{
 				timePassed += deltaTime;
 				goldText.text = GlobalState.currentGold+"";
-				
-				buttonText.text = "NEXT ROUND";
-				
-				if (!GlobalState.roundBreak && GlobalState.waveBreak) {
-					buttonText.text = "FORCE WAVE";
-				} 
 				
 				if (timePassed > 3000)
 				{
