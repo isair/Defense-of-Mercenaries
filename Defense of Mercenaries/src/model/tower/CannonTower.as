@@ -16,14 +16,15 @@ package model.tower
 	{
 		private static 	var cannonTowerTexture:Texture = Game.assetManager.getTexture("cannonTowerTexture");
 		private static var cannonTowerShape:Image = new Image(cannonTowerTexture);
-		private var damage:int = 13;
-		private var blastRadius:Number = GlobalState.tileSize;
+		private var blastRadius:Number = GlobalState.tileSize * 1.5;
 
 		public function CannonTower()
 		{
 			super();
 			
-			super.attackInterval = 2500;
+			super.damage = 25;
+			super.range = GlobalState.tileSize * 5;
+			super.attackInterval = 3000;
 			super.currentInterval = super.attackInterval - 1;
 		}
 		
@@ -49,7 +50,7 @@ package model.tower
 			var shape:Shape = new Shape();
 			shape.graphics.beginFill(0xFF0000, 0.3);
 			shape.graphics.lineStyle(1, 0xFF0000, 0.7);
-			shape.graphics.drawCircle(GlobalState.tileSize / 2, GlobalState.tileSize / 2, GlobalState.tileSize * 3.5);
+			shape.graphics.drawCircle(GlobalState.tileSize / 2, GlobalState.tileSize / 2, GlobalState.tileSize * 5);
 			shape.graphics.endFill();
 			ghostArray[0] = shape;
 

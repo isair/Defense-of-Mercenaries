@@ -16,13 +16,14 @@ package model.tower
 	{
 		private static 	var slowTowerTexture:Texture = Game.assetManager.getTexture("slowTowerTexture");
 		private static var slowTowerShape:Image = new Image(slowTowerTexture);
-		private var damage:int = 9;
 		private var slowAmount:Number = 40;
 		private var slowDuration:Number = 2700;
 		
 		public function SlowTower()
 		{
 			super();
+			
+			super.damage = 9;
 		}
 		
 		public override function init(e:Event):void

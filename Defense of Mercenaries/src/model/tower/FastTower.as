@@ -18,6 +18,7 @@ package model.tower
 			super();
 			
 			super.attackInterval = 800;
+			super.damage = 20;
 			super.currentInterval = super.attackInterval - 1;
 			super.range = GlobalState.tileSize * 2.5;
 		}
