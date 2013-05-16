@@ -4,6 +4,8 @@ package
 	import model.Map;
 	
 	import view.Interface;
+	
+	import state.Game;
 
 	public class GlobalState
 	{
@@ -25,7 +27,7 @@ package
 		public static function reset():void
 		{
 			base = null;
-			//currentMap = null;
+			currentMap = null;
 			ui = null;
 			roundBreak = true;
 			currentRound = 0;
@@ -35,6 +37,15 @@ package
 			boostTimer = 0;
 			freezeActive = false;
 			freezeTimer = 0;
+			
+			if (Game.assetManager)
+			{
+				Game.assetManager.dispose();
+				Game.assetManager.purge();
+				Game.assetManager = null;
+			}
+			
+			Game.gate = null;
 		}
 	}
 }
