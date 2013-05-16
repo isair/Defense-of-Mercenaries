@@ -262,7 +262,7 @@ package model
 		{
 			var enemy:Enemy = new Enemy(100 * powerMultiplier, new Point(x, y), (new Path()).copyPath(path), currentId);
 			enemy.x = position.x + GlobalState.tileSize / 2;
-			enemy.y = position.y + GlobalState.tileSize / 2;
+			enemy.y = position.y + GlobalState.tileSize * (1/4);
 			currentId++;
 			
 			GlobalState.currentMap.insertEnemy(enemy);
