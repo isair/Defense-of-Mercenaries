@@ -71,6 +71,8 @@ package model
 		// Calculate an optimal path from gate to base using A* algorithm.
 		public function calculatePath():Boolean
 		{
+			hasPath = false;
+			
 			if ( ! target) return false;
 			
 			var tiles:Vector.<Vector.<Tile>> = GlobalState.currentMap.getTiles();
@@ -146,6 +148,8 @@ package model
 			tiles[startNode.position.x][startNode.position.y].setIsRoad(true);
 			for (i = 0; i < pathNodes.length; i++)
 				tiles[pathNodes[i].position.x][pathNodes[i].position.y].setIsRoad(true);
+			
+			hasPath = true;
 			
 			return true;
 		}
