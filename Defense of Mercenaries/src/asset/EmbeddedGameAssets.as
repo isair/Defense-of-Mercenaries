@@ -7,6 +7,9 @@ package asset
 	
 	public class EmbeddedGameAssets
 	{
+		[Embed(source="/asset/fonts/ahronbd.ttf", embedAsCFF="false", fontFamily="Aharoni")]
+		private static const Aharoni:Class;
+		
 		[Embed(source="/asset/music/Dust and Bones.mp3")]
 		public static const bgm:Class;
 		

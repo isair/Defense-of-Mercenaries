@@ -44,7 +44,7 @@ package state
 			restartPrompt = new TextField(size, GlobalState.tileSize * 4, "TAP TO RETURN TO MAIN MENU", "Verdana", 25);
 			restartPrompt.y = gameOverText.y + 100;
 			
-			GlobalState.reset();
+			//GlobalState.reset();
 			
 			addChild(new Quad(size, size, 0xD49A3D, true));
 			addChild(gameOverText);
