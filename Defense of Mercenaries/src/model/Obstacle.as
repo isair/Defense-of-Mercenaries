@@ -16,7 +16,7 @@ package model
 		public function Obstacle()
 		{
 			super();
-						
+			
 			addEventListener(Event.ADDED_TO_STAGE, init);
 		}
 		
@@ -37,10 +37,14 @@ package model
 					break;
 			}
 			
-			// Filtered out dead-tree for now
-			counter = (counter + 1) % 2;
-			
 			result = new Image(texture);
+			
+			if (counter == 2)
+				result.y = - GlobalState.tileSize / 2;
+			else
+				result.y = - GlobalState.tileSize / 8;
+			
+			counter = (counter + 1) % 3;
 			
 			return result;
 		}
@@ -56,7 +60,6 @@ package model
 		public override function init(e:Event):void
 		{
 			image = getShape();
-			image.y = - GlobalState.tileSize / 8;
 			addChild(image);
 		}
 	}

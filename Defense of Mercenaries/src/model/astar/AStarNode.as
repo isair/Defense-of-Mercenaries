@@ -10,6 +10,8 @@ package model.astar
 		public var visited:Boolean, closed:Boolean, isWall:Boolean;
 		public var position:Point;
 		public var parent:AStarNode, next:AStarNode;
+		public var from:int;
+		public var to:int;
 		
 		public function AStarNode() {}
 	}

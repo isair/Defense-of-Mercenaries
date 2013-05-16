@@ -127,14 +127,36 @@ package model
 			{
 				nextNode = pathNodes[i];
 				
+				if (i == 0)
+					currentNode.from = 1;
+						
 				if (nextNode.position.x > currentNode.position.x && nextNode.position.y == currentNode.position.y)
+				{
 					path.pushDirection(Path.RIGHT);
+					currentNode.to = 2;
+					nextNode.from = 4;
+				}
 				else if (nextNode.position.x < currentNode.position.x && nextNode.position.y == currentNode.position.y)
+				{
 					path.pushDirection(Path.LEFT);
+					currentNode.to = 4;
+					nextNode.from = 2;
+				}
 				else if (nextNode.position.y > currentNode.position.y && nextNode.position.x == currentNode.position.x)
+				{
 					path.pushDirection(Path.DOWN);
+					currentNode.to = 3;
+					nextNode.from = 1;
+				}
 				else if (nextNode.position.y < currentNode.position.y && nextNode.position.x == currentNode.position.x)
+				{
 					path.pushDirection(Path.UP);
+					currentNode.to = 1;
+					nextNode.from = 3;
+				}
+				
+				if (i == (pathNodes.length - 1))
+					nextNode.to = ((nextNode.from + 1) % 4) + 1;
 				
 				currentNode = nextNode;
 			}
@@ -145,9 +167,14 @@ package model
 					tiles[column][row].setIsRoad(false);
 			
 			// Set tiles on path as road tiles.
+			tiles[startNode.position.x][startNode.position.y].setFromTo(startNode.from, startNode.to);
 			tiles[startNode.position.x][startNode.position.y].setIsRoad(true);
+			
 			for (i = 0; i < pathNodes.length; i++)
+			{
+				tiles[pathNodes[i].position.x][pathNodes[i].position.y].setFromTo(pathNodes[i].from, pathNodes[i].to);
 				tiles[pathNodes[i].position.x][pathNodes[i].position.y].setIsRoad(true);
+			}
 			
 			hasPath = true;
 			

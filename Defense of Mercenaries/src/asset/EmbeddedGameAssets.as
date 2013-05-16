@@ -90,16 +90,30 @@ package asset
 		
 		private static var enemyAtlas:TextureAtlas = null;
 		
+		[Embed(source="/asset/tile/roads.xml", mimeType="application/octet-stream")]
+		private static const roadsData:Class;
+		
+		[Embed(source="/asset/tile/roads.png")]
+		private static const roadsTexture:Class;
+		
+		private static var roadsAtlas:TextureAtlas = null;
+
 		public function EmbeddedGameAssets() {}
 		
 		public static function generateEnemyAtlas():void
 		{
 			enemyAtlas = new TextureAtlas(Texture.fromBitmap(new enemyTexture()), XML(new enemyData()));
+			roadsAtlas = new TextureAtlas(Texture.fromBitmap(new roadsTexture()), XML(new roadsData()));
 		}
 		
 		public static function getEnemyAtlas():TextureAtlas
 		{
 			return enemyAtlas;
+		}
+		
+		public static function getRoadsAtlas():TextureAtlas
+		{
+			return roadsAtlas;
 		}
 	}
 }

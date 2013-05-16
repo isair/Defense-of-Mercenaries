@@ -72,13 +72,13 @@ package model.enemy
 			downClip = new MovieClip(atlas.getTextures("down"), 5);
 			
 			upClip.x = - GlobalState.tileSize / 2;
-			upClip.y = - GlobalState.tileSize / 2;
+			upClip.y = - GlobalState.tileSize / (4/3);
 			downClip.x = - GlobalState.tileSize / 2;
-			downClip.y = - GlobalState.tileSize / 2;
+			downClip.y = - GlobalState.tileSize / (4/3);
 			leftClip.x = - GlobalState.tileSize / 2;
-			leftClip.y = - GlobalState.tileSize / 2;
+			leftClip.y = - GlobalState.tileSize / (4/3);
 			rightClip.x = - GlobalState.tileSize / 2;
-			rightClip.y = - GlobalState.tileSize / 2;
+			rightClip.y = - GlobalState.tileSize / (4/3);
 			
 			currentClip = downClip;
 

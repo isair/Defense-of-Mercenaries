@@ -1,15 +1,19 @@
 package model.tile
 {
+	import asset.EmbeddedGameAssets;
+	
 	import flash.geom.Matrix;
 	import flash.geom.Point;
 	
 	import model.Occupier;
 	
+	import starling.display.Image;
 	import starling.display.Quad;
 	import starling.display.Shape;
 	import starling.display.Sprite;
 	import starling.events.Event;
 	import starling.textures.Texture;
+	import starling.textures.TextureAtlas;
 	
 	import state.Game;
 
@@ -20,6 +24,8 @@ package model.tile
 		private var position:Point;
 		private var occupier:Occupier;
 		private var isRoad:Boolean;
+		private var from:int;
+		private var to:int;
 		
 		public function Tile(position:Point)
 		{
@@ -44,19 +50,56 @@ package model.tile
 		private function drawRoad():void
 		{
 			var size:Number = GlobalState.tileSize;
-			var texture:Texture = Game.assetManager.getTexture("roadTexture");
+			//var texture:Texture = Game.assetManager.getTexture("roadTexture");
 			
+			var textureAtlas:TextureAtlas = EmbeddedGameAssets.getRoadsAtlas();
+			var texture:Texture;
+			
+			// NS
+			if ( ( (from == 1) && (to == 3) ) || ( (from == 3) && (to == 1) ) )
+			{
+				texture = textureAtlas.getTexture("road_ns");
+			}
+			// WE
+			else if ( ( (from == 2) && (to == 4) ) || ( (from == 4) && (to == 2) ) )
+			{
+				texture = textureAtlas.getTexture("road_we");
+			}
+			// NE
+			else if ( ( (from == 1) && (to == 2) ) || ( (from == 2) && (to == 1) ) )
+			{
+				texture = textureAtlas.getTexture("road_ne");
+			}
+			// NW
+			else if ( ( (from == 1) && (to == 4) ) || ( (from == 4) && (to == 1) ) )
+			{
+				texture = textureAtlas.getTexture("road_nw");
+			}
+			// SE
+			else if ( ( (from == 2) && (to == 3) ) || ( (from == 3) && (to == 2) ) )
+			{
+				texture = textureAtlas.getTexture("road_se");
+			}
+			// SW
+			else if ( ( (from == 3) && (to == 4) ) || ( (from == 4) && (to == 3) ) )
+			{
+				texture = textureAtlas.getTexture("road_sw");
+			}
+
 			if (texture)
 			{
-				var shape:Shape = new Shape();
-				addChild(shape);
+				//var shape:Shape = new Shape();
+				//addChild(shape);
 				
-				var scaleMatrix:Matrix = new Matrix();
+				var image:Image = new Image(texture);
+				addChild(image);
+				
+				/*var scaleMatrix:Matrix = new Matrix();
 				scaleMatrix.scale(texture.width / size, texture.height / size);
 				
 				shape.graphics.beginTextureFill(texture, scaleMatrix);
 				shape.graphics.drawRect(0, 0, size, size);
-				shape.graphics.endFill();
+				shape.graphics.endFill();*/
 			}
 			else // Draw a simple quad if texture fails to load.
 			{
@@ -122,12 +165,18 @@ package model.tile
 			return y + GlobalState.tileSize / 2;
 		}
 		
+		public function setFromTo(from:int, to:int):void
+		{
+			this.from = from;
+			this.to = to;
+		}
+		
 		public function setIsRoad(isRoad:Boolean):void
 		{
 			if (this.isRoad == isRoad) return;
 			
 			this.isRoad = isRoad;
-			
+						
 			removeChildren();
 			init(null);
 		}
