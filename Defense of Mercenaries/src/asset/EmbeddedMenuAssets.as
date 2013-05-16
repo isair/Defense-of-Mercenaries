@@ -2,7 +2,7 @@ package asset
 {
 	public class EmbeddedMenuAssets
 	{
-		[Embed(source="/asset/music/Dust and Bones.mp3")]
+		[Embed(source="/asset/music/Escadre.mp3")]
 		public static const bgm:Class;
 		
 		[Embed(source="/asset/music/Game Over.mp3")]
