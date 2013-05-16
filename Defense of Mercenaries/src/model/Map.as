@@ -80,6 +80,24 @@ package model
 			return tiles;
 		}
 		
+		public function isEnemiesPresent():Boolean
+		{
+			var result:Boolean = false;
+			
+			for (var i:int = 0; i < enemiesAndOccupiers.numChildren; i++)
+			{
+				var child:Object = enemiesAndOccupiers.getChildAt(i);
+
+				if (child is Enemy)
+				{
+					result = true;
+					break;
+				}
+			}
+			
+			return result;
+		}
+		
 		public function getTileFromCoordinates(x:Number, y:Number):Tile
 		{	
 			var tileX:int = x / GlobalState.tileSize;

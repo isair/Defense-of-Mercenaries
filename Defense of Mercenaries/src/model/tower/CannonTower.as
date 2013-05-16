@@ -16,7 +16,7 @@ package model.tower
 	{
 		private static 	var cannonTowerTexture:Texture = Game.assetManager.getTexture("cannonTowerTexture");
 		private static var cannonTowerShape:Image = new Image(cannonTowerTexture);
-		private var damage:int = 20;
+		private var damage:int = 10;
 		private var blastRadius:Number = GlobalState.tileSize;
 
 		public function CannonTower()
@@ -36,7 +36,7 @@ package model.tower
 		
 		public override function shoot(enemy:Enemy):void
 		{			
-			var bullet:CannonProjectile = new CannonProjectile(enemy, GlobalState.tileSize/8, damage, this, blastRadius);
+			var bullet:CannonProjectile = new CannonProjectile(enemy, GlobalState.tileSize/10, damage, this, blastRadius);
 			bullet.x = x + GlobalState.tileSize / 2;
 			bullet.y = y;
 			GlobalState.currentMap.addChild(bullet);

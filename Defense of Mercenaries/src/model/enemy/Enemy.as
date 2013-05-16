@@ -21,7 +21,8 @@ package model.enemy
 	{
 		public var id:int;
 		
-		private var health:Number = 100;
+		private var health:Number;
+		private var maxHealth:Number;
 		private var speed:Number = 0.7;
 		private var position:Point = null;
 		private var dead:Boolean = false;
@@ -53,6 +54,7 @@ package model.enemy
 			
 			this.id = id;
 			this.health = health;
+			this.maxHealth = health;
 			this.position = position;
 			this.path = path;
 			
@@ -164,7 +166,7 @@ package model.enemy
 		{
 			if (damaged)
 			{
-				healthBar.width = GlobalState.tileSize * (4/5) * (health / 100);
+				healthBar.width = GlobalState.tileSize * (4/5) * (health / maxHealth);
 			}
 			
 			if (!frozen)

@@ -3,28 +3,35 @@ package view
 	import model.BonusCard;
 	import model.Card;
 	import model.GameObject;
+	import model.Obstacle;
 	import model.enemy.Enemy;
 	import model.tile.Tile;
 	import model.tower.CannonTower;
 	import model.tower.FastTower;
 	import model.tower.SlowTower;
 	import model.tower.Tower;
-	import model.Obstacle;
-	import state.Game;
 	
+	import starling.text.TextField;
 	import starling.display.Quad;
 	import starling.display.Shape;
 	import starling.display.Sprite;
+	import starling.display.graphics.RoundedRectangle;
 	import starling.events.Event;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
+	
+	import state.Game;
 	
 	public class Interface extends Sprite implements GameObject
 	{
 		private var hand:Hand;
 		private var hud:HUD;
 		private var ghostArray:Array = new Array(2);
+		private var endRoundDrawn:Boolean = true;
+		private var endRoundActive:Boolean = false;
+		private var endRoundTimer:Number = 5000;
+		private var endRound:TextField = null;
 		
 		public function Interface()
 		{
@@ -35,6 +42,10 @@ package view
 			
 			hud = new HUD();
 			hud.y = GlobalState.tileSize * 20.5;
+			
+			endRound = new TextField(GlobalState.tileSize * 4, GlobalState.tileSize * 4, "Round Over", "Aharoni", 32, 0xFFFFFF, false);
+			endRound.x = GlobalState.tileSize * 6;
+			endRound.y = GlobalState.tileSize * 6;
 			
 			addChild(hand);	
 			addChild(hud);
@@ -309,8 +320,47 @@ package view
 			}
 		}
 		
+		public function drawEndRound():void
+		{
+			endRoundActive = true;
+			endRoundDrawn = true;
+			
+			addChild(endRound);
+		}
+		
+		public function removeEndRound():void
+		{
+			endRoundActive = false;
+			
+			removeChild(endRound);
+		}
+		
 		public function update(deltaTime:Number):void
 		{
+			if ( !endRoundDrawn  && GlobalState.roundBreak )
+			{
+				drawEndRound();
+			}
+			if ( endRoundDrawn && !GlobalState.roundBreak )
+			{
+				if ( endRoundActive)
+				{
+					endRoundTimer = 5000;
+					removeEndRound();
+				}
+				
+				endRoundDrawn = false;
+			}
+			if ( endRoundActive)
+			{
+				endRoundTimer -= deltaTime;
+				
+				if (endRoundTimer <= 0)
+				{
+					endRoundTimer = 2000;
+					removeEndRound();
+				}
+			}
 			if (GlobalState.boostActive)
 			{
 				GlobalState.boostTimer -= deltaTime;

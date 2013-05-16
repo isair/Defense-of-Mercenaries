@@ -101,13 +101,19 @@ package state
 		{
 			if ( ! GlobalState.roundBreak) return;
 			
-			gate.start(5 + GlobalState.currentRound * 1.5, 1 + GlobalState.currentRound * 0.2, onRoundEnd);
+			gate.start(3 + GlobalState.currentRound * 1.5, 1 + GlobalState.currentRound * 0.5, onRoundEnd);
 			GlobalState.roundBreak = false;
 		}
 		
 		public static function onRoundEnd():void
 		{
+			if (GlobalState.currentRound == 4)
+			{
+				Main.getInstance().setState(VictoryScreen);
+			}
+		
 			GlobalState.roundBreak = true;
+			GlobalState.currentRound++;
 		}
 	}
 }

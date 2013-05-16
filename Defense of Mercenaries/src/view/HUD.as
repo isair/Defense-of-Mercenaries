@@ -32,13 +32,14 @@ package view
 			if( (round - 1) != GlobalState.currentRound)
 			{
 				round = GlobalState.currentRound + 1;
-				roundText.text = "Current Round: " + round;
+				var maxRound:int = 3 + GlobalState.currentRound * 1.5;
+				roundText.text = "Current Round: " + round + " / " + maxRound;
 			}
 			
 			if( wave != GlobalState.currentWave)
 			{
 				wave = GlobalState.currentWave;
-				waveText.text = "Waves Spawned: " + wave;
+				waveText.text = "Waves Spawned: " + wave + " / 5";
 			}
 		}
 		
@@ -50,11 +51,11 @@ package view
 		
 		public function generateText():void
 		{
-			roundText = new TextField(GlobalState.tileSize * 8, GlobalState.tileSize * 0.5, "Current Round: 1", "Arial", 13, 0x000000);
+			roundText = new TextField(GlobalState.tileSize * 8, GlobalState.tileSize * 0.75, "Current Round: 1 / 5", "Aharoni", 18, 0x000000);
 			roundText.x = GlobalState.tileSize * 8;
 			addChild(roundText);
 			
-			waveText = new TextField(GlobalState.tileSize * 8, GlobalState.tileSize * 0.5, "Waves Spawned: 0", "Arial", 13, 0x000000);
+			waveText = new TextField(GlobalState.tileSize * 8, GlobalState.tileSize * 0.75, "Waves Spawned: 0 / 3", "Aharoni", 18, 0x000000);
 			addChild(waveText);
 		}
 	}

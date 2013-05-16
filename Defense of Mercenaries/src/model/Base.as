@@ -27,7 +27,7 @@ package model
 		
 		public override function init(e:Event):void
 		{
-			text = new TextField(GlobalState.tileSize * (3 / 2), GlobalState.tileSize / 2, health+"", "Arial", 12, 0x000000);
+			text = new TextField(GlobalState.tileSize * (3 / 2), GlobalState.tileSize / 2, health+"", "Aharoni", 20, 0x000000);
 			healthBar = new Quad(GlobalState.tileSize * (3 / 2), GlobalState.tileSize / 3, 0x69E01F, true);
 			healthBarEmpty = new Quad(GlobalState.tileSize * (3 / 2), GlobalState.tileSize / 3, 0xE33D3D, true);
 			text.x = this.x - GlobalState.tileSize / 4;

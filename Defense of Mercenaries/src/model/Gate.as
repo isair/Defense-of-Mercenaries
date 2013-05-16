@@ -153,9 +153,7 @@ package model
 		public function start(waveCount:int, powerMultiplier:Number, callback:Function):void
 		{
 			if (working) return;
-			
-			hasPath = calculatePath();
-			
+						
 			if ( ! hasPath) return;
 			
 			this.waveCount = waveCount;
@@ -192,11 +190,15 @@ package model
 			
 			if (GlobalState.currentWave >= waveCount && callback != null)
 			{
-				stop();
-				callback();
+				if (!GlobalState.currentMap.isEnemiesPresent())
+				{
+					stop();
+					callback();
+				}
+				
 				return;
 			}
-			
+
 			if (waitTime > 0)
 			{
 				waitTime -= deltaTime;

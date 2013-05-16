@@ -20,7 +20,7 @@ package model.tower
 	
 	public class Tower extends Occupier implements GameObject
 	{
-		private var damage:int = 20;
+		private var damage:int = 10;
 		public var range:int = GlobalState.tileSize * 3.5;
 		private var influenceRange:int;
 		private static 	var towerTexture:Texture = Game.assetManager.getTexture("towerTexture");
