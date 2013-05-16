@@ -225,8 +225,8 @@ package model
 		public function spawnEnemy():void
 		{
 			var enemy:Enemy = new Enemy(100 * powerMultiplier, 1 * powerMultiplier, new Point(x, y), (new Path()).copyPath(path), currentId);
-			enemy.x = position.x;
-			enemy.y = position.y;
+			enemy.x = position.x + GlobalState.tileSize / 2;
+			enemy.y = position.y + GlobalState.tileSize / 2;
 			currentId++;
 			
 			GlobalState.currentMap.insertEnemy(enemy);

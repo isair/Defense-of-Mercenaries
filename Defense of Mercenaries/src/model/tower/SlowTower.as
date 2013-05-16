@@ -27,7 +27,7 @@ package model.tower
 		
 		public override function init(e:Event):void
 		{
-			var slowTowerShape = new Image(slowTowerTexture);
+			var slowTowerShape:Image = new Image(slowTowerTexture);
 			slowTowerShape.y = - GlobalState.tileSize / 2;
 			addChild(slowTowerShape);
 		}

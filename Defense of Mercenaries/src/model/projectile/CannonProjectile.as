@@ -33,8 +33,8 @@ package model.projectile
 			this.strength = strength;
 			this.blastRadius = blastRadius;
 			
-			this.targetX = target.x + GlobalState.tileSize / 2;
-			this.targetY = target.y + GlobalState.tileSize / 2;
+			this.targetX = target.x;
+			this.targetY = target.y;
 			
 			var targetDeltaX:Number = targetX - (owner.x + GlobalState.tileSize / 2);
 			var targetDeltaY:Number = targetY - (owner.y);

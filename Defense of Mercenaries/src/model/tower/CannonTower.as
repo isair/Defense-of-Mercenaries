@@ -1,15 +1,16 @@
 package model.tower
 {
-	import model.projectile.CannonProjectile;
 	import model.enemy.Enemy;
+	import model.projectile.CannonProjectile;
 	import model.tile.Tile;
-	import state.Game;
 	
 	import starling.display.Image;
-	import starling.textures.Texture;
 	import starling.display.Quad;
-	import starling.events.Event;
 	import starling.display.Shape;
+	import starling.events.Event;
+	import starling.textures.Texture;
+	
+	import state.Game;
 	
 	public class CannonTower extends Tower
 	{
@@ -28,7 +29,7 @@ package model.tower
 		
 		public override function init(e:Event):void
 		{
-			var cannonTowerShape = new Image(cannonTowerTexture);
+			var cannonTowerShape:Image = new Image(cannonTowerTexture);
 			cannonTowerShape.y = - GlobalState.tileSize / 2;
 			addChild(cannonTowerShape);
 		}

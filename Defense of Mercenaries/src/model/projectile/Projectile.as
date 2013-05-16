@@ -38,8 +38,8 @@ package model.projectile
 		
 		public function update(deltaTime:Number):void
 		{						
-			var deltaX:Number = (target.x + GlobalState.tileSize / 2) - (x);
-			var deltaY:Number = (target.y + GlobalState.tileSize / 2) - (y);
+			var deltaX:Number = (target.x) - (x);
+			var deltaY:Number = (target.y) - (y);
 			
 			var hyp:Number = Math.sqrt( deltaX * deltaX + deltaY * deltaY );
 			

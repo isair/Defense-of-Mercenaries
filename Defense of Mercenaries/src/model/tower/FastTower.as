@@ -23,7 +23,7 @@ package model.tower
 		
 		public override function init(e:Event):void
 		{
-			var fastTowerShape = new Image(fastTowerTexture);
+			var fastTowerShape:Image = new Image(fastTowerTexture);
 			fastTowerShape.y = - GlobalState.tileSize / 2;
 			addChild(fastTowerShape);
 		}

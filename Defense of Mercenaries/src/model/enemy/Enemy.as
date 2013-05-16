@@ -4,6 +4,7 @@ package model.enemy
 	
 	import model.GameObject;
 	import model.Path;
+	import asset.EmbeddedGameAssets;
 	
 	import starling.core.Starling;
 	import starling.display.MovieClip;
@@ -45,12 +46,6 @@ package model.enemy
 		private var rightClip:MovieClip;
 		private var downClip:MovieClip;
 		
-		[Embed(source="/asset/enemy/enemy.xml", mimeType="application/octet-stream")]
-		private var AnimData:Class;
-		
-		[Embed(source="/asset/enemy/enemy.png")]
-		private var AnimTexture:Class;
-
 		public function Enemy(health:Number, speed:Number, position:Point, path:Path, id:int)
 		{
 			super();
@@ -65,25 +60,31 @@ package model.enemy
 		}
 		
 		public function init(e:Event):void
-		{
-			var _t:Texture = Texture.fromBitmap(new AnimTexture());
-			var _d:XML = XML(new AnimData());
+		{			
+			var enemyAtlas:TextureAtlas = EmbeddedGameAssets.getEnemyAtlas();
+	
+			upClip = new MovieClip(enemyAtlas.getTextures("up"), 5);
+			leftClip = new MovieClip(enemyAtlas.getTextures("left"), 5);
+			rightClip = new MovieClip(enemyAtlas.getTextures("right"), 5);
+			downClip = new MovieClip(enemyAtlas.getTextures("down"), 5);
 			
-			var _ta:TextureAtlas = new TextureAtlas(_t, _d);
-			
-			upClip = new MovieClip(_ta.getTextures("up"), 5);
-			leftClip = new MovieClip(_ta.getTextures("left"), 5);
-			rightClip = new MovieClip(_ta.getTextures("right"), 5);
-			downClip = new MovieClip(_ta.getTextures("down"), 5);
+			upClip.x = - GlobalState.tileSize / 2;
+			upClip.y = - GlobalState.tileSize / 2;
+			downClip.x = - GlobalState.tileSize / 2;
+			downClip.y = - GlobalState.tileSize / 2;
+			leftClip.x = - GlobalState.tileSize / 2;
+			leftClip.y = - GlobalState.tileSize / 2;
+			rightClip.x = - GlobalState.tileSize / 2;
+			rightClip.y = - GlobalState.tileSize / 2;
 			
 			currentClip = downClip;
 
 			healthBar = new Quad(GlobalState.tileSize * (4/5), GlobalState.tileSize / 10, 0x69E01F, true);
 			healthBarEmpty = new Quad(GlobalState.tileSize * (4/5), GlobalState.tileSize / 10, 0xE33D3D, true);
-			healthBar.x = GlobalState.tileSize / 10;
-			healthBarEmpty.x = GlobalState.tileSize / 10;
-			healthBar.y = - GlobalState.tileSize / 5;
-			healthBarEmpty.y = - GlobalState.tileSize / 5;
+			healthBar.x = GlobalState.tileSize / 10 - GlobalState.tileSize / 2;
+			healthBarEmpty.x = GlobalState.tileSize / 10 - GlobalState.tileSize / 2;
+			healthBar.y = - GlobalState.tileSize / 5 - GlobalState.tileSize / 2;
+			healthBarEmpty.y = - GlobalState.tileSize / 5 - GlobalState.tileSize / 2;
 			healthBar.alpha = 0;
 			healthBarEmpty.alpha = 0;
 			
