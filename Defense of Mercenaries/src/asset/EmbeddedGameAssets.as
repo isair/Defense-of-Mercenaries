@@ -12,37 +12,7 @@ package asset
 		
 		[Embed(source="/asset/music/Dust and Bones.mp3")]
 		public static const bgm:Class;
-		
-		[Embed(source="/asset/tile/grass.png")]
-		public static const grassTexture:Class;
-		
-		[Embed(source="/asset/tile/road.png")]
-		public static const roadTexture:Class;
-		
-		[Embed(source="/asset/tower/tower.png")]
-		public static const towerTexture:Class;
-		
-		[Embed(source="/asset/tower/slowtower.png")]
-		public static const slowTowerTexture:Class;
-		
-		[Embed(source="/asset/tower/fasttower.png")]
-		public static const fastTowerTexture:Class;
-		
-		[Embed(source="/asset/tower/cannontower.png")]
-		public static const cannonTowerTexture:Class;
-		
-		[Embed(source="/asset/tower/base.png")]
-		public static const baseTexture:Class;
-		
-		[Embed(source="/asset/tower/obs1.png")]
-		public static const obs1Texture:Class;
-		
-		[Embed(source="/asset/tower/obs2.png")]
-		public static const obs2Texture:Class;
-
-		[Embed(source="/asset/tower/obs3.png")]
-		public static const obs3Texture:Class;
-		
+						
 		[Embed(source="/asset/interface/wall.png")]
 		public static const wallTexture:Class;
 		
@@ -82,6 +52,22 @@ package asset
 		[Embed(source="/asset/interface/startround.png")]
 		public static const startroundTexture:Class;
 		
+		[Embed(source="/asset/tile/grass.xml", mimeType="application/octet-stream")]
+		private static const grassData:Class;
+		
+		[Embed(source="/asset/tile/grass.png")]
+		private static const grassTexture:Class;
+		
+		private static var grassAtlas:TextureAtlas = null;
+
+		[Embed(source="/asset/tower/occupiers.xml", mimeType="application/octet-stream")]
+		private static const occupiersData:Class;
+		
+		[Embed(source="/asset/tower/occupiers.png")]
+		private static const occupiersTexture:Class;
+		
+		private static var occupiersAtlas:TextureAtlas = null;
+		
 		[Embed(source="/asset/enemy/enemy.xml", mimeType="application/octet-stream")]
 		private static const enemyData:Class;
 		
@@ -104,6 +90,8 @@ package asset
 		{
 			enemyAtlas = new TextureAtlas(Texture.fromBitmap(new enemyTexture()), XML(new enemyData()));
 			roadsAtlas = new TextureAtlas(Texture.fromBitmap(new roadsTexture()), XML(new roadsData()));
+			occupiersAtlas = new TextureAtlas(Texture.fromBitmap(new occupiersTexture()), XML(new occupiersData()));
+			grassAtlas = new TextureAtlas(Texture.fromBitmap(new grassTexture()), XML(new grassData()));
 		}
 		
 		public static function getEnemyAtlas():TextureAtlas
@@ -114,6 +102,16 @@ package asset
 		public static function getRoadsAtlas():TextureAtlas
 		{
 			return roadsAtlas;
+		}
+		
+		public static function getOccupiersAtlas():TextureAtlas
+		{
+			return occupiersAtlas;
+		}
+		
+		public static function getGrassAtlas():TextureAtlas
+		{
+			return grassAtlas;
 		}
 	}
 }

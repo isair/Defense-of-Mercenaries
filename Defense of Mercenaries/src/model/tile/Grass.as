@@ -5,14 +5,18 @@ package model.tile
 	import flash.geom.Matrix;
 	import flash.geom.Point;
 	
+	import starling.display.Image;
 	import starling.display.Quad;
 	import starling.display.Shape;
 	import starling.textures.Texture;
+	import starling.textures.TextureAtlas;
 	
 	import state.Game;
 
 	public class Grass extends Tile
 	{
+		private var grassAtlas:TextureAtlas = EmbeddedGameAssets.getGrassAtlas();
+
 		public function Grass(position:Point)
 		{
 			super(position);
@@ -21,19 +25,22 @@ package model.tile
 		public override function draw():void
 		{
 			var size:Number = GlobalState.tileSize;
-			var texture:Texture = Game.assetManager.getTexture("grassTexture");
+			var texture:Texture = grassAtlas.getTexture("grass");
 			
 			if (texture)
 			{
-				var shape:Shape = new Shape();
-				addChild(shape);
+				//var shape:Shape = new Shape();
+				//addChild(shape);
 				
-				var scaleMatrix:Matrix = new Matrix();
+				var image:Image = new Image(texture);
+				addChild(image);
+				
+				/*var scaleMatrix:Matrix = new Matrix();
 				scaleMatrix.scale(texture.width / size, texture.height / size);
 				
 				shape.graphics.beginTextureFill(texture, scaleMatrix);
 				shape.graphics.drawRect(0, 0, size, size);
-				shape.graphics.endFill();
+				shape.graphics.endFill();*/
 			}
 			else // Draw a simple quad if texture fails to load.
 			{

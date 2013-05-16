@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker http://texturepacker.com-->
+<!-- $TexturePacker:SmartUpdate:765368e67a2b24ff60808d0ce3ebd80e$ -->
+<TextureAtlas imagePath="grass.png">
+    <SubTexture name="grass" x="2" y="2" width="40" height="40"/>
+</TextureAtlas>

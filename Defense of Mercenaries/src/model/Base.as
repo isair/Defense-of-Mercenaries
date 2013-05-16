@@ -1,15 +1,19 @@
 package model
 {
-	import model.tile.Tile;
-	import state.Game;
-	import state.GameOver;
+	import asset.EmbeddedGameAssets;
 	
+	import model.tile.Tile;
+	
+	import starling.display.Image;
 	import starling.display.Quad;
 	import starling.display.Sprite;
 	import starling.events.Event;
 	import starling.text.TextField;
-	import starling.display.Image;
 	import starling.textures.Texture;
+	import starling.textures.TextureAtlas;
+	
+	import state.Game;
+	import state.GameOver;
 	
 	public class Base extends Occupier
 	{
@@ -17,6 +21,7 @@ package model
 		private var healthBar:Quad;
 		private var healthBarEmpty:Quad;
 		private var text:TextField;
+		private var occupiersAtlas:TextureAtlas = EmbeddedGameAssets.getOccupiersAtlas();
 		
 		public function Base()
 		{
@@ -37,7 +42,7 @@ package model
 			healthBar.y = this.y + (GlobalState.tileSize as Number) * (7 / 6);
 			healthBarEmpty.y = this.y + (GlobalState.tileSize as Number) * (7 / 6);
 			
-			var baseTexture:Texture = Game.assetManager.getTexture("baseTexture");
+			var baseTexture:Texture = occupiersAtlas.getTexture("base");
 			var baseImage:Image = new Image(baseTexture);
 			
 			addChild(baseImage);

@@ -2,16 +2,19 @@ package model
 {	
 	import model.tile.Tile;
 	import state.Game;
+	import asset.EmbeddedGameAssets;
 	
 	import starling.display.Image;
 	import starling.display.Quad;
 	import starling.events.Event;
 	import starling.textures.Texture;
+	import starling.textures.TextureAtlas;
 	
 	public class Obstacle extends Occupier
 	{
 		private var image:Image;
 		private static var counter:int = 0;
+		private var occupiersAtlas:TextureAtlas = EmbeddedGameAssets.getOccupiersAtlas();
 		
 		public function Obstacle()
 		{
@@ -27,11 +30,11 @@ package model
 			
 			switch(counter)
 			{
-				case 0: texture = Game.assetManager.getTexture("obs1Texture");
+				case 0: texture = occupiersAtlas.getTexture("obs1");
 					break; 
-				case 1: texture = Game.assetManager.getTexture("obs2Texture");
+				case 1: texture = occupiersAtlas.getTexture("obs2");
 					break;
-				case 2: texture = Game.assetManager.getTexture("obs3Texture");
+				case 2: texture = occupiersAtlas.getTexture("obs3");
 					break;
 				default: 
 					break;

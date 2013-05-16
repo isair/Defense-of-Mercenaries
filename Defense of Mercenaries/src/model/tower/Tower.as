@@ -11,6 +11,7 @@ package model.tower
 	import asset.EmbeddedGameAssets;
 	import state.Game;
 
+	import starling.textures.TextureAtlas;
 	import starling.textures.Texture;
 	import starling.display.Image;
 	import starling.display.Quad;
@@ -23,7 +24,8 @@ package model.tower
 		public var damage:int = 13;
 		public var range:int = GlobalState.tileSize * 3.5;
 		private var influenceRange:int;
-		private static 	var towerTexture:Texture = Game.assetManager.getTexture("towerTexture");
+		private static var occupiersAtlas:TextureAtlas = EmbeddedGameAssets.getOccupiersAtlas();
+		private static var towerTexture:Texture = occupiersAtlas.getTexture("tower");
 		private static var towerShape:Image = new Image(towerTexture);
 		private var shape:Quad;
 		public var attackInterval:int = 1500;
@@ -43,7 +45,6 @@ package model.tower
 			var towerImage:Image = new Image(towerTexture);
 			towerImage.y = - GlobalState.tileSize / 2;
 			
-			//this.shape = new Quad(GlobalState.tileSize, GlobalState.tileSize, 0x7A4F2C, true);
 			addChild(towerImage);
 		}
 		

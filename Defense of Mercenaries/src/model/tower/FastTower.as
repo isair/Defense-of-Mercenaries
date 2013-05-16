@@ -5,12 +5,15 @@ package model.tower
 	import starling.events.Event;
 	import starling.display.Image;
 	import starling.textures.Texture;
+	import starling.textures.TextureAtlas;
 	
 	import state.Game;
+	import asset.EmbeddedGameAssets;
 	
 	public class FastTower extends Tower
 	{
-		private static 	var fastTowerTexture:Texture = Game.assetManager.getTexture("fastTowerTexture");
+		private static var occupiersAtlas:TextureAtlas = EmbeddedGameAssets.getOccupiersAtlas();
+		private static var fastTowerTexture:Texture = occupiersAtlas.getTexture("fasttower");
 		private static var fastTowerShape:Image = new Image(fastTowerTexture);
 		
 		public function FastTower()

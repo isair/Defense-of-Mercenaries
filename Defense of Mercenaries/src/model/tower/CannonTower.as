@@ -2,19 +2,22 @@ package model.tower
 {
 	import model.enemy.Enemy;
 	import model.projectile.CannonProjectile;
-	import model.tile.Tile;
+	import model.tile.Tile;	
+	import asset.EmbeddedGameAssets;
 	
 	import starling.display.Image;
 	import starling.display.Quad;
 	import starling.display.Shape;
 	import starling.events.Event;
 	import starling.textures.Texture;
+	import starling.textures.TextureAtlas;
 	
 	import state.Game;
 	
 	public class CannonTower extends Tower
 	{
-		private static 	var cannonTowerTexture:Texture = Game.assetManager.getTexture("cannonTowerTexture");
+		private static var occupiersAtlas:TextureAtlas = EmbeddedGameAssets.getOccupiersAtlas();
+		private static var cannonTowerTexture:Texture = occupiersAtlas.getTexture("cannontower");
 		private static var cannonTowerShape:Image = new Image(cannonTowerTexture);
 		private var blastRadius:Number = GlobalState.tileSize * 1.5;
 

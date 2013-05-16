@@ -4,6 +4,7 @@ package model.tower
 	import model.projectile.SlowProjectile;
 	import model.tile.Tile;
 	import state.Game;
+	import asset.EmbeddedGameAssets;
 	
 	import starling.display.Sprite;
 	import starling.display.Quad;
@@ -11,10 +12,12 @@ package model.tower
 	import starling.events.Event;
 	import starling.display.Image;
 	import starling.textures.Texture;
+	import starling.textures.TextureAtlas;
 	
 	public class SlowTower extends Tower
 	{
-		private static 	var slowTowerTexture:Texture = Game.assetManager.getTexture("slowTowerTexture");
+		private static var occupiersAtlas:TextureAtlas = EmbeddedGameAssets.getOccupiersAtlas();
+		private static var slowTowerTexture:Texture = occupiersAtlas.getTexture("slowtower");
 		private static var slowTowerShape:Image = new Image(slowTowerTexture);
 		private var slowAmount:Number = 40;
 		private var slowDuration:Number = 2700;
