@@ -104,5 +104,12 @@ package model.tower
 			
 			return ghostArray;
 		}
+		
+		public static function fetchImage():void
+		{
+			occupiersAtlas = EmbeddedGameAssets.getOccupiersAtlas();
+			slowTowerTexture = occupiersAtlas.getTexture("slowtower");
+			slowTowerShape = new Image(slowTowerTexture);
+		}
 	}
 }

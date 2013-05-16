@@ -50,5 +50,12 @@ package model.tower
 			
 			return ghostArray;
 		}
+		
+		public static function fetchImage():void
+		{
+			occupiersAtlas = EmbeddedGameAssets.getOccupiersAtlas();
+			fastTowerTexture = occupiersAtlas.getTexture("fasttower");
+			fastTowerShape = new Image(fastTowerTexture);
+		}
 	}
 }

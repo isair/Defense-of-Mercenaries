@@ -63,5 +63,12 @@ package model.tower
 			
 			return ghostArray;
 		}
+		
+		public static function fetchImage():void
+		{
+			occupiersAtlas = EmbeddedGameAssets.getOccupiersAtlas();
+			cannonTowerTexture = occupiersAtlas.getTexture("cannontower");
+			cannonTowerShape = new Image(cannonTowerTexture);
+		}
 	}
 }

@@ -180,7 +180,7 @@ package model.enemy
 					{
 						this.slowed = false;
 						this.slowAmount = 0;
-						this.speed = 1;
+						this.speed = 0.7;
 					}
 				}
 				

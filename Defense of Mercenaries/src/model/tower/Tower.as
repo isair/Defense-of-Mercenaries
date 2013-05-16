@@ -148,5 +148,12 @@ package model.tower
 				this.boosted = false;
 			}
 		}
+		
+		public static function fetchImage():void
+		{
+			occupiersAtlas = EmbeddedGameAssets.getOccupiersAtlas();
+			towerTexture = occupiersAtlas.getTexture("tower");
+			towerShape = new Image(towerTexture);
+		}
 	}
 }

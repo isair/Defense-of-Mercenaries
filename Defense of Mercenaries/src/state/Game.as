@@ -8,6 +8,8 @@ package state
 	import model.Gate;
 	import model.Map;
 	import model.Obstacle;
+	import model.tower.CannonTower;
+	import model.tower.FastTower;
 	import model.tower.SlowTower;
 	import model.tower.Tower;
 	
@@ -34,10 +36,17 @@ package state
 			assetManager.enqueue(EmbeddedGameAssets);
 			EmbeddedGameAssets.generateEnemyAtlas();
 			
+			
 			assetManager.loadQueue(function(ratio:Number):void
 			{
 				if (ratio == 1.0)
+				{
+					Tower.fetchImage();
+					SlowTower.fetchImage();
+					FastTower.fetchImage();
+					CannonTower.fetchImage();
 					startGame();
+				}
 			});
 		}
 		
