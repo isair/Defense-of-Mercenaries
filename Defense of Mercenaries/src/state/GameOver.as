@@ -10,6 +10,8 @@ package state
 	import starling.events.TouchPhase;
 	import starling.utils.AssetManager;
 	import starling.text.TextField;
+	import starling.events.Touch;
+	import starling.events.TouchEvent;
 	
 	public class GameOver extends GameState
 	{
@@ -42,6 +44,8 @@ package state
 			restartPrompt = new TextField(size, GlobalState.tileSize * 4, "TAP TO RETURN TO MAIN MENU", "Verdana", 25);
 			restartPrompt.y = gameOverText.y + 100;
 			
+			GlobalState.reset();
+			
 			addChild(new Quad(size, size, 0xD49A3D, true));
 			addChild(gameOverText);
 			addChild(restartPrompt);
@@ -53,7 +57,9 @@ package state
 		
 		private function onTouch(e:TouchEvent):void
 		{
-			if (e.getTouch(this).phase == TouchPhase.ENDED)
+			var touch:Touch = e.getTouch(this);
+			
+			if (touch && touch.phase == TouchPhase.ENDED)
 				Main.getInstance().setState(Menu);
 		}
 	}
