@@ -46,7 +46,7 @@ package state
 			addChild(gameOverText);
 			addChild(restartPrompt);
 			
-			var bgm:SoundChannel = assetManager.playSound("bgm", 0, int.MAX_VALUE);
+			var victoryTrack:SoundChannel = assetManager.playSound("victoryTrack", 0, int.MAX_VALUE);
 			
 			addEventListener(TouchEvent.TOUCH, onTouch);
 		}

@@ -8,6 +8,9 @@ package asset
 		[Embed(source="/asset/music/Game Over.mp3")]
 		public static const gameOver:Class;
 		
+		[Embed(source="/asset/music/Forgotten Victory.mp3")]
+		public static const victoryTrack:Class;
+		
 		public function EmbeddedMenuAssets() {}
 	}
 }
