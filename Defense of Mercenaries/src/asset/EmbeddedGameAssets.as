@@ -3,6 +3,8 @@ package asset
 	import starling.textures.Texture;
 	import starling.textures.TextureAtlas;
 	
+	import state.Game;
+	
 	public class EmbeddedGameAssets
 	{
 		[Embed(source="/asset/music/To-New-World.mp3")]
@@ -63,16 +65,19 @@ package asset
 		public static const freezeTexture:Class;
 		
 		[Embed(source="/asset/enemy/enemy.xml", mimeType="application/octet-stream")]
-		private static const EnemyData:Class;
+		private static const enemyData:Class;
 		
 		[Embed(source="/asset/enemy/enemy.png")]
-		private static const EnemyTexture:Class;
-
-		private static const enemyTexture:Texture = Texture.fromBitmap(new EnemyTexture());
-		private static const enemyData:XML = XML(new EnemyData());
-		private static const enemyAtlas:TextureAtlas = new TextureAtlas(enemyTexture, enemyData);
-				
+		private static const enemyTexture:Class;
+		
+		private static var enemyAtlas:TextureAtlas = null;
+		
 		public function EmbeddedGameAssets() {}
+		
+		public static function generateEnemyAtlas():void
+		{
+			enemyAtlas = new TextureAtlas(Texture.fromBitmap(new enemyTexture()), XML(new enemyData()));
+		}
 		
 		public static function getEnemyAtlas():TextureAtlas
 		{

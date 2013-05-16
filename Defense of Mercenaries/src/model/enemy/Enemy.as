@@ -1,10 +1,11 @@
 package model.enemy
 {
+	import asset.EmbeddedGameAssets;
+	
 	import flash.geom.Point;
 	
 	import model.GameObject;
 	import model.Path;
-	import asset.EmbeddedGameAssets;
 	
 	import starling.core.Starling;
 	import starling.display.MovieClip;
@@ -59,13 +60,13 @@ package model.enemy
 		}
 		
 		public function init(e:Event):void
-		{			
-			var enemyAtlas:TextureAtlas = EmbeddedGameAssets.getEnemyAtlas();
-	
-			upClip = new MovieClip(enemyAtlas.getTextures("up"), 5);
-			leftClip = new MovieClip(enemyAtlas.getTextures("left"), 5);
-			rightClip = new MovieClip(enemyAtlas.getTextures("right"), 5);
-			downClip = new MovieClip(enemyAtlas.getTextures("down"), 5);
+		{
+			var atlas:TextureAtlas = EmbeddedGameAssets.getEnemyAtlas();
+			
+			upClip = new MovieClip(atlas.getTextures("up"), 5);
+			leftClip = new MovieClip(atlas.getTextures("left"), 5);
+			rightClip = new MovieClip(atlas.getTextures("right"), 5);
+			downClip = new MovieClip(atlas.getTextures("down"), 5);
 			
 			upClip.x = - GlobalState.tileSize / 2;
 			upClip.y = - GlobalState.tileSize / 2;

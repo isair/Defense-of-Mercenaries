@@ -31,6 +31,7 @@ package state
 			assetManager = new AssetManager();
 			
 			assetManager.enqueue(EmbeddedGameAssets);
+			EmbeddedGameAssets.generateEnemyAtlas();
 			
 			assetManager.loadQueue(function(ratio:Number):void
 			{

@@ -8,10 +8,11 @@ package state
 	import starling.core.Starling;
 	import starling.display.Quad;
 	import starling.events.Event;
+	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
-	import starling.utils.AssetManager;
 	import starling.text.TextField;
+	import starling.utils.AssetManager;
 	
 	public class Menu extends GameState
 	{
@@ -58,7 +59,9 @@ package state
 		
 		private function onTouch(e:TouchEvent):void
 		{
-			if (e.getTouch(this).phase == TouchPhase.ENDED)
+			var touch:Touch = e.getTouch(this);
+			
+			if (touch && touch.phase == TouchPhase.ENDED)
 				Main.getInstance().setState(Game);
 		}
 	}
