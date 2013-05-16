@@ -110,7 +110,7 @@ package state
 		{
 			if ( ! GlobalState.roundBreak) return;
 			
-			gate.start(3 + GlobalState.currentRound * 1.5, 1 + GlobalState.currentRound * 0.5, onRoundEnd);
+			gate.start(2 * GlobalState.currentRound, 3 + GlobalState.currentRound * 1.5, 1 + GlobalState.currentRound * 0.5, onRoundEnd);
 			GlobalState.roundBreak = false;
 		}
 		

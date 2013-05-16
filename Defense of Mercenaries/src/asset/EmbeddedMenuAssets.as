@@ -19,7 +19,6 @@ package asset
 		
 		[Embed(source="/asset/menu/gameover.png")]
 		public static const gameover:Class;
-
 		
 		public function EmbeddedMenuAssets() {}
 	}

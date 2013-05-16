@@ -181,18 +181,18 @@ package model
 			return true;
 		}
 		
-		public function start(waveCount:int, powerMultiplier:Number, callback:Function):void
+		public function start(startWave:int, waveCount:int, powerMultiplier:Number, callback:Function):void
 		{
 			if (working) return;
 						
 			if ( ! hasPath) return;
 			
-			this.waveCount = waveCount;
+			this.waveCount = startWave + waveCount;
 			this.powerMultiplier = powerMultiplier;
 			this.callback = callback;
 			
-			GlobalState.currentWave = 0;
-			storedEnemies = 2;
+			GlobalState.currentWave = startWave;
+			storedEnemies = 2 + startWave * 1.3;
 			working = true;
 		}
 		
