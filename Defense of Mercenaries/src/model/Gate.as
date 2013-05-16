@@ -19,7 +19,7 @@ package model
   	{
 		private var currentId:int = 0;
 		
-		private var position:Tile = null;
+		public var position:Tile = null;
 		private var target:Base = null;
 		
 		private var working:Boolean = false;

@@ -156,7 +156,7 @@ package view
 			
 			if ( currentTile != null )
 			{
-				if ( ! (currentTile.isOccupied()))
+				if ( ! currentTile.isOccupied() && (currentTile != Game.gate.position))
 				{
 					if ( GlobalState.roundBreak || !currentTile.hasRoad() )
 					{
