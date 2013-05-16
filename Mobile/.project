@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>Mobile</name>
+	<comment></comment>
+	<projects>
+		<project>Defense of Mercenaries</project>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>com.adobe.flexbuilder.project.flexbuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>com.adobe.flexbuilder.project.apollobuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>com.adobe.flexide.project.multiplatform.multiplatformasnature</nature>
+		<nature>com.adobe.flexide.project.multiplatform.multiplatformnature</nature>
+		<nature>com.adobe.flexbuilder.project.apollonature</nature>
+		<nature>com.adobe.flexbuilder.project.actionscriptnature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>[source path] src</name>
+			<type>2</type>
+			<locationURI>DOCUMENTS/Defense%20of%20Mercenaries/src</locationURI>
+		</link>
+		<link>
+			<name>[source path] starling</name>
+			<type>2</type>
+			<locationURI>DOCUMENTS/Defense%20of%20Mercenaries/starling</locationURI>
+		</link>
+		<link>
+			<name>[source path] starling-graphics</name>
+			<type>2</type>
+			<locationURI>DOCUMENTS/Defense%20of%20Mercenaries/starling-graphics</locationURI>
+		</link>
+	</linkedResources>
+</projectDescription>
