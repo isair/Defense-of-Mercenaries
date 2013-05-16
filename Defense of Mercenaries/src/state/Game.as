@@ -93,13 +93,15 @@ package state
 			addChild(ui);
 			
 			var bgm:SoundChannel = assetManager.playSound("bgm", 0, int.MAX_VALUE);
+			
+			gate.calculatePath();
 		}
 		
 		public static function newRound():void
 		{
 			if ( ! GlobalState.roundBreak) return;
 			
-			Game.gate.start(5 + GlobalState.currentRound * 1.5, 1 + GlobalState.currentRound * 0.2, onRoundEnd);
+			gate.start(5 + GlobalState.currentRound * 1.5, 1 + GlobalState.currentRound * 0.2, onRoundEnd);
 			GlobalState.roundBreak = false;
 		}
 		
