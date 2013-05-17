@@ -192,7 +192,7 @@ package model
 			this.callback = callback;
 			
 			GlobalState.currentWave = startWave;
-			storedEnemies = 2 + startWave * 1.3;
+			storedEnemies = 2 + startWave;
 			working = true;
 		}
 		
@@ -254,7 +254,7 @@ package model
 				spawnTimePassed = 0;
 				waitTime = waveInterval;
 				GlobalState.currentWave++;
-				storedEnemies = 2 + GlobalState.currentWave * 1.3;
+				storedEnemies = 2 + GlobalState.currentWave;
 			}
 		}
 		
