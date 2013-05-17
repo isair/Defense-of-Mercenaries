@@ -39,7 +39,7 @@ package view
 			
 			if( wave != GlobalState.currentWave)
 			{
-				var maxWave:int = 3 + GlobalState.currentRound * 1.5;
+				var maxWave:int = 3 + GlobalState.currentRound * 0.5;
 				wave = GlobalState.currentWave;
 				waveText.text = "Waves Spawned: " + wave + " / " + maxWave;
 			}
