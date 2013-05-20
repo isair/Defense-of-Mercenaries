@@ -3,7 +3,7 @@ package asset
 	import starling.textures.Texture;
 	import starling.textures.TextureAtlas;
 	
-	import state.Game;
+	import game.state.Game;
 	
 	public class EmbeddedGameAssets
 	{

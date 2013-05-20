@@ -11,8 +11,11 @@ package asset
 		[Embed(source="/asset/music/Forgotten Victory.mp3")]
 		public static const victoryTrack:Class;
 		
-		[Embed(source="/asset/menu/mainmenu.png")]
-		public static const mainmenu:Class;
+		[Embed(source="/asset/menu/bgMenu.png")]
+		public static const bgMenu:Class;
+		
+		[Embed(source="/asset/menu/bgMenuNormal.png")]
+		public static const bgMenuNormal:Class;
 		
 		[Embed(source="/asset/menu/victory.png")]
 		public static const victory:Class;

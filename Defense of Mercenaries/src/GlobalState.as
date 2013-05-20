@@ -1,11 +1,11 @@
 package
 {
-	import model.Base;
-	import model.Map;
+	import game.Base;
+	import game.Map;
 	
-	import view.Interface;
+	import game.ui.Interface;
 	
-	import state.Game;
+	import game.state.Game;
 
 	public class GlobalState
 	{

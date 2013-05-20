@@ -5,8 +5,8 @@ package
 	
 	import starling.core.Starling;
 	
-	import state.GameState;
-	import state.Menu;
+	import game.state.GameState;
+	import game.state.Menu;
 	
 	[SWF(frameRate="60", width="640", height="960", backgroundColor="0x333333")]
 	public class Main extends Sprite

@@ -2,7 +2,7 @@ package model.astar
 {
 	import flash.geom.Point;
 	
-	import model.tile.Tile;
+	import game.tile.Tile;
 
 	public class AStarNode
 	{

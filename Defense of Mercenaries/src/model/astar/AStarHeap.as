@@ -1,6 +1,6 @@
 package model.astar
 {
-	import model.tile.Tile;
+	import game.tile.Tile;
 
 	public class AStarHeap
 	{
