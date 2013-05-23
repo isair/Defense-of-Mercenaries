@@ -12,6 +12,12 @@ package asset
 		
 		[Embed(source="/asset/music/Dust and Bones.mp3")]
 		public static const bgm:Class;
+		
+		[Embed(source="/asset/sounds/enemy death.mp3")]
+		public static const deathSound:Class;
+		
+		[Embed(source="/asset/sounds/small explosion.mp3")]
+		public static const explosionSound:Class;
 						
 		[Embed(source="/asset/interface/wall.png")]
 		public static const wallTexture:Class;

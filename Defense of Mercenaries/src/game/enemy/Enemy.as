@@ -3,6 +3,7 @@ package game.enemy
 	import asset.EmbeddedGameAssets;
 	
 	import flash.geom.Point;
+	import flash.media.SoundChannel;
 	
 	import game.GameObject;
 	import model.Path4D;
@@ -12,6 +13,7 @@ package game.enemy
 	import starling.display.Quad;
 	import starling.display.Sprite;
 	import starling.events.Event;
+	import starling.utils.AssetManager;
 	import starling.textures.Texture;
 	import starling.textures.TextureAtlas;
 	
@@ -19,6 +21,8 @@ package game.enemy
 	
 	public class Enemy extends Sprite implements GameObject
 	{
+		public static var assetManager:AssetManager = null;
+		
 		public var id:int;
 		
 		private var health:Number;
@@ -63,7 +67,16 @@ package game.enemy
 		}
 		
 		public function init(e:Event):void
-		{
+		{		
+			assetManager = new AssetManager();
+			
+			assetManager.enqueue(EmbeddedGameAssets);
+			
+			assetManager.loadQueue(function(ratio:Number):void
+			{
+				if (ratio == 1.0) doSomething(); // this does nothing, needs better code
+			});
+			
 			var atlas:TextureAtlas = EmbeddedGameAssets.getEnemyAtlas();
 			
 			upClip = new MovieClip(atlas.getTextures("up"), 5);
@@ -102,6 +115,11 @@ package game.enemy
 			Starling.juggler.add(rightClip);
 		}
 		
+		private function doSomething():void
+		{
+			// void function in place for asset enqueing
+		}
+		
 		public function damage(value:int):void
 		{
 			health = health - value;
@@ -111,6 +129,10 @@ package game.enemy
 				this.dead = true;
 				GlobalState.currentGold += 5;
 				this.removeFromParent(true);
+				
+				var death:SoundChannel = assetManager.playSound("deathSound", 0, 0);
+							
+
 			}
 			
 			if (!damaged)
