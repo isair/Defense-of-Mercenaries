@@ -16,7 +16,7 @@ package asset
 		[Embed(source="/asset/sounds/enemy death.mp3")]
 		public static const deathSound:Class;
 		
-		[Embed(source="/asset/sounds/small explosion.mp3")]
+		[Embed(source="/asset/sounds/explosion.mp3")]
 		public static const explosionSound:Class;
 						
 		[Embed(source="/asset/interface/wall.png")]

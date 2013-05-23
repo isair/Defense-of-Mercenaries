@@ -3,10 +3,15 @@ package game.projectile
 	import game.enemy.Enemy;
 	import game.tower.Tower;
 	
+	import asset.EmbeddedGameAssets;
+	
 	import starling.display.Shape;
 	import starling.events.Event;
 	import starling.text.TextField;
 	import starling.display.Sprite;
+	import starling.utils.AssetManager;
+	
+	import flash.media.SoundChannel;
 	
 	public class CannonProjectile extends Projectile
 	{
@@ -23,9 +28,9 @@ package game.projectile
 		private var halfwayY:Number;
 		private var movedX:Number = 0;
 		private var movedY:Number = 0;
-		
+				
 		public function CannonProjectile(target:Enemy, velocity:Number, strength:int, owner:Tower, blastRadius:Number)
-		{
+		{			
 			super(target, velocity, strength, owner);
 			
 			this.target = target;		
@@ -128,5 +133,6 @@ package game.projectile
 			
 			this.removeFromParent(true);
 		}
+		
 	}
 }

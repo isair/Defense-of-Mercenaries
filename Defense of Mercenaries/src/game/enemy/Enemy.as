@@ -75,7 +75,7 @@ package game.enemy
 			assetManager.loadQueue(function(ratio:Number):void
 			{
 				if (ratio == 1.0) doSomething(); // this does nothing, needs better code
-			});
+			}); 
 			
 			var atlas:TextureAtlas = EmbeddedGameAssets.getEnemyAtlas();
 			
