@@ -1,20 +1,15 @@
 package game.projectile
 {
 	import game.GameObject;
-	
-	import asset.EmbeddedGameAssets;
-	
+		
 	import starling.display.Sprite;
 	import starling.display.Shape;
 	import starling.events.Event;
-	import starling.utils.AssetManager;
 	
 	import flash.media.SoundChannel;
 	
 	public class CannonBlast extends Sprite implements GameObject
-	{
-		public static var assetManager:AssetManager = null;
-		
+	{		
 		private var blastRadius:Number;
 		private var shape:Shape;
 		private var timer:Number = 0;
@@ -28,14 +23,6 @@ package game.projectile
 		
 		public function init(e:Event):void
 		{
-			assetManager = new AssetManager();
-			
-			assetManager.enqueue(EmbeddedGameAssets);
-			
-			assetManager.loadQueue(function(ratio:Number):void
-			{
-				if (ratio == 1.0) doSomething(); // this does nothing, needs better code
-			});
 			
 			this.shape = new Shape();
 			this.shape.graphics.beginFill(0xFFCC00, 1);
@@ -53,11 +40,6 @@ package game.projectile
 			 
 		}
 		
-		private function doSomething():void
-		{
-			// void function in place for asset enqueing
-		}
-		
 		public function update(deltaTime:Number):void
 		{
 			timer += deltaTime;
@@ -67,8 +49,6 @@ package game.projectile
 							
 			if (timer >= 750)
 			{
-					var blast:SoundChannel = assetManager.playSound("explosionSound", 0, 0);
-
 					this.removeFromParent(true);
 			}
 			

@@ -15,6 +15,8 @@ package game.projectile
 	
 	public class CannonProjectile extends Projectile
 	{
+		public static var assetManager:AssetManager = null;
+		
 		private var blastRadius:Number;
 		private var shape:Shape;
 		private var target:Enemy;
@@ -57,12 +59,26 @@ package game.projectile
 		
 		private function init():void
 		{
+			assetManager = new AssetManager();
+			
+			assetManager.enqueue(EmbeddedGameAssets);
+			
+			assetManager.loadQueue(function(ratio:Number):void
+			{
+				if (ratio == 1.0) doSomething(); // does nothing but error if not placed. How to remove?
+			});
+			
 			this.shape = new Shape();
 			this.shape.graphics.beginFill(0x222222, 1);
 			this.shape.graphics.lineStyle(1, 0x000000, 0.7);
 			this.shape.graphics.drawCircle(0, 0, GlobalState.tileSize / 5);
 			this.shape.graphics.endFill();
 			addChild(this.shape);
+		}
+		
+		private function doSomething():void
+		{
+			// void function in place for asset enqueing
 		}
 		
 		public override function update(deltaTime:Number):void
@@ -76,6 +92,7 @@ package game.projectile
 			if( (absX < ((GlobalState.tileSize as Number) / 8)) && (absY < ((GlobalState.tileSize as Number) / 8)))
 			{				
 				blast();
+								
 			}
 			else
 			{				
@@ -106,6 +123,8 @@ package game.projectile
 			var deltaX:Number;
 			var deltaY:Number;
 			var hyp:Number;
+			
+			var blast:SoundChannel = assetManager.playSound("explosionSound", 0, 0);
 			
 			var cannonBlast:CannonBlast = new CannonBlast(blastRadius);
 			cannonBlast.x = this.targetX;
