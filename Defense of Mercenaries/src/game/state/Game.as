@@ -12,12 +12,11 @@ package game.state
 	import game.tower.FastTower;
 	import game.tower.SlowTower;
 	import game.tower.Tower;
+	import game.ui.Interface;
+	import game.ui.TopHUD;
 	
 	import starling.events.Event;
 	import starling.utils.AssetManager;
-	
-	import game.ui.Interface;
-	import game.ui.TopHUD;	
 	
 	public class Game extends GameState
 	{
@@ -36,7 +35,6 @@ package game.state
 			assetManager.enqueue(EmbeddedGameAssets);
 			EmbeddedGameAssets.generateEnemyAtlas();
 			
-			
 			assetManager.loadQueue(function(ratio:Number):void
 			{
 				if (ratio == 1.0)
@@ -53,10 +51,9 @@ package game.state
 		private function startGame():void
 		{
 			var halfSize:Number = GlobalState.mapSize / 2;
-			
 			var top:TopHUD = new TopHUD();
-			
 			var map:Map = new Map();
+			
 			map.y = GlobalState.tileSize;
 			map.generateMap();
 			
@@ -92,7 +89,7 @@ package game.state
 					map.insertOccupier(obstacle, randX, randY);
 				}
 			}
-
+			
 			gate = new Gate(base);
 			map.insertGate(gate, gateX, 0);
 			map.addLayer();
@@ -120,7 +117,7 @@ package game.state
 			{
 				Main.getInstance().setState(VictoryScreen);
 			}
-		
+			
 			GlobalState.roundBreak = true;
 			GlobalState.currentRound++;
 		}

@@ -30,7 +30,7 @@ package game.projectile
 		private var halfwayY:Number;
 		private var movedX:Number = 0;
 		private var movedY:Number = 0;
-				
+		
 		public function CannonProjectile(target:Enemy, velocity:Number, strength:int, owner:Tower, blastRadius:Number)
 		{			
 			super(target, velocity, strength, owner);
@@ -60,12 +60,10 @@ package game.projectile
 		private function init():void
 		{
 			assetManager = new AssetManager();
-			
 			assetManager.enqueue(EmbeddedGameAssets);
-			
 			assetManager.loadQueue(function(ratio:Number):void
 			{
-				if (ratio == 1.0) doSomething(); // does nothing but error if not placed. How to remove?
+				if (ratio == 1.0) doSomething();
 			});
 			
 			this.shape = new Shape();
@@ -76,23 +74,18 @@ package game.projectile
 			addChild(this.shape);
 		}
 		
-		private function doSomething():void
-		{
-			// void function in place for asset enqueing
-		}
+		private function doSomething():void{}
 		
 		public override function update(deltaTime:Number):void
 		{						
 			var deltaX:Number = this.targetX - x;
-			var deltaY:Number = this.targetY - y;
-						
+			var deltaY:Number = this.targetY - y;	
 			var absX:Number = Math.abs(deltaX);
 			var absY:Number = Math.abs(deltaY);
 			
 			if( (absX < ((GlobalState.tileSize as Number) / 8)) && (absY < ((GlobalState.tileSize as Number) / 8)))
 			{				
-				blast();
-								
+				blast();				
 			}
 			else
 			{				
@@ -142,7 +135,7 @@ package game.projectile
 					deltaX = Math.abs((child.x + GlobalState.tileSize / 2) - this.targetX);
 					deltaY = Math.abs((child.y + GlobalState.tileSize / 2) - this.targetY);
 					hyp = Math.sqrt( deltaX * deltaX + deltaY * deltaY );
-
+					
 					if ((hyp - (GlobalState.tileSize / 4)) <= blastRadius)
 					{
 						(child as Enemy).damage(this.strength);
@@ -151,7 +144,6 @@ package game.projectile
 			}
 			
 			this.removeFromParent(true);
-		}
-		
+		}	
 	}
 }

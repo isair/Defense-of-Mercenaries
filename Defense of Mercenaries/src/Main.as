@@ -43,8 +43,6 @@ package
 			starling.start();
 		}
 		
-		/* Some static helper functions after this point. */
-		
 		public static function randomBetween(min:Number, max:Number):Number
 		{
 			return (Math.floor(Math.random() * (max - min + 1)) + min);

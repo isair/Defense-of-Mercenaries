@@ -1,7 +1,7 @@
 package game.projectile
 {
 	import game.GameObject;
-		
+	
 	import starling.display.Sprite;
 	import starling.display.Shape;
 	import starling.events.Event;
@@ -22,8 +22,7 @@ package game.projectile
 		}
 		
 		public function init(e:Event):void
-		{
-			
+		{		
 			this.shape = new Shape();
 			this.shape.graphics.beginFill(0xFFCC00, 1);
 			this.shape.graphics.lineStyle(1, 0xFF6600, 0.5);
@@ -36,8 +35,7 @@ package game.projectile
 			this.shape.graphics.drawCircle(0, 0, this.blastRadius);
 			this.shape.graphics.endFill();
 			alpha = 0.6;
-			addChild(this.shape);
-			 
+			addChild(this.shape);	 
 		}
 		
 		public function update(deltaTime:Number):void
@@ -46,14 +44,8 @@ package game.projectile
 			alpha -= deltaTime / 1000;
 			height -= GlobalState.tileSize / 100;
 			width -= GlobalState.tileSize / 100;
-							
+			
 			if (timer >= 750)
 			{
-					this.removeFromParent(true);
-			}
-			
-			
-			
-		}
-	}
-}
+				this.removeFromParent(true);
+			} } } }

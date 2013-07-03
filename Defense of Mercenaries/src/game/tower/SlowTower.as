@@ -4,6 +4,7 @@ package game.tower
 	import game.projectile.SlowProjectile;
 	import game.tile.Tile;
 	import game.state.Game;
+	
 	import asset.EmbeddedGameAssets;
 	
 	import starling.display.Sprite;
@@ -41,9 +42,8 @@ package game.tower
 			var firstSlowedEnemy:Enemy = null;
 			var firstEnemy:Enemy = null;
 			var currentLeast:int = 9999;
-			
 			var targets:Sprite = GlobalState.currentMap.getEnemiesAndOccupiers();
-
+			
 			for (var i:int = 0; i < targets.numChildren; i++)
 			{
 				var child:Object = targets.getChildAt(i);

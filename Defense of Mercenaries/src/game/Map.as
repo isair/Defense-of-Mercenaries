@@ -57,7 +57,6 @@ package game
 		{
 			tiles = new Vector.<Vector.<Tile>>();
 			
-			// Cover the whole map with grass tiles.
 			for (var column:uint = 0; column < GlobalState.mapSize; column++)
 			{
 				tiles[column] = new Vector.<Tile>();
@@ -87,14 +86,13 @@ package game
 			for (var i:int = 0; i < enemiesAndOccupiers.numChildren; i++)
 			{
 				var child:Object = enemiesAndOccupiers.getChildAt(i);
-
+				
 				if (child is Enemy)
 				{
 					result = true;
 					break;
 				}
 			}
-			
 			return result;
 		}
 		

@@ -2,7 +2,9 @@ package game.tower
 {
 	import game.enemy.Enemy;
 	import game.projectile.CannonProjectile;
-	import game.tile.Tile;	
+	import game.tile.Tile;
+	import game.state.Game;
+	
 	import asset.EmbeddedGameAssets;
 	
 	import starling.display.Image;
@@ -11,8 +13,6 @@ package game.tower
 	import starling.events.Event;
 	import starling.textures.Texture;
 	import starling.textures.TextureAtlas;
-	
-	import game.state.Game;
 	
 	public class CannonTower extends Tower
 	{

@@ -2,7 +2,7 @@ package asset
 {
 	import starling.textures.Texture;
 	import starling.textures.TextureAtlas;
-	
+
 	import game.state.Game;
 	
 	public class EmbeddedGameAssets
@@ -18,7 +18,7 @@ package asset
 		
 		[Embed(source="/asset/sounds/explosion.mp3")]
 		public static const explosionSound:Class;
-						
+		
 		[Embed(source="/asset/interface/wall.png")]
 		public static const wallTexture:Class;
 		
@@ -36,7 +36,7 @@ package asset
 		
 		[Embed(source="/asset/interface/frostcard.png")]
 		public static const frostTexture:Class;
-
+		
 		[Embed(source="/asset/interface/rapidcard.png")]
 		public static const rapidTexture:Class;
 		
@@ -65,7 +65,7 @@ package asset
 		private static const grassTexture:Class;
 		
 		private static var grassAtlas:TextureAtlas = null;
-
+		
 		[Embed(source="/asset/tower/occupiers.xml", mimeType="application/octet-stream")]
 		private static const occupiersData:Class;
 		
@@ -89,7 +89,7 @@ package asset
 		private static const roadsTexture:Class;
 		
 		private static var roadsAtlas:TextureAtlas = null;
-
+		
 		public function EmbeddedGameAssets() {}
 		
 		public static function generateEnemyAtlas():void

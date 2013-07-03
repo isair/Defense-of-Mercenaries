@@ -25,7 +25,6 @@ package model.astar
 					visitedNodes[i].visited = false;
 					visitedNodes[i].parent = null;
 				}
-				
 				openHeap.reset();
 			}
 			else

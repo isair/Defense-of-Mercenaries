@@ -1,6 +1,7 @@
 package game.ui
 {	
 	import game.GameObject;
+	import game.state.Game;
 	
 	import starling.display.Button;
 	import starling.display.Image;
@@ -13,14 +14,11 @@ package game.ui
 	import starling.text.TextField;
 	import starling.textures.Texture;
 	
-	import game.state.Game;
-	
 	public class Hand extends Sprite implements GameObject
 	{
 		private var cards:Array = null;
 		private var goldText:TextField;
 		private var timePassed:Number = 0;
-		
 		private var buttonDisabled:Boolean = false;
 		private var button:Image;
 		
@@ -105,7 +103,7 @@ package game.ui
 			var	texture:Texture = Game.assetManager.getTexture("borderTexture");
 			var border:Image = new Image(texture);
 			border.y = - GlobalState.tileSize / 10;
-
+			
 			var background:Quad = new Quad(GlobalState.tileSize * 16, GlobalState.tileSize * 3.5, 0x111111, true);
 			addChild(background);
 			addChild(border);
@@ -136,7 +134,7 @@ package game.ui
 		public function update(deltaTime:Number):void
 		{
 			goldText.text = GlobalState.currentGold+"";
-
+			
 			if (!GlobalState.roundBreak)
 			{
 				if (!buttonDisabled)
@@ -150,7 +148,7 @@ package game.ui
 					timePassed -= 3000;
 				}
 			}
-			
+				
 			else
 			{
 				if (buttonDisabled)

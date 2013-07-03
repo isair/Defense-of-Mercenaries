@@ -1,42 +1,36 @@
 package game
 {
-  	import flash.geom.Point;
-  	
-  	import model.astar.AStar;
-  	import model.astar.AStarHeap;
-  	import model.astar.AStarNode;
-  	import game.enemy.Enemy;
-  	import game.tile.Tile;
+	import flash.geom.Point;
+	
+	import model.astar.AStar;
+	import model.astar.AStarHeap;
+	import model.astar.AStarNode;
+	import model.Path4D;
+	
+	import game.enemy.Enemy;
+	import game.tile.Tile;
 	import game.state.Game;
-  	
-  	import starling.display.Quad;
-  	import starling.display.Sprite;
+	
+	import starling.display.Quad;
+	import starling.display.Sprite;
 	import starling.events.Event;
 	import starling.display.Image;
 	import starling.textures.Texture;
-	import model.Path4D;
-
-  	public class Gate extends Sprite implements GameObject
-  	{
+	
+	public class Gate extends Sprite implements GameObject
+	{
 		private var currentId:int = 0;
-		
 		public var position:Tile = null;
 		private var target:Base = null;
-		
 		private var working:Boolean = false;
-		
 		public var hasPath:Boolean = false;
 		private var path:Path4D = null;
-		
 		private var storedEnemies:int = 0;
 		private var powerMultiplier:Number = 0;
 		private var spawnTimePassed:Number = 0;
-		
 		private var waveCount:int = 0;
-		private var waveInterval:int = 10000; // Waiting time between waves (in milliseconds).
-		
+		private var waveInterval:int = 10000;
 		private var waitTime:Number = 0;
-		
 		private var callback:Function = null;
 		
 		public function Gate(target:Base)
@@ -69,7 +63,6 @@ package game
 			y = position.getY();
 		}
 		
-		// Calculate an optimal path from gate to base using A* algorithm.
 		public function calculatePath():Boolean
 		{
 			hasPath = false;
@@ -117,7 +110,7 @@ package game
 			// Return false if unable to find a path.
 			if (pathNodes.length == 0)
 				return false;
-				
+			
 			// Create path out of path nodes.
 			var currentNode:AStarNode = startNode;
 			var nextNode:AStarNode;
@@ -130,7 +123,7 @@ package game
 				
 				if (i == 0)
 					currentNode.from = 1;
-						
+				
 				if (nextNode.position.x > currentNode.position.x && nextNode.position.y == currentNode.position.y)
 				{
 					path.pushDirection(Path4D.RIGHT);
@@ -185,7 +178,7 @@ package game
 		public function start(startWave:int, waveCount:int, powerMultiplier:Number, callback:Function):void
 		{
 			if (working) return;
-						
+			
 			if ( ! hasPath) return;
 			
 			this.waveCount = startWave + waveCount;
@@ -227,10 +220,9 @@ package game
 					stop();
 					callback();
 				}
-				
 				return;
 			}
-
+			
 			if (waitTime > 0)
 			{
 				waitTime -= deltaTime;

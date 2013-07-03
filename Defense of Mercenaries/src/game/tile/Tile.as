@@ -16,7 +16,7 @@ package game.tile
 	import starling.textures.TextureAtlas;
 	
 	import game.state.Game;
-
+	
 	public class Tile extends Sprite
 	{
 		private static var borderSize:int = 1;
@@ -50,7 +50,6 @@ package game.tile
 		private function drawRoad():void
 		{
 			var size:Number = GlobalState.tileSize;
-			//var texture:Texture = Game.assetManager.getTexture("roadTexture");
 			
 			var textureAtlas:TextureAtlas = EmbeddedGameAssets.getRoadsAtlas();
 			var texture:Texture;
@@ -60,48 +59,39 @@ package game.tile
 			{
 				texture = textureAtlas.getTexture("road_ns");
 			}
-			// WE
+				// WE
 			else if ( ( (from == 2) && (to == 4) ) || ( (from == 4) && (to == 2) ) )
 			{
 				texture = textureAtlas.getTexture("road_we");
 			}
-			// NE
+				// NE
 			else if ( ( (from == 1) && (to == 2) ) || ( (from == 2) && (to == 1) ) )
 			{
 				texture = textureAtlas.getTexture("road_ne");
 			}
-			// NW
+				// NW
 			else if ( ( (from == 1) && (to == 4) ) || ( (from == 4) && (to == 1) ) )
 			{
 				texture = textureAtlas.getTexture("road_nw");
 			}
-			// SE
+				// SE
 			else if ( ( (from == 2) && (to == 3) ) || ( (from == 3) && (to == 2) ) )
 			{
 				texture = textureAtlas.getTexture("road_se");
 			}
-			// SW
+				// SW
 			else if ( ( (from == 3) && (to == 4) ) || ( (from == 4) && (to == 3) ) )
 			{
 				texture = textureAtlas.getTexture("road_sw");
 			}
-
+			
 			if (texture)
 			{
-				//var shape:Shape = new Shape();
-				//addChild(shape);
 				
 				var image:Image = new Image(texture);
 				addChild(image);
-				
-				/*var scaleMatrix:Matrix = new Matrix();
-				scaleMatrix.scale(texture.width / size, texture.height / size);
-				
-				shape.graphics.beginTextureFill(texture, scaleMatrix);
-				shape.graphics.drawRect(0, 0, size, size);
-				shape.graphics.endFill();*/
 			}
-			else // Draw a simple quad if texture fails to load.
+			else
 			{
 				addChild(new Quad(GlobalState.tileSize, GlobalState.tileSize, 0x61380b, true));
 			}
@@ -176,7 +166,7 @@ package game.tile
 			if (this.isRoad == isRoad) return;
 			
 			this.isRoad = isRoad;
-						
+			
 			removeChildren();
 			init(null);
 		}

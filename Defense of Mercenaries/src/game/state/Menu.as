@@ -48,11 +48,10 @@ package game.state
 		{
 			bgFilter = new NormalMapFilter(assetManager.getTexture("bgMenuNormal"));
 			bgImage = new Image(assetManager.getTexture("bgMenu"));
-			
 			bgFilter.sendLightPosition(0.5, 0.5);
 			bgImage.filter = bgFilter;
 			addChild(bgImage);			
-	
+			
 			var bgm:SoundChannel = assetManager.playSound("bgm", 0, int.MAX_VALUE);
 			
 			addEventListener(TouchEvent.TOUCH, onTouch);

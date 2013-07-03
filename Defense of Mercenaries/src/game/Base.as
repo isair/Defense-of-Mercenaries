@@ -3,6 +3,8 @@ package game
 	import asset.EmbeddedGameAssets;
 	
 	import game.tile.Tile;
+	import game.state.Game;
+	import game.state.GameOver;
 	
 	import starling.display.Image;
 	import starling.display.Quad;
@@ -11,9 +13,6 @@ package game
 	import starling.text.TextField;
 	import starling.textures.Texture;
 	import starling.textures.TextureAtlas;
-	
-	import game.state.Game;
-	import game.state.GameOver;
 	
 	public class Base extends Occupier
 	{

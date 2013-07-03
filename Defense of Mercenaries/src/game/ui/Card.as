@@ -58,9 +58,7 @@ package game.ui
 			}
 			
 			shape = new Image(texture);
-			
-			// Placeholder price tag
-			
+						
 			addChild(shape);
 		}
 		

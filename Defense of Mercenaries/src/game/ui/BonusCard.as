@@ -1,6 +1,5 @@
 package game.ui
 {
-	
 	import starling.textures.Texture;
 	import starling.display.Image;
 	import starling.display.Sprite;
@@ -43,7 +42,6 @@ package game.ui
 			
 			shape = new Image(texture);
 			
-			// Placeholder price tag
 			addChild(shape);
 		}
 		

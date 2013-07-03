@@ -1,12 +1,10 @@
 package
 {
 	import game.Base;
-	import game.Map;
-	
-	import game.ui.Interface;
-	
+	import game.Map;	
+	import game.ui.Interface;	
 	import game.state.Game;
-
+	
 	public class GlobalState
 	{
 		public static const tileSize:int = 40, mapSize:int = 16;

@@ -8,6 +8,7 @@ package game.ui
 	import game.tower.FastTower;
 	import game.tower.SlowTower;
 	import game.tower.Tower;
+	import game.state.Game;
 	
 	import starling.text.TextField;
 	import starling.display.Quad;
@@ -18,8 +19,6 @@ package game.ui
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
-	
-	import game.state.Game;
 	
 	public class Interface extends Sprite implements GameObject
 	{
@@ -63,7 +62,6 @@ package game.ui
 					constructTower(touch, card);
 					break;
 			}
-			//When construction completes -- deduct gold
 		}
 		
 		public function handleBonusTouch(bonusCard:BonusCard, touch:Touch):void 

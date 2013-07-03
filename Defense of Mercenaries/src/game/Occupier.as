@@ -5,7 +5,6 @@ package game
 	import starling.display.Quad;
 	import game.tile.Tile;
 	
-	
 	public class Occupier extends Sprite
 	{		
 		public var position:Tile;
@@ -28,8 +27,6 @@ package game
 			y = position.getY();
 		}
 		
-		public function init(e:Event):void
-		{
-		}
+		public function init(e:Event):void {}
 	}
 }

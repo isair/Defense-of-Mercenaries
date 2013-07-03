@@ -5,6 +5,7 @@ package game.enemy
 	import flash.geom.Point;
 	import flash.media.SoundChannel;
 	
+	import game.state.Game;
 	import game.GameObject;
 	import model.Path4D;
 	
@@ -17,36 +18,29 @@ package game.enemy
 	import starling.textures.Texture;
 	import starling.textures.TextureAtlas;
 	
-	import game.state.Game;
-	
 	public class Enemy extends Sprite implements GameObject
 	{
 		public static var assetManager:AssetManager = null;
 		
 		public var id:int;
-		
 		private var health:Number;
 		private var maxHealth:Number;
 		private var speed:Number = 0.7;
 		private var position:Point = null;
 		private var dead:Boolean = false;
-		
 		private var healthBar:Quad;
 		private var healthBarEmpty:Quad;
 		private var damaged:Boolean = false;
-		
 		public var slowed:Boolean = false;
 		private var frozen:Boolean = false;
 		private var slowAmount:Number = 0;
 		private var slowDuration:Number = 0;
-		
 		private var path:Path4D = null;
 		private var moveDirection:int = Path4D.NONE;
 		private var distanceMoved:Number = 0;
 		private var totalDistanceMoved:Number = 0;
 		private var upDown:Boolean = false;
 		private var leftRight:Boolean = false;
-		
 		private var currentClip:MovieClip;
 		private var upClip:MovieClip;
 		private var leftClip:MovieClip;
@@ -94,7 +88,7 @@ package game.enemy
 			rightClip.y = - GlobalState.tileSize / 2;
 			
 			currentClip = downClip;
-
+			
 			healthBar = new Quad(GlobalState.tileSize * (4/5), GlobalState.tileSize / 10, 0x69E01F, true);
 			healthBarEmpty = new Quad(GlobalState.tileSize * (4/5), GlobalState.tileSize / 10, 0xE33D3D, true);
 			healthBar.x = GlobalState.tileSize / 10 - GlobalState.tileSize / 2;
@@ -104,7 +98,6 @@ package game.enemy
 			healthBar.alpha = 0;
 			healthBarEmpty.alpha = 0;
 			
-			//addChild(new Quad(GlobalState.tileSize, GlobalState.tileSize, 0xcc0000, true));
 			addChild(currentClip);
 			addChild(healthBarEmpty);
 			addChild(healthBar);
@@ -130,9 +123,7 @@ package game.enemy
 				GlobalState.currentGold += 5;
 				this.removeFromParent(true);
 				
-				var death:SoundChannel = assetManager.playSound("deathSound", 0, 0);
-							
-
+				var death:SoundChannel = assetManager.playSound("deathSound", 0, 0);						
 			}
 			
 			if (!damaged)
@@ -167,6 +158,7 @@ package game.enemy
 		public function unfreeze():void
 		{
 			this.frozen = false;
+			
 			Starling.juggler.add(downClip);
 			Starling.juggler.add(upClip);
 			Starling.juggler.add(leftClip);
@@ -206,19 +198,18 @@ package game.enemy
 					}
 				}
 				
-				if (moveDirection == Path4D.NONE) // If not moving, check path for directions.
+				if (moveDirection == Path4D.NONE)
 				{
 					moveDirection = path.popNextDirection();
 					distanceMoved = 0;
 					
-					// TODO: Reduce base health at the end of the path.
 					if (moveDirection == Path4D.NONE)
 					{
 						GlobalState.base.damage();
 						this.removeFromParent(true);
 					}
 				}
-				else // Move in given direction for a single tile length.
+				else
 				{
 					var deltaPos:Number = (((GlobalState.tileSize as Number) * deltaTime * speed) / (1000));
 					distanceMoved += deltaPos;
@@ -258,10 +249,10 @@ package game.enemy
 								leftRight = true;
 								GlobalState.currentMap.childrenSort();
 							}	
-
+							
 							if(upDown)
 								upDown = false;
-
+							
 							x += deltaPos;
 							break;
 						
@@ -270,7 +261,7 @@ package game.enemy
 							{
 								updateClip(downClip);
 							}
-
+							
 							if(!upDown)
 							{
 								upDown = true;
@@ -278,8 +269,9 @@ package game.enemy
 							}
 							
 							if(leftRight)
+								
 								leftRight = false;
-
+							
 							y += deltaPos;
 							break;
 						
@@ -294,10 +286,9 @@ package game.enemy
 								leftRight = true;
 								GlobalState.currentMap.childrenSort();
 							}	
-
+							
 							if(upDown)
 								upDown = false;
-	
 							
 							x -= deltaPos;
 							break;
@@ -308,9 +299,6 @@ package game.enemy
 					
 					if (distanceMoved >= GlobalState.tileSize)
 						moveDirection = Path4D.NONE;
-				}
-			}
-		}
-	}
-}
+					
+				} } } } }
 
