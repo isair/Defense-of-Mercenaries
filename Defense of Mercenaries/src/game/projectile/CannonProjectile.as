@@ -61,10 +61,7 @@ package game.projectile
 		{
 			assetManager = new AssetManager();
 			assetManager.enqueue(EmbeddedGameAssets);
-			assetManager.loadQueue(function(ratio:Number):void
-			{
-				if (ratio == 1.0) doSomething();
-			});
+			assetManager.loadQueue(function(ratio:Number):void {});
 			
 			this.shape = new Shape();
 			this.shape.graphics.beginFill(0x222222, 1);
@@ -74,7 +71,6 @@ package game.projectile
 			addChild(this.shape);
 		}
 		
-		private function doSomething():void{}
 		
 		public override function update(deltaTime:Number):void
 		{						

@@ -66,10 +66,7 @@ package game.enemy
 			
 			assetManager.enqueue(EmbeddedGameAssets);
 			
-			assetManager.loadQueue(function(ratio:Number):void
-			{
-				if (ratio == 1.0) doSomething(); // this does nothing, needs better code
-			}); 
+			assetManager.loadQueue(function(ratio:Number):void {});
 			
 			var atlas:TextureAtlas = EmbeddedGameAssets.getEnemyAtlas();
 			
@@ -106,11 +103,6 @@ package game.enemy
 			Starling.juggler.add(upClip);
 			Starling.juggler.add(leftClip);
 			Starling.juggler.add(rightClip);
-		}
-		
-		private function doSomething():void
-		{
-			// void function in place for asset enqueing
 		}
 		
 		public function damage(value:int):void
